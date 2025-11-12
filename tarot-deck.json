@@ -1,158 +1,180 @@
 {
     "tarot-cards":[
         {
-            "num": "0",
+            "number": 0,
             "name": "The Fool",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Embarking on new beginnings"
+            "meaning": "Embarking on new beginnings",
+            "image": "m00.jpg"
         },
         {
-            "num": "1",
+            "number": 1,
             "name": "The Magician",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Manifesting your own dreams and desires"
+            "meaning": "Manifesting your own dreams and desires",
+            "image": "m01.jpg"
         },
         {
-            "num": "2",
+            "number": 2,
             "name": "The High Priestess",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Look within and trust your own intuition"
+            "meaning": "Look within and trust your own intuition",
+            "image": "m02.jpg"
         },
         {
-            "num": "3",
+            "number": 3,
             "name": "The Empress",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Relax and allow yourself to be open to all forms of love"
+            "meaning": "Relax and allow yourself to be open to all forms of love",
+            "image": "m03.jpg"
         },
         {
-            "num": "4",
+            "number": 4,
             "name": "The Emperor",
             "arcana": "Major",
             "suit": null,
-            "meaning": "You're in control, so don't be afraid to take action"
+            "meaning": "You're in control, so don't be afraid to take action",
+            "image": "m04.jpg"
         },
         {
-            "num": "5",
+            "number": 5,
             "name": "The Hierophant",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Continue learning while also upholding your own values"
+            "meaning": "Continue learning while also upholding your own values",
+            "image": "m05.jpg"
         },
         {
-            "num": "6",
+            "number": 6,
             "name": "The Lovers",
             "arcana": "Major",
             "suit": null,
-            "meaning": "You're in alignment with yourself, healthy relationships can blossom."
+            "meaning": "You're in alignment with yourself, healthy relationships can blossom.",
+            "image": "m06.jpg"
         },
         {
-            "num": "7",
+            "number": 7,
             "name": "The Chariot",
             "arcana": "Major",
             "suit": null,
-            "meaning": "You're on the right path, be intentional and prepare to take action"
+            "meaning": "You're on the right path, be intentional and prepare to take action",
+            "image": "m07.jpg"
         },
         {
-            "num": "8",
+            "number": 8,
             "name": "Strength",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Be confident and trust yourself when it comes to overcoming obstacles"
+            "meaning": "Be confident and trust yourself when it comes to overcoming obstacles",
+            "image": "m08.jpg"
         },
         {
-            "num": "9",
+            "number": 9,
             "name": "The Hermit",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Take some time to connect with your inner self"
+            "meaning": "Take some time to connect with your inner self",
+            "image": "m09.jpg"
         },
         {
-            "num": "10",
+            "number": 10,
             "name": "Wheel of Fortune",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Embrace life's cycles of ups and downs to invite what's meant for you"
+            "meaning": "Embrace life's cycles of ups and downs to invite what's meant for you",
+            "image": "m10.jpg"
         },
         {
-            "num": "11",
+            "number": 11,
             "name": "Justice",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Truth will be revealed in due time. Remain true to yourself."
+            "meaning": "Truth will be revealed in due time. Remain true to yourself.",
+            "image": "m11.jpg"
         },
         {
-            "num": "12",
+            "number": 12,
             "name": "The Hanged Man",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Take a breath, reflect, and change your perspective on your situation."
+            "meaning": "Take a breath, reflect, and change your perspective on your situation.",
+            "image": "m12.jpg"
         },
         {
-            "num": "13",
+            "number": 13,
             "name": "Death",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Embrace that a major transformation is afloat. Release what no longer serves you."
+            "meaning": "Embrace that a major transformation is afloat. Release what no longer serves you.",
+            "image": "m13.jpg"
         },
         {
-            "num": "14",
+            "number": 14,
             "name": "Temperance",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Trust in divine timing."
+            "meaning": "Trust in divine timing.",
+            "image": "m14.jpg"
         },
         {
-            "num": "15",
+            "number": 15,
             "name": "The Devil",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Confront the unhealthy behaviors that are present as the first step to healing."
+            "meaning": "Confront the unhealthy behaviors that are present as the first step to healing.",
+            "image": "m15.jpg"
         },
         {
-            "num": "16",
+            "number": 16,
             "name": "The Tower",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Sudden breakdowns and upheavals are occuring to bring in new opportunities."
+            "meaning": "Sudden breakdowns and upheavals are occuring to bring in new opportunities.",
+            "image": "m16.jpg"
         },
         {
-            "num": "17",
+            "number": 17,
             "name": "The Star",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Hope and healing from your situation are coming soon. Don't lose faith."
+            "meaning": "Hope and healing from your situation are coming soon. Don't lose faith.",
+            "image": "m17.jpg"
         },
         {
-            "num": "18",
+            "number": 18,
             "name": "The Moon",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Things once hidden are going to be revealed. Trust your intuition."
+            "meaning": "Things once hidden are going to be revealed. Trust your intuition.",
+            "image": "m18.jpg"
         },
         {
-            "num": "19",
+            "number": 19,
             "name": "The Sun",
             "arcana": "Major",
             "suit": null,
-            "meaning": "You'll receive clarity on your situation, continue to be optimistic."
+            "meaning": "You'll receive clarity on your situation, continue to be optimistic.",
+            "image": "m19.jpg"
         },
         {
-            "num": "20",
+            "number": 20,
             "name": "Judgement",
             "arcana": "Major",
             "suit": null,
-            "meaning": "Accepting what has happened in the past is necessary in order to move forward."
+            "meaning": "Accepting what has happened in the past is necessary in order to move forward.",
+            "image": "m20.jpg"
         },
         {
-            "num": "21",
+            "number": 21,
             "name": "The World",
             "arcana": "Major",
             "suit": null,
-            "meaning": "A cycle is ending allowing for you to reap the rewards and begin a new journey."
+            "meaning": "A cycle is ending allowing for you to reap the rewards and begin a new journey.",
+            "image": "m21.jpg"
         }
     ]
 }
