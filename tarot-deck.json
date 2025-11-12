@@ -1,0 +1,158 @@
+{
+    "tarot-cards":[
+        {
+            "num": "0",
+            "name": "The Fool",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Embarking on new beginnings"
+        },
+        {
+            "num": "1",
+            "name": "The Magician",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Manifesting your own dreams and desires"
+        },
+        {
+            "num": "2",
+            "name": "The High Priestess",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Look within and trust your own intuition"
+        },
+        {
+            "num": "3",
+            "name": "The Empress",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Relax and allow yourself to be open to all forms of love"
+        },
+        {
+            "num": "4",
+            "name": "The Emperor",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "You're in control, so don't be afraid to take action"
+        },
+        {
+            "num": "5",
+            "name": "The Hierophant",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Continue learning while also upholding your own values"
+        },
+        {
+            "num": "6",
+            "name": "The Lovers",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "You're in alignment with yourself, healthy relationships can blossom."
+        },
+        {
+            "num": "7",
+            "name": "The Chariot",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "You're on the right path, be intentional and prepare to take action"
+        },
+        {
+            "num": "8",
+            "name": "Strength",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Be confident and trust yourself when it comes to overcoming obstacles"
+        },
+        {
+            "num": "9",
+            "name": "The Hermit",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Take some time to connect with your inner self"
+        },
+        {
+            "num": "10",
+            "name": "Wheel of Fortune",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Embrace life's cycles of ups and downs to invite what's meant for you"
+        },
+        {
+            "num": "11",
+            "name": "Justice",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Truth will be revealed in due time. Remain true to yourself."
+        },
+        {
+            "num": "12",
+            "name": "The Hanged Man",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Take a breath, reflect, and change your perspective on your situation."
+        },
+        {
+            "num": "13",
+            "name": "Death",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Embrace that a major transformation is afloat. Release what no longer serves you."
+        },
+        {
+            "num": "14",
+            "name": "Temperance",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Trust in divine timing."
+        },
+        {
+            "num": "15",
+            "name": "The Devil",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Confront the unhealthy behaviors that are present as the first step to healing."
+        },
+        {
+            "num": "16",
+            "name": "The Tower",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Sudden breakdowns and upheavals are occuring to bring in new opportunities."
+        },
+        {
+            "num": "17",
+            "name": "The Star",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Hope and healing from your situation are coming soon. Don't lose faith."
+        },
+        {
+            "num": "18",
+            "name": "The Moon",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Things once hidden are going to be revealed. Trust your intuition."
+        },
+        {
+            "num": "19",
+            "name": "The Sun",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "You'll receive clarity on your situation, continue to be optimistic."
+        },
+        {
+            "num": "20",
+            "name": "Judgement",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "Accepting what has happened in the past is necessary in order to move forward."
+        },
+        {
+            "num": "21",
+            "name": "The World",
+            "arcana": "Major",
+            "suit": null,
+            "meaning": "A cycle is ending allowing for you to reap the rewards and begin a new journey."
+        }
+    ]
+}
