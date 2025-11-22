@@ -1,0 +1,1 @@
+//contains the home menu and access to the history (tarot journal)
