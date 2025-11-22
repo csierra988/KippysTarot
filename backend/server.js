@@ -1,7 +1,11 @@
 const express = require('express');
 const cors = require('cors');
+const dotenv = require('dotenv');
 
 //import routes after adding them in later
+
+//enviroment variables
+dotenv.config();
 
 //initializing the app
 const app = express();
