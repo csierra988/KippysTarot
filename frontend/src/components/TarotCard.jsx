@@ -17,13 +17,21 @@ const BackCard = styled.div`
     background-position: center;
 `;
 
-//going to take in cardData
+const CardBlock = styled.div`
+    display: grid;
+    width: 400px;
+    height: 600px;
+`;
+
+
 const Card = styled.div`
     width: 300px;
     height: 500px;
     border: 1px solid black;
     border-radius: 20px;
     margin: 50px auto;
+    grid-area: 1 / 1 / 2 / 2;
+    z-index: 1;
     background: ${props => props.$backgroundImage
         ? `url(${props.$backgroundImage})`
         : "url(${cardImage})"
@@ -32,29 +40,50 @@ const Card = styled.div`
     background-position: center;
 `;
 
+const CardData = styled.div`
+    width: 250px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    grid-area: 1 / 1 / 2 / 2;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+`;
+
 
 function TarotCard({ cardData }) {
     console.log("cardData received:", cardData);
     const [isFlipped, setIsFlipped] = useState(false);
 
-    function flipCard(){
+    function flipCard() {
         setIsFlipped(!isFlipped);
     }
 
     return (
         <div>
             <ReactCardFlip flipDirection='horizontal' isFlipped={isFlipped}>
-                <BackCard onClick={flipCard}>
-                    {/* this is going to be the same for every card */}
-                </BackCard>
+                <CardBlock>
+                    <BackCard onClick={flipCard}>
+                        {/* this is going to be the same for every card */}
+                    </BackCard>
+                </CardBlock>
+
                 <div onClick={flipCard}>
-                    <Card onClick={flipCard} 
-                    $backgroundImage={cardData?.image}>
-                    </Card>
-                    <h3>{cardData?.number}</h3>
-                    <h4>{cardData?.meaning}</h4>
+                    <CardBlock>
+
+                        <CardData>
+                            <h5>{cardData?.meaning}</h5>
+                        </CardData>
+
+                        <Card onClick={flipCard}
+                            $backgroundImage={cardData?.image}>
+                        </Card>
+
+                    </CardBlock>
+
                 </div>
-                
             </ReactCardFlip>
         </div>
     );
