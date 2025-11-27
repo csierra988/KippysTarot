@@ -2,19 +2,30 @@
 import { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import styled from 'styled-components';
-import cardBackImage from '/images/card-images/back.jpg';
-import cardImage from '/images/card-images/w14.jpg';
+import cardBackImage from '/images/card-images/back1.jpg';
 
 //the back of the tarot card
 const BackCard = styled.div`
-    width: 300px;
-    height: 500px;
+    width: 200px;
+    height: 400px;
     border: 1px solid black;
     border-radius: 20px;
     margin: 50px auto;
-    background: url(${cardBackImage});
-    background-size: cover;
-    background-position: center;
+    overflow: hidden;
+`;
+
+const BackImage = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    object-position: center;
+`;
+
+const FrontImage = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    object-position: center;
 `;
 
 const CardBlock = styled.div`
@@ -25,23 +36,17 @@ const CardBlock = styled.div`
 
 
 const Card = styled.div`
-    width: 300px;
-    height: 500px;
+    width: 200px;
+    height: 400px;
     border: 1px solid black;
     border-radius: 20px;
     margin: 50px auto;
     grid-area: 1 / 1 / 2 / 2;
     z-index: 1;
-    background: ${props => props.$backgroundImage
-        ? `url(${props.$backgroundImage})`
-        : "url(${cardImage})"
-    };
-    background-size: cover;
-    background-position: center;
 `;
 
 const CardData = styled.div`
-    width: 250px;
+    width: 150px;
     height: 100px;
     margin-left: auto;
     margin-right: auto;
@@ -54,7 +59,6 @@ const CardData = styled.div`
 
 
 function TarotCard({ cardData }) {
-    console.log("cardData received:", cardData);
     const [isFlipped, setIsFlipped] = useState(false);
 
     function flipCard() {
@@ -67,6 +71,7 @@ function TarotCard({ cardData }) {
                 <CardBlock>
                     <BackCard onClick={flipCard}>
                         {/* this is going to be the same for every card */}
+                        <BackImage src={cardBackImage} />
                     </BackCard>
                 </CardBlock>
 
@@ -77,8 +82,9 @@ function TarotCard({ cardData }) {
                             <h5>{cardData?.meaning}</h5>
                         </CardData>
 
-                        <Card onClick={flipCard}
-                            $backgroundImage={cardData?.image}>
+                        <Card onClick={flipCard}>
+                            <FrontImage src={cardData?.image} />
+                            
                         </Card>
 
                     </CardBlock>
