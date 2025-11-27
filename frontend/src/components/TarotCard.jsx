@@ -28,6 +28,8 @@ const FrontImage = styled.img`
     object-position: center;
 `;
 
+//add some type of hover animation
+//where cards come "forward" when mouse hovers over it
 const CardBlock = styled.div`
     display: grid;
     width: 220px;
@@ -56,6 +58,7 @@ const CardData = styled.div`
     z-index: 2;
     background-color: rgba(255, 255, 255, 0.85);
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    border-radius: 10px;
     font-size: 14px;
     display: inline-block;
 `;
@@ -78,14 +81,14 @@ function TarotCard({ cardData }) {
                     </BackCard>
                 </CardBlock>
 
-                <div onClick={flipCard}>
+                <div>
                     <CardBlock>
 
                         <CardData>
                             {cardData?.meaning}
                         </CardData>
 
-                        <Card onClick={flipCard}>
+                        <Card>
                             <FrontImage src={cardData?.image} />
                             
                         </Card>
