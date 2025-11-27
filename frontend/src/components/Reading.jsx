@@ -1,8 +1,21 @@
-//displays the three card reading and can save at the end
-import { useState, useEffect } from 'react';
-import { randomCard, threeRandomCards } from '../utils/Helpers';
+import { useState } from 'react';
+import { threeRandomCards } from '../utils/Helpers';
 import TarotCard from './TarotCard';
 import styled from 'styled-components';
+
+const Content = styled.div`
+    display: flex;
+    width: 100%;
+    gap: 20px;
+`;
+
+const KippyBlock = styled.div`
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    background: black;
+    min-height: 400px;
+`;
 
 const ReadingBlock = styled.div`
     display: flex;
@@ -12,17 +25,41 @@ const ReadingBlock = styled.div`
     padding: 40px;
 `;
 
-const Row = styled.div`
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    justify-content: flex-end;
-    flex-wrap: wrap;
+const Text = styled.div`
+    align-items: center;
+    background-color: white;
+    border: 2px solid black;
+    width: 500px;
+    height: 50px;
 `;
 
+const CardContainer = styled.div`
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+`;
+
+const Row = styled.div`
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: nowrap;
+`;
+
+const Button = styled.button`
+    font-size: 1em;
+`;
+
+const ButtonBlock = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 20px auto; 
+`;
 
 function Reading() {
-    // //the 3 cards that are selected
     const [cards, setCards] = useState([]);
 
     const drawThreeCards = () => {
@@ -30,26 +67,37 @@ function Reading() {
         setCards(threeCards);
     }
 
-    // testing a single card
-    // const drawCards = () => {
-    //     const drawnCard = randomCard();
-    //     setCards([drawnCard]);
-    // };
+    const saveReading = () => {
+        alert("saved reading");
+    }
 
     return (
-        <div>
-            <button onClick={drawThreeCards}>Three Cards</button>
-            <ReadingBlock>
-                <Row>
-                    {/* in the future add perhaps a cardTense
-                        for past, present, and future to know which meaning
-                        to use */}
+        <ReadingBlock>
+            <ButtonBlock>
+                <Button onClick={drawThreeCards}>Three Cards</Button>
+            </ButtonBlock>
+
+            <Content>
+                <KippyBlock>
+                    <p>meow its me kippy</p>
+                </KippyBlock>
+
+                <CardContainer>
+                    <Text>your reading blah blah blah</Text>
+                    <Row>
                     {cards.map((card) =>
                         <TarotCard key={card.number} cardData={card} />
                     )}
                 </Row>
-            </ReadingBlock>
-        </div>
+
+                </CardContainer>
+
+            </Content>
+
+            <ButtonBlock>
+                <Button onClick={saveReading}>Save Reading</Button>
+            </ButtonBlock>
+        </ReadingBlock>
     );
 }
 

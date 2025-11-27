@@ -2,15 +2,15 @@
 import { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import styled from 'styled-components';
-import cardBackImage from '/images/card-images/back1.jpg';
+import cardBackImage from '/images/card-images/back.jpg';
 
 //the back of the tarot card
 const BackCard = styled.div`
     width: 200px;
-    height: 400px;
+    height: 350px;
     border: 1px solid black;
     border-radius: 20px;
-    margin: 50px auto;
+    margin: 20px auto;
     overflow: hidden;
 `;
 
@@ -30,24 +30,25 @@ const FrontImage = styled.img`
 
 const CardBlock = styled.div`
     display: grid;
-    width: 400px;
-    height: 600px;
+    width: 220px;
+    height: 340px;
 `;
 
 
 const Card = styled.div`
     width: 200px;
-    height: 400px;
+    height: 350px;
     border: 1px solid black;
     border-radius: 20px;
-    margin: 50px auto;
+    margin: 20px auto;
+    overflow: hidden;
     grid-area: 1 / 1 / 2 / 2;
     z-index: 1;
 `;
 
 const CardData = styled.div`
     width: 150px;
-    height: 100px;
+    height: 95px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 0;
@@ -55,6 +56,8 @@ const CardData = styled.div`
     z-index: 2;
     background-color: rgba(255, 255, 255, 0.85);
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    font-size: 14px;
+    display: inline-block;
 `;
 
 
@@ -79,7 +82,7 @@ function TarotCard({ cardData }) {
                     <CardBlock>
 
                         <CardData>
-                            <h5>{cardData?.meaning}</h5>
+                            {cardData?.meaning}
                         </CardData>
 
                         <Card onClick={flipCard}>
