@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const admin = require('firebase-admin');
+const serviceAccount = require('./firebase-service-key.json');
 
 //import routes after adding them in later
 
@@ -10,7 +12,10 @@ dotenv.config();
 //initializing the app
 const app = express();
 
-//maybe add authentication later
+//initialize authentication
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+});
 
 app.use(cors()); //frontend requests
 app.use(express.json()); //parsing json requests
@@ -21,7 +26,7 @@ app.get('/', (req, res) => {
 });
 
 //starting the server
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
