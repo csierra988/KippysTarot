@@ -41,15 +41,18 @@ const FrontCard = styled.div`
     display: inline-block;
     padding: 10px;
     border-radius: 25px;
+    transition: transform 1s ease;
     &:hover {
+        padding: 16px;
         background: #3F5EFB;
-        background: radial-gradient(circle, rgba(63, 94, 251, 0.10) 0%, rgba(252, 70, 107, 0.10) 100%);
+        background: radial-gradient(circle, rgba(63, 94, 251, 0.25) 0%, rgba(252, 70, 107, 0.25) 100%);
+        filter: blur(0px);
         box-shadow: 
             0 0 30px rgba(63, 94, 251, 0.4),
             0 0 60px rgba(252, 70, 107, 0.3),
             0 0 90px rgba(63, 94, 251, 0.2);
-        transition: 1s all ease;
         transform: scale(1.15);
+        transition: 1s all ease;
     }
 `;
 
@@ -64,17 +67,18 @@ const Card = styled.div`
 `;
 
 const CardData = styled.div`
-    width: 150px;
-    height: 95px;
+    width: 160px;
+    height: 90px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 0;
+    margin-top: -10px;
     grid-area: 1 / 1 / 2 / 2;
     z-index: 2;
     background-color: rgba(255, 255, 255, 0.85);
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
     border-radius: 10px;
     font-size: 14px;
+    text-align: center;
     display: inline-block;
 `;
 
@@ -105,7 +109,6 @@ function TarotCard({ cardData }) {
 
                         <Card>
                             <FrontImage src={cardData?.image} />
-                            
                         </Card>
 
                     </CardBlock>
