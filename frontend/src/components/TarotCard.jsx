@@ -76,6 +76,7 @@ const CardData = styled.div`
     border-radius: 10px;
     font-size: 14px;
     display: inline-block;
+    color: black;
 `;
 
 
