@@ -32,6 +32,7 @@ const Text = styled.div`
     width: 500px;
     height: 50px;
     padding: 10px;
+    color: black;
 `;
 
 const CardContainer = styled.div`
