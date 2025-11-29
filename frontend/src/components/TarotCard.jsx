@@ -80,6 +80,7 @@ const CardData = styled.div`
     font-size: 14px;
     text-align: center;
     display: inline-block;
+    color: black;
 `;
 
 
