@@ -174,5 +174,453 @@
         "suit": null,
         "meaning": "A cycle is ending allowing for you to reap the rewards and begin a new journey.",
         "image": "/images/card-images/m21.jpg"
+    },
+    {
+        "number": 22,
+        "name": "Ace of Cups",
+        "arcana": "Minor",
+        "suit": "cups",
+        "meaning": "New connections could blossom.",
+        "image": "/images/card-images/c01.jpg"
+    },
+    {
+        "number": 23,
+        "name": "Two of Cups",
+        "arcana": "Minor",
+        "suit": "cups",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/c02.jpg"
+    },
+    {
+        "number": 24,
+        "name": "Three of Cups",
+        "arcana": "Minor",
+        "suit": "cups",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/c03.jpg"
+    },
+    {
+        "number": 25,
+        "name": "Four of Cups",
+        "arcana": "Minor",
+        "suit": "cups",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/c04.jpg"
+    },
+    {
+        "number": 26,
+        "name": "Five of Cups",
+        "arcana": "Minor",
+        "suit": "cups",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/c05.jpg"
+    },
+    {
+        "number": 27,
+        "name": "Six of Cups",
+        "arcana": "Minor",
+        "suit": "cups",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/c06.jpg"
+    },
+    {
+        "number": 28,
+        "name": "Seven of Cups",
+        "arcana": "Minor",
+        "suit": "cups",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/c07.jpg"
+    },
+    {
+        "number": 29,
+        "name": "Eight of Cups",
+        "arcana": "Minor",
+        "suit": "cups",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/c08.jpg"
+    },
+    {
+        "number": 30,
+        "name": "Nine of Cups",
+        "arcana": "Minor",
+        "suit": "cups",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/c09.jpg"
+    },
+    {
+        "number": 31,
+        "name": "Ten of Cups",
+        "arcana": "Minor",
+        "suit": "cups",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/c10.jpg"
+    },
+    {
+        "number": 32,
+        "name": "Page of Cups",
+        "arcana": "Minor",
+        "suit": "cups",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/c11.jpg"
+    },
+    {
+        "number": 33,
+        "name": "Knight of Cups",
+        "arcana": "Minor",
+        "suit": "cups",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/c12.jpg"
+    },
+    {
+        "number": 34,
+        "name": "Queen of Cups",
+        "arcana": "Minor",
+        "suit": "cups",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/c13.jpg"
+    },
+    {
+        "number": 35,
+        "name": "King of Cups",
+        "arcana": "Minor",
+        "suit": "cups",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/c14.jpg"
+    },
+    {
+        "number": 36,
+        "name": "Ace of Pentacles",
+        "arcana": "Minor",
+        "suit": "pentacles",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/p01.jpg"
+    },
+    {
+        "number": 37,
+        "name": "Two of Pentacles",
+        "arcana": "Minor",
+        "suit": "pentacles",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/p02.jpg"
+    },
+    {
+        "number": 38,
+        "name": "Three of Pentacles",
+        "arcana": "Minor",
+        "suit": "pentacles",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/p03.jpg"
+    },
+    {
+        "number": 39,
+        "name": "Four of Pentacles",
+        "arcana": "Minor",
+        "suit": "pentacles",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/p04.jpg"
+    },
+    {
+        "number": 40,
+        "name": "Five of Pentacles",
+        "arcana": "Minor",
+        "suit": "pentacles",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/p05.jpg"
+    },
+    {
+        "number": 41,
+        "name": "Six of Pentacles",
+        "arcana": "Minor",
+        "suit": "pentacles",
+        "meaning": "Joyous times in partnerships and connections are ahead.",
+        "image": "/images/card-images/p06.jpg"
+    },
+    {
+        "number": 42,
+        "name": "Seven of Pentacles",
+        "arcana": "Minor",
+        "suit": "pentacles",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/p07.jpg"
+    },
+    {
+        "number": 43,
+        "name": "Eight of Pentacles",
+        "arcana": "Minor",
+        "suit": "pentacles",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/p08.jpg"
+    },
+    {
+        "number": 44,
+        "name": "Nine of Pentacles",
+        "arcana": "Minor",
+        "suit": "pentacles",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/p09.jpg"
+    },
+    {
+        "number": 45,
+        "name": "Ten of Pentacles",
+        "arcana": "Minor",
+        "suit": "pentacles",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/p10.jpg"
+    },
+    {
+        "number": 46,
+        "name": "Page of Pentacles",
+        "arcana": "Minor",
+        "suit": "pentacles",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/p11.jpg"
+    },
+    {
+        "number": 47,
+        "name": "Knight of Pentacles",
+        "arcana": "Minor",
+        "suit": "pentacles",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/p12.jpg"
+    },
+    {
+        "number": 48,
+        "name": "Queen of Pentacles",
+        "arcana": "Minor",
+        "suit": "pentacles",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/p13.jpg"
+    },
+    {
+        "number": 49,
+        "name": "King of Pentacles",
+        "arcana": "Minor",
+        "suit": "pentacles",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/p14.jpg"
+    },
+    {
+        "number": 50,
+        "name": "Ace of Swords",
+        "arcana": "Minor",
+        "suit": "swords",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/s01.jpg"
+    },
+    {
+        "number": 51,
+        "name": "Two of Swords",
+        "arcana": "Minor",
+        "suit": "swords",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/s02.jpg"
+    },
+    {
+        "number": 52,
+        "name": "Three of Swords",
+        "arcana": "Minor",
+        "suit": "swords",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/s03.jpg"
+    },
+    {
+        "number": 53,
+        "name": "Four of Swords",
+        "arcana": "Minor",
+        "suit": "swords",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/s04.jpg"
+    },
+    {
+        "number": 54,
+        "name": "Five of Swords",
+        "arcana": "Minor",
+        "suit": "swords",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/s05.jpg"
+    },
+    {
+        "number": 55,
+        "name": "Six of Swords",
+        "arcana": "Minor",
+        "suit": "swords",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/s06.jpg"
+    },
+    {
+        "number": 56,
+        "name": "Seven of Swords",
+        "arcana": "Minor",
+        "suit": "swords",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/s07.jpg"
+    },
+    {
+        "number": 57,
+        "name": "Eight of Swords",
+        "arcana": "Minor",
+        "suit": "swords",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/s08.jpg"
+    },
+    {
+        "number": 58,
+        "name": "Nine of Swords",
+        "arcana": "Minor",
+        "suit": "swords",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/s09.jpg"
+    },
+    {
+        "number": 59,
+        "name": "Ten of Swords",
+        "arcana": "Minor",
+        "suit": "swords",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/s10.jpg"
+    },
+    {
+        "number": 60,
+        "name": "Page of Swords",
+        "arcana": "Minor",
+        "suit": "swords",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/s11.jpg"
+    },
+    {
+        "number": 61,
+        "name": "Knight of Swords",
+        "arcana": "Minor",
+        "suit": "swords",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/s12.jpg"
+    },
+    {
+        "number": 62,
+        "name": "Queen of Swords",
+        "arcana": "Minor",
+        "suit": "swords",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/s13.jpg"
+    },
+    {
+        "number": 63,
+        "name": "King of Swords",
+        "arcana": "Minor",
+        "suit": "swords",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/s14.jpg"
+    },
+    {
+        "number": 64,
+        "name": "Ace of Wands",
+        "arcana": "Minor",
+        "suit": "wands",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/w01.jpg"
+    },
+    {
+        "number": 65,
+        "name": "Two of Wands",
+        "arcana": "Minor",
+        "suit": "wands",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/w02.jpg"
+    },
+    {
+        "number": 66,
+        "name": "Three of Wands",
+        "arcana": "Minor",
+        "suit": "wands",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/w03.jpg"
+    },
+    {
+        "number": 67,
+        "name": "Four of Wands",
+        "arcana": "Minor",
+        "suit": "wands",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/w04.jpg"
+    },
+    {
+        "number": 68,
+        "name": "Five of Wands",
+        "arcana": "Minor",
+        "suit": "wands",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/w05.jpg"
+    },
+    {
+        "number": 69,
+        "name": "Six of Wands",
+        "arcana": "Minor",
+        "suit": "wands",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/w06.jpg"
+    },
+    {
+        "number": 70,
+        "name": "Seven of Wands",
+        "arcana": "Minor",
+        "suit": "wands",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/w07.jpg"
+    },
+    {
+        "number": 71,
+        "name": "Eight of Wands",
+        "arcana": "Minor",
+        "suit": "wands",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/w08.jpg"
+    },
+    {
+        "number": 72,
+        "name": "Nine of Wands",
+        "arcana": "Minor",
+        "suit": "wands",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/w09.jpg"
+    },
+    {
+        "number": 73,
+        "name": "Ten of Wands",
+        "arcana": "Minor",
+        "suit": "wands",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/w10.jpg"
+    },
+    {
+        "number": 74,
+        "name": "Page of Wands",
+        "arcana": "Minor",
+        "suit": "wands",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/w11.jpg"
+    },    
+    {
+        "number": 75,
+        "name": "Knight of Wands",
+        "arcana": "Minor",
+        "suit": "wands",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/w12.jpg"
+    },
+    {
+        "number": 76,
+        "name": "Queen of Wands",
+        "arcana": "Minor",
+        "suit": "wands",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/w13.jpg"
+    },
+    {
+        "number": 77,
+        "name": "King of Wands",
+        "arcana": "Minor",
+        "suit": "wands",
+        "meaning": "Sad times in partnerships and connections are ahead.",
+        "image": "/images/card-images/w14.jpg"
     }
 ]

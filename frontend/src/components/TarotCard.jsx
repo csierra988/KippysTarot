@@ -75,7 +75,7 @@ const CardData = styled.div`
     margin-top: -10px;
     grid-area: 1 / 1 / 2 / 2;
     z-index: 2;
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 0.65);
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
     border-radius: 10px;
     font-size: 14px;
