@@ -4,7 +4,7 @@
         "name": "The Fool",
         "arcana": "Major",
         "suit": null,
-        "meaning": "Embarking on new beginnings",
+        "meaning": "Prepare to embark on new beginnings",
         "image": "/images/card-images/m00.jpg"
     },
     {
@@ -12,7 +12,7 @@
         "name": "The Magician",
         "arcana": "Major",
         "suit": null,
-        "meaning": "Manifesting your own dreams and desires",
+        "meaning": "The timing is perfect to start manifesting your own dreams and desires.",
         "image": "/images/card-images/m01.jpg"
     },
     {
