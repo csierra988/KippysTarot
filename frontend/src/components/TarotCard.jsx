@@ -28,14 +28,30 @@ const FrontImage = styled.img`
     object-position: center;
 `;
 
-//add some type of hover animation
-//where cards come "forward" when mouse hovers over it
+//parent block for front/back of card
 const CardBlock = styled.div`
     display: grid;
     width: 220px;
-    height: 340px;
+    height: 380px;
+    margin: 0;
 `;
 
+//parent for front of card - using for animation
+const FrontCard = styled.div`
+    display: inline-block;
+    padding: 10px;
+    border-radius: 25px;
+    &:hover {
+        background: #3F5EFB;
+        background: radial-gradient(circle, rgba(63, 94, 251, 0.10) 0%, rgba(252, 70, 107, 0.10) 100%);
+        box-shadow: 
+            0 0 30px rgba(63, 94, 251, 0.4),
+            0 0 60px rgba(252, 70, 107, 0.3),
+            0 0 90px rgba(63, 94, 251, 0.2);
+        transition: 1s all ease;
+        transform: scale(1.15);
+    }
+`;
 
 const Card = styled.div`
     width: 200px;
@@ -45,7 +61,6 @@ const Card = styled.div`
     margin: 20px auto;
     overflow: hidden;
     grid-area: 1 / 1 / 2 / 2;
-    z-index: 1;
 `;
 
 const CardData = styled.div`
@@ -81,7 +96,7 @@ function TarotCard({ cardData }) {
                     </BackCard>
                 </CardBlock>
 
-                <div>
+                <FrontCard>
                     <CardBlock>
 
                         <CardData>
@@ -94,8 +109,8 @@ function TarotCard({ cardData }) {
                         </Card>
 
                     </CardBlock>
+                </FrontCard>
 
-                </div>
             </ReactCardFlip>
         </div>
     );

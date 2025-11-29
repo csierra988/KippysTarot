@@ -21,7 +21,7 @@ const ReadingBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 45px;
     padding: 40px;
 `;
 
@@ -31,6 +31,7 @@ const Text = styled.div`
     border: 2px solid black;
     width: 500px;
     height: 50px;
+    padding: 10px;
 `;
 
 const CardContainer = styled.div`
@@ -39,7 +40,8 @@ const CardContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 50px;
+    padding: 10px;
 `;
 
 const Row = styled.div`
@@ -57,6 +59,10 @@ const ButtonBlock = styled.div`
     display: flex;
     justify-content: center;
     margin: 20px auto; 
+`;
+
+const SaveButton = styled.div`
+    padding: 10px;
 `;
 
 function Reading() {
@@ -95,7 +101,9 @@ function Reading() {
             </Content>
 
             <ButtonBlock>
-                <Button onClick={saveReading}>Save Reading</Button>
+                <SaveButton>
+                    <Button onClick={saveReading}>Save Reading</Button>
+                </SaveButton>   
             </ButtonBlock>
         </ReadingBlock>
     );
