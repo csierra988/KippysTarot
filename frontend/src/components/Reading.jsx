@@ -15,6 +15,10 @@ const KippyBlock = styled.div`
     justify-content: center;
     background: black;
     min-height: 400px;
+
+    @media (max-width: 888px) {
+        display: none;
+    }
 `;
 
 const ReadingBlock = styled.div`
