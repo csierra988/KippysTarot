@@ -22,7 +22,7 @@ const HeaderBlock = styled.div`
 const MenuButton = styled.div`
     background: none;
     border: none;
-    color: white;
+    color: rgba(123, 68, 145, 0.66);;
     font-size: 40px;
     cursor: pointer;
 `;
@@ -55,12 +55,13 @@ const Overlay = styled.div`
 
 const Menu = styled.div`
     position: fixed;
-    background: white;
+    background: rgba(231, 184, 206, 1);
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
     top: 0;
     //-500 to not show it
     left: ${props => props.$isOpen ? '0' : '-500px'};
     width: 200px;
-    height: 100vh;
+    height: 100%;
     transition: left 0.3s ease;
     z-index: 200;
     padding: 80px 20px 20px;
@@ -73,7 +74,7 @@ const Menu = styled.div`
 
 const NavLink = styled(Link)`
     display: block;
-    color: black;
+    color: rgba(123, 68, 145, 0.66);
     text-decoration: none;
     padding: 15px 20px;
     margin-bottom: 10px;
@@ -84,12 +85,11 @@ const NavLink = styled(Link)`
     
     &:hover {
         background: none;
-        color: black;
+        color: rgba(104, 20, 138, 0.66);
     }
 `;
 
 function Header() {
-    //for hamburger style menu
     const [isOpen, setOpen] = useState(false);
     const toggleMenu = () => {
         setOpen(!isOpen);
