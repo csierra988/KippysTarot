@@ -106,7 +106,7 @@ function TarotCard({ cardData }) {
                     <CardBlock>
 
                         <CardData>
-                            {cardData?.meaning}
+                            {cardData?.meaning} 
                         </CardData>
 
                         <Card>

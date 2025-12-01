@@ -47,9 +47,9 @@ const CardContainer = styled.div`
 
 const Row = styled.div`
     display: flex;
-    gap: 20px;
+    gap: 32px;
     justify-content: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 `;
 
 const Button = styled.button`
