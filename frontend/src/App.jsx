@@ -3,6 +3,8 @@ import Header from './components/Header';
 import History from './components/History';
 import Home from './components/Home';
 import Reading from './components/Reading';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/Reading" element={<Reading />} />
             <Route path="/History" element={<History />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/SignUp" element={<SignUp />} />
           </Routes>
     </div>
   );

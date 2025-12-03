@@ -1,4 +1,6 @@
-//history page - contains a list of a user saved readings
+//tarotjournal - individual saved reading 
+//displays cards and text box
+//use it to write and reflect on how the cards can apply to your situation
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -10,12 +12,12 @@ const Wrapper = styled.div`
     width: 100vw;
 `;
 
-function History() {
+function Journal() {
     return (
         <Wrapper>
-            this is the history page. view any of your past saved readings.
+            this is the journal for a saved reading
         </Wrapper>
     );
 }
 
-export default History;
+export default Journal;

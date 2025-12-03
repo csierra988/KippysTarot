@@ -1,5 +1,5 @@
 //contains the home menu, access to the history (tarot journal), sign in/sign out
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -72,6 +72,11 @@ const Menu = styled.div`
 
 `;
 
+const LoginPlacement = styled.div`
+    position: relative;
+    margin-top: 320px;
+`;
+
 const NavLink = styled(Link)`
     display: block;
     color: rgba(123, 68, 145, 0.66);
@@ -108,13 +113,16 @@ function Header() {
             <Overlay $isOpen={isOpen} onClick={toggleMenu}/>
 
             <Menu $isOpen={isOpen} onClick={toggleMenu}>
-                <NavLink to="/Reading" onClick={toggleMenu}> Three Card Reading</NavLink>
                 <NavLink to="/" onClick={toggleMenu}> Home</NavLink>
+                <NavLink to="/Reading" onClick={toggleMenu}> Three Card Reading</NavLink>
                 <NavLink to="/History" onClick={toggleMenu}> History</NavLink>
+                <LoginPlacement>
+                    <NavLink to="/Login" onClick={toggleMenu}>Login</NavLink>
+                </LoginPlacement>
             </Menu>
 
         </div>
-    )
+    );
 }
 
 export default Header;
