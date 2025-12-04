@@ -1,7 +1,7 @@
 //communication between the frontend and backend
 import axios from 'axios';
 import { auth } from './firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 const API_BASE_URL = 'http://localhost:3000';
 
@@ -9,6 +9,9 @@ const API_BASE_URL = 'http://localhost:3000';
 export const signUp = async ( name, email, password ) => {
     try{
         const userData = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile( userData.user, {
+            displayName: name,
+        });
         const firebase_uid = userData.user.uid;
 
         const response = await axios.post(`${API_BASE_URL}/users`, {

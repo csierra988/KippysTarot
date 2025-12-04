@@ -102,6 +102,26 @@ const NavLink = styled(Link)`
     }
 `;
 
+const LogOutButton = styled.button`
+    display: block;
+    color: rgba(123, 68, 145, 0.66);
+    text-decoration: none;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    transition: background 0.2s;
+    cursor: pointer;
+    background: none;
+    border: none;
+    
+    &:hover {
+        outline: none;
+        border: none;
+        color: rgba(104, 20, 138, 0.66);
+    }
+`;
+
 function Header() {
     const [isOpen, setOpen] = useState(false);
     const [user, setUser] = useState(null);
@@ -111,6 +131,7 @@ function Header() {
         setOpen(!isOpen);
     };
 
+    //if the user is logged in, use their information
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
@@ -146,7 +167,7 @@ function Header() {
                 and vice versa */}
                 <LoginPlacement>
                     { user ? (
-                        <NavLink as="button" onClick={loggingOut}>Logout</NavLink>
+                        <LogOutButton onClick={loggingOut}>Logout</LogOutButton>
                     ) : (
                         <NavLink to="/Login" onClick={toggleMenu}>Login</NavLink>
                     )}
