@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const admin = require('firebase-admin');
 const serviceAccount = require('./firebase-service-key.json');
 
-//import routes after adding them in later
+const usersRoutes = require('./routes/usersRoutes');
 
 //enviroment variables
 dotenv.config();
@@ -19,6 +19,8 @@ admin.initializeApp({
 
 app.use(cors()); //frontend requests
 app.use(express.json()); //parsing json requests
+
+app.use('/users', usersRoutes);
 
 //testing a basic request route on the root url
 app.get('/', (req, res) => {

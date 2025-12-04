@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { signUp } from "../api";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,16 +21,67 @@ const UserInput = styled.input`
 
 const SignUpButton = styled.button`
     margin-top: 10px;
+    background: rgba(255, 255, 255, 0.75);
+    color: black;
+    &:hover {
+        color: rgba(104, 20, 138, 0.66);
+    }
 `;
 
+
 function SignUp () {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
+
+    //setting the values using the user input
+    const changeName = ( event ) => {
+        setName(event.target.value);
+    };
+    const changeEmail = ( event ) => {
+        setEmail(event.target.value);
+    };
+    const changePassword = ( event ) => {
+        setPassword(event.target.value);
+    };
+
+    const changePasswordVisibility = () => {
+        setShowPassword((prev) => !prev);
+    };
+
+    const signingUp = async ( event ) => {
+        //preventing form from submitting 
+        event.preventDefault();
+        try {
+            await signUp(name, email, password);
+            console.log('user registered successfully in both firebase and database');
+            //taking user to home page
+            navigate('/');
+        } catch (err) {
+            console.error('signup error: ', err);
+        }
+
+    }
+
     return (
-        <Wrapper>
+        <Wrapper onSubmit={signingUp}>
             sign up page
-            <UserInput placeholder="name"></UserInput>
-            <UserInput placeholder="email"></UserInput>
-            <UserInput placeholder="password"></UserInput>
-            <SignUpButton> Sign Up Now!</SignUpButton>
+            <UserInput
+                placeholder="name" type="text" value={name} onChange={changeName} />
+            <UserInput 
+                placeholder="email" type="email" value={email} onChange={changeEmail} />
+            <UserInput 
+                placeholder="password" type={showPassword ? "text" : "password"} value={password} onChange={changePassword} />
+
+                { showPassword ? (
+                    <FaRegEye onClick={changePasswordVisibility} />
+                ) : (
+                    <FaRegEyeSlash onClick={changePasswordVisibility}/>
+                )}
+
+            <SignUpButton type="submit"> Sign Up Now!</SignUpButton>
         </Wrapper>
     );
 }

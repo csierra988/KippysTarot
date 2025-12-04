@@ -1,6 +1,8 @@
 //contains the home menu, access to the history (tarot journal), sign in/sign out
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { logout } from '../api';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import styled from 'styled-components';
 
 const HeaderBlock = styled.div`
@@ -25,6 +27,12 @@ const MenuButton = styled.div`
     color: rgba(123, 68, 145, 0.66);;
     font-size: 40px;
     cursor: pointer;
+    margin-bottom: 8px;
+
+    &:hover {
+        background: none;
+        color: rgba(104, 20, 138, 0.66);
+    }
 `;
 
 const Title = styled(Link)`
@@ -96,10 +104,27 @@ const NavLink = styled(Link)`
 
 function Header() {
     const [isOpen, setOpen] = useState(false);
+    const [user, setUser] = useState(null);
+    const auth = getAuth();
+
     const toggleMenu = () => {
         setOpen(!isOpen);
     };
 
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    const loggingOut = () => {
+        const conf = window.confirm('are you sure you want to log out?');
+        if (conf) {
+            logout();
+        }
+    };
 
     return (
         <div>
@@ -116,8 +141,15 @@ function Header() {
                 <NavLink to="/" onClick={toggleMenu}> Home</NavLink>
                 <NavLink to="/Reading" onClick={toggleMenu}> Three Card Reading</NavLink>
                 <NavLink to="/History" onClick={toggleMenu}> History</NavLink>
+
+                {/* when a user is logged in, show log out
+                and vice versa */}
                 <LoginPlacement>
-                    <NavLink to="/Login" onClick={toggleMenu}>Login</NavLink>
+                    { user ? (
+                        <NavLink as="button" onClick={loggingOut}>Logout</NavLink>
+                    ) : (
+                        <NavLink to="/Login" onClick={toggleMenu}>Login</NavLink>
+                    )}
                 </LoginPlacement>
             </Menu>
 
