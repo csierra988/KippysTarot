@@ -58,6 +58,14 @@ const Row = styled.div`
 
 const Button = styled.button`
     font-size: 1em;
+    outline: none;
+    border: none;
+
+    &:hover {
+        outline: none;
+        border: none;
+        color: rgba(104, 20, 138, 0.66);
+    }
 `;
 
 const ButtonBlock = styled.div`
