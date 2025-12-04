@@ -7,6 +7,7 @@ const Content = styled.div`
     display: flex;
     width: 100%;
     gap: 20px;
+    margin-top: 60px;
 `;
 
 const KippyBlock = styled.div`
@@ -80,10 +81,21 @@ const SaveButton = styled.div`
 
 function Reading() {
     const [cards, setCards] = useState([]);
+    const [readingButton, setReadingButton] = useState(true);
+    const [cardValue, setCardValue] = useState(0);
 
     const drawThreeCards = () => {
         const threeCards = threeRandomCards();
         setCards(threeCards);
+        //changing card value so that the cards get updated and rerender starting on back image
+        setCardValue(prev => prev + 1);
+    }
+
+    //the first reading displays three cards, but subsequent readings display draw again button
+    const firstReading = () => {
+        const threeCards = threeRandomCards();
+        setCards(threeCards);
+        setReadingButton(false);
     }
 
     const saveReading = () => {
@@ -92,9 +104,6 @@ function Reading() {
 
     return (
         <ReadingBlock>
-            <ButtonBlock>
-                <Button onClick={drawThreeCards}>Three Cards</Button>
-            </ButtonBlock>
 
             <Content>
                 <KippyBlock>
@@ -105,7 +114,7 @@ function Reading() {
                     <Text>your reading blah blah blah</Text>
                     <Row>
                     {cards.map((card) =>
-                        <TarotCard key={card.number} cardData={card} />
+                        <TarotCard key={`${cardValue} - ${card.number}`} cardData={card} />
                     )}
                 </Row>
 
@@ -116,7 +125,12 @@ function Reading() {
             <ButtonBlock>
                 <SaveButton>
                     <Button onClick={saveReading}>Save Reading</Button>
-                </SaveButton>   
+                    { readingButton ? (
+                        <Button onClick={firstReading}>Three Cards</Button>
+                    ): (
+                        <Button onClick={drawThreeCards}>Draw Again</Button>
+                    )}
+                </SaveButton>
             </ButtonBlock>
         </ReadingBlock>
     );
