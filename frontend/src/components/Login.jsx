@@ -27,6 +27,7 @@ const LoginButton = styled.button`
     margin-top: 10px;
     background: rgba(255, 255, 255, 0.75);
     color: black;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
     &:hover {
         color: rgba(104, 20, 138, 0.66);
     }
@@ -36,6 +37,7 @@ const SignUpButton = styled.button `
     justify-content: center;
     margin-top: 10px;
     background: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
 `;
 
 const SignUpNav = styled(Link) `

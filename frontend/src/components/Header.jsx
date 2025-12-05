@@ -82,7 +82,7 @@ const Menu = styled.div`
 
 const LoginPlacement = styled.div`
     position: relative;
-    margin-top: 320px;
+    margin-top: 200px;
 `;
 
 const NavLink = styled(Link)`
@@ -162,6 +162,7 @@ function Header() {
                 <NavLink to="/" onClick={toggleMenu}> Home</NavLink>
                 <NavLink to="/Reading" onClick={toggleMenu}> Three Card Reading</NavLink>
                 <NavLink to="/History" onClick={toggleMenu}> History</NavLink>
+                <NavLink to="/Profile" onClick={toggleMenu}>Profile</NavLink>
 
                 {/* when a user is logged in, show log out
                 and vice versa */}

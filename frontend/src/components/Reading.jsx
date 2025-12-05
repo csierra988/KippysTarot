@@ -15,7 +15,8 @@ const KippyBlock = styled.div`
     flex: 1;
     justify-content: center;
     background: black;
-    min-height: 400px;
+    height: 550px;
+    max-height: 550px;
 
     @media (max-width: 888px) {
         display: none;
@@ -61,6 +62,9 @@ const Button = styled.button`
     font-size: 1em;
     outline: none;
     border: none;
+    width: 150px;
+    margin-left: 20px;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
 
     &:hover {
         outline: none;
@@ -71,6 +75,7 @@ const Button = styled.button`
 
 const ButtonBlock = styled.div`
     display: flex;
+    position: relative;
     justify-content: center;
     margin: 20px auto; 
 `;
@@ -91,7 +96,7 @@ function Reading() {
         setCardValue(prev => prev + 1);
     }
 
-    //the first reading displays three cards, but subsequent readings display draw again button
+    //the first reading displays three cards, but subsequent readings display draw again and save reading buttons
     const firstReading = () => {
         const threeCards = threeRandomCards();
         setCards(threeCards);
@@ -118,11 +123,24 @@ function Reading() {
                     )}
                 </Row>
 
+                 <ButtonBlock>
+                <SaveButton>
+                    { readingButton ? (
+                        <Button onClick={firstReading}>Three Cards</Button>
+                    ): (
+                        <div>
+                            <Button onClick={drawThreeCards}>Draw Again</Button>
+                            <Button onClick={saveReading}>Save Reading</Button>
+                        </div>
+                    )}
+                </SaveButton>
+            </ButtonBlock>
+
                 </CardContainer>
 
             </Content>
 
-            <ButtonBlock>
+            {/* <ButtonBlock>
                 <SaveButton>
                     <Button onClick={saveReading}>Save Reading</Button>
                     { readingButton ? (
@@ -131,7 +149,7 @@ function Reading() {
                         <Button onClick={drawThreeCards}>Draw Again</Button>
                     )}
                 </SaveButton>
-            </ButtonBlock>
+            </ButtonBlock> */}
         </ReadingBlock>
     );
 }
