@@ -65,6 +65,7 @@ const Card = styled.div`
     margin: 20px auto;
     overflow: hidden;
     grid-area: 1 / 1 / 2 / 2;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
 `;
 
 const CardData = styled.div`
