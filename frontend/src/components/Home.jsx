@@ -1,5 +1,5 @@
 //the home page - welcomes user and has the start reading button
-// hi y/a(if signed in), think of a question, set your intentions, and choose your reading type(?)
+// hi y/n(if signed in), think of a question, set your intentions, and choose your reading type(?)
 import styled from 'styled-components';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useState, useEffect } from 'react';
@@ -19,6 +19,11 @@ const Wrapper = styled.div`
 const Content = styled.div`
     display: flex;
     width: 100%;
+
+    @media (max-width: 888px) {
+        flex-direction: column;
+        align-items: center;
+    }
 `;
 
 const KippyBlock = styled.div`
@@ -30,7 +35,11 @@ const KippyBlock = styled.div`
     margin: 40px;
 
     @media (max-width: 888px) {
-        display: none;
+        order: -1;
+        width: 550px;
+        height: 200px;
+        padding-top: 40px;
+        padding-bottom: 40px;
     }
 `;
 
@@ -115,11 +124,11 @@ function Home() {
                         </ReadingButtons>
 
                         <ReadingButtons>
-                            Love
+                            Love - coming soon
                         </ReadingButtons>
 
                         <ReadingButtons>
-                            Career
+                            Career - coming soon
                         </ReadingButtons>
                     </ReadingOptions>
                 </Container>

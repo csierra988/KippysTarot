@@ -24,14 +24,16 @@ const HeaderBlock = styled.div`
 const MenuButton = styled.div`
     background: none;
     border: none;
-    color: rgba(123, 68, 145, 0.66);;
+    color: rgba(255, 255, 255, 0.66);
+   // color: rgba(123, 68, 145, 0.66);;
     font-size: 40px;
     cursor: pointer;
     margin-bottom: 8px;
 
     &:hover {
         background: none;
-        color: rgba(104, 20, 138, 0.66);
+        color: rgba(123, 68, 145, 0.66);
+       // color: rgba(104, 20, 138, 0.66);
     }
 `;
 
@@ -40,12 +42,14 @@ const Title = styled(Link)`
     border: none;
     padding: 20px;
     font-size: 30px;
-    color: rgba(123, 68, 145, 0.66);
+    color: rgba(255, 255, 255, 0.66);
+   // color: rgba(123, 68, 145, 0.66);
     cursor: pointer;
 
     &:hover {
         background: none;
-        color: rgba(104, 20, 138, 0.66);
+        color: rgba(123, 68, 145, 0.66);
+       // color: rgba(104, 20, 138, 0.66);
     }
 `;
 
@@ -56,7 +60,7 @@ const Overlay = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
     display: ${props => props.$isOpen ? 'block' : 'none' };
     z-index: 150;
 `;
@@ -82,12 +86,13 @@ const Menu = styled.div`
 
 const LoginPlacement = styled.div`
     position: relative;
-    margin-top: 200px;
+    margin-top: 300px;
 `;
 
 const NavLink = styled(Link)`
     display: block;
-    color: rgba(123, 68, 145, 0.66);
+    color: rgba(255, 255, 255, 0.66);
+    // color: rgba(123, 68, 145, 0.66);
     text-decoration: none;
     padding: 15px 20px;
     margin-bottom: 10px;
@@ -98,13 +103,15 @@ const NavLink = styled(Link)`
     
     &:hover {
         background: none;
-        color: rgba(104, 20, 138, 0.66);
+        color: rgba(123, 68, 145, 0.66);
+        // color: rgba(104, 20, 138, 0.66);
     }
 `;
 
 const LogOutButton = styled.button`
     display: block;
-    color: rgba(123, 68, 145, 0.66);
+    color: rgba(255, 255, 255, 0.66);
+    // color: rgba(123, 68, 145, 0.66);
     text-decoration: none;
     padding: 15px 20px;
     margin-bottom: 10px;
@@ -118,7 +125,8 @@ const LogOutButton = styled.button`
     &:hover {
         outline: none;
         border: none;
-        color: rgba(104, 20, 138, 0.66);
+        color: rgba(123, 68, 145, 0.66);
+        // color: rgba(104, 20, 138, 0.66);
     }
 `;
 
@@ -160,7 +168,7 @@ function Header() {
 
             <Menu $isOpen={isOpen} onClick={toggleMenu}>
                 <NavLink to="/" onClick={toggleMenu}> Home</NavLink>
-                <NavLink to="/Reading" onClick={toggleMenu}> Three Card Reading</NavLink>
+                {/* <NavLink to="/Reading" onClick={toggleMenu}> Three Card Reading</NavLink> */}
                 <NavLink to="/History" onClick={toggleMenu}> History</NavLink>
                 <NavLink to="/Profile" onClick={toggleMenu}>Profile</NavLink>
 
