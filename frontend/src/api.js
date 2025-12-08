@@ -37,6 +37,7 @@ export const login = async ( email, password ) => {
     }
 };
 
+//signs the user out with firebase
 export const logout = async () => {
     try {
         await auth.signOut();
@@ -44,4 +45,38 @@ export const logout = async () => {
         console.error('error with log out:', err);
         throw err;
     }
+};
+
+//save a reading(ids of 3 cards) for a user with a title
+export const saveReading = async ( firebase_uid, title, card1, card2, card3 ) => {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/readings`, {
+            firebase_uid,
+            title,
+            card1,
+            card2,
+            card3
+        });
+        return response.data;
+    } catch (err) {
+        console.error('error with saving reading:', err);
+        throw err;
+    }
+};
+
+//return all of the readings for the given user
+export const getReadings = async ( firebase_uid ) => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/readings/${firebase_uid}`);
+        console.log('retrieved readings from user');
+        return response.data;
+
+    } catch (err) {
+        console.error('error with getting saved readings:', err);
+        throw err;
+    }
+};
+
+export const deleteReading = () => {
+    //do later after setting up history page
 };

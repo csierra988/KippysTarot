@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { threeRandomCards } from '../utils/Helpers';
+import { saveReading } from '../api';
 import TarotCard from './TarotCard';
 import styled from 'styled-components';
 
@@ -8,6 +10,11 @@ const Content = styled.div`
     width: 100%;
     gap: 20px;
     margin-top: 60px;
+
+    @media (max-width: 888px) {
+        flex-direction: column;
+        align-items: center;
+    }
 `;
 
 const KippyBlock = styled.div`
@@ -19,7 +26,11 @@ const KippyBlock = styled.div`
     max-height: 550px;
 
     @media (max-width: 888px) {
-        display: none;
+        order: -1;
+        width: 550px;
+        height: 200px;
+        padding-top: 40px;
+        padding-bottom: 40px;
     }
 `;
 
@@ -32,13 +43,15 @@ const ReadingBlock = styled.div`
 `;
 
 const Text = styled.div`
+    text-align: center;
     align-items: center;
     background-color: white;
     border: 2px solid black;
-    width: 500px;
-    height: 50px;
+    width: 550px;
+    height: 60px;
     padding: 10px;
     color: black;
+    font-weight: 420;
 `;
 
 const CardContainer = styled.div`
@@ -85,6 +98,20 @@ const SaveButton = styled.div`
 `;
 
 function Reading() {
+    const [user, setUser] = useState(null);
+    const [uid, setUid] = useState(null);
+    const auth = getAuth();
+
+    //checking if the user is logged in
+    useEffect(() => {
+            const unsub = onAuthStateChanged(auth, (currentUser) => {
+                setUser(currentUser);
+                setUid(currentUser.uid);
+            });
+    
+            return () => unsub();
+        }, []);
+
     const [cards, setCards] = useState([]);
     const [readingButton, setReadingButton] = useState(true);
     const [cardValue, setCardValue] = useState(0);
@@ -103,8 +130,24 @@ function Reading() {
         setReadingButton(false);
     }
 
-    const saveReading = () => {
-        alert("saved reading");
+    //saves a reading with title if a user is logged in
+    const savingReading = async ( ) => {
+        if (user) {
+            const title = prompt("enter a title for your reading");
+    
+            if (title) {
+                try {
+                     //save the reading to the database with uid, title, and card ids
+                    await saveReading(uid, title, cards[0].number, cards[1].number, cards[2].number);
+                    console.log('successfully saved reading with title');
+                } catch (err) {
+                    console.error('error with saving reading: ', err);
+                }
+            }
+        }
+        else {
+            alert("to save a reading you must be logged in");
+        }
     }
 
     return (
@@ -116,7 +159,8 @@ function Reading() {
                 </KippyBlock>
 
                 <CardContainer>
-                    <Text>your reading blah blah blah</Text>
+                    <Text>
+                        <p>my third eye has opened to reveal your reading...meow</p> </Text>
                     <Row>
                     {cards.map((card) =>
                         <TarotCard key={`${cardValue} - ${card.number}`} cardData={card} />
@@ -130,7 +174,7 @@ function Reading() {
                     ): (
                         <div>
                             <Button onClick={drawThreeCards}>Draw Again</Button>
-                            <Button onClick={saveReading}>Save Reading</Button>
+                            <Button onClick={savingReading}>Save Reading</Button>
                         </div>
                     )}
                 </SaveButton>
