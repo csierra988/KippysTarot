@@ -7,6 +7,7 @@ import Reading from './components/Reading';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Profile from './components/Profile';
+import Journal from './components/Journal';
 
 const GrainyOverlay = styled.div`
     position: fixed;
@@ -34,6 +35,7 @@ function App() {
             <Route path="/Login" element={<Login />} />
             <Route path="/SignUp" element={<SignUp />} />
             <Route path="/Profile" element={<Profile />} />
+            <Route path="/Journal/:readingId" element={<Journal />} />
           </Routes>
     </div>
   );

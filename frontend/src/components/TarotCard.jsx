@@ -4,6 +4,12 @@ import ReactCardFlip from 'react-card-flip';
 import styled from 'styled-components';
 import cardBackImage from '/images/card-images/back.jpg';
 
+const Wrapper = styled.div`
+    flex-shrink: 0;
+    width: 260px;
+    height: 410px;
+`;
+
 //the back of the tarot card
 const BackCard = styled.div`
     width: 200px;
@@ -40,11 +46,11 @@ const CardBlock = styled.div`
 //parent for front of card - using for animation
 const FrontCard = styled.div`
     display: inline-block;
-    padding: 10px;
+    padding: 16px;
     border-radius: 25px;
     transition: transform 1s ease;
     &:hover {
-        padding: 16px;
+        //padding: 16px;
         background: #3F5EFB;
         background: radial-gradient(circle, rgba(63, 94, 251, 0.25) 0%, rgba(252, 70, 107, 0.25) 100%);
         filter: blur(0px);
@@ -95,7 +101,7 @@ function TarotCard({ cardData }) {
     }
 
     return (
-        <div>
+        <Wrapper>
             <ReactCardFlip flipDirection='horizontal' isFlipped={isFlipped}>
                 <CardBlock>
                     <BackCard onClick={flipCard}>
@@ -119,7 +125,7 @@ function TarotCard({ cardData }) {
                 </FrontCard>
 
             </ReactCardFlip>
-        </div>
+        </Wrapper>
     );
 }
 
