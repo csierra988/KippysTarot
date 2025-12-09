@@ -77,6 +77,17 @@ export const getReadings = async ( firebase_uid ) => {
     }
 };
 
+export const getReading = async ( readingId ) => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/readings/reading/${readingId}`);
+        console.log('retrieved reading by id');
+        return response.data;
+    } catch (err) {
+        console.error('error with retrieving reading', err);
+        throw err;
+    }
+};
+
 export const deleteReading = () => {
     //do later after setting up history page
 };

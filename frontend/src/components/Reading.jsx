@@ -99,14 +99,12 @@ const SaveButton = styled.div`
 
 function Reading() {
     const [user, setUser] = useState(null);
-    const [uid, setUid] = useState(null);
     const auth = getAuth();
 
     //checking if the user is logged in
     useEffect(() => {
             const unsub = onAuthStateChanged(auth, (currentUser) => {
                 setUser(currentUser);
-                setUid(currentUser.uid);
             });
     
             return () => unsub();
@@ -138,7 +136,7 @@ function Reading() {
             if (title) {
                 try {
                      //save the reading to the database with uid, title, and card ids
-                    await saveReading(uid, title, cards[0].number, cards[1].number, cards[2].number);
+                    await saveReading(user.uid, title, cards[0].number, cards[1].number, cards[2].number);
                     console.log('successfully saved reading with title');
                 } catch (err) {
                     console.error('error with saving reading: ', err);
@@ -170,7 +168,7 @@ function Reading() {
                  <ButtonBlock>
                 <SaveButton>
                     { readingButton ? (
-                        <Button onClick={firstReading}>Three Cards</Button>
+                        <Button onClick={firstReading}>Reveal Cards</Button>
                     ): (
                         <div>
                             <Button onClick={drawThreeCards}>Draw Again</Button>
