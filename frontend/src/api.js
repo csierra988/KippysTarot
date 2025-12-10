@@ -77,9 +77,12 @@ export const getReadings = async ( firebase_uid ) => {
     }
 };
 
-export const getReading = async ( readingId ) => {
+//return a reading by its id
+export const getReading = async ( firebase_uid, readingId ) => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/readings/reading/${readingId}`);
+        const response = await axios.get(`${API_BASE_URL}/readings/reading/${readingId}`, {
+            params: {firebase_uid}
+        });
         console.log('retrieved reading by id');
         return response.data;
     } catch (err) {
@@ -87,6 +90,15 @@ export const getReading = async ( readingId ) => {
         throw err;
     }
 };
+
+// export const saveEntry = async ( textEntry ) => {
+//     try {
+//         const response = await axios.put(`${API_BASE_URL}/readings/`)
+//     } catch (err) {
+//         console.error('error with saving entry', err);
+//         throw err;
+//     }
+// }
 
 export const deleteReading = () => {
     //do later after setting up history page

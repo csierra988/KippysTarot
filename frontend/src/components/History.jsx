@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getReadings } from '../api';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useNavigation } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -83,6 +83,16 @@ const Navigate = styled(Link)`
     }
 `;
 
+const LoginButton = styled.button`
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.75);
+    color: black;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    &:hover {
+        color: rgba(104, 20, 138, 0.66);
+    }
+`;
+
 function History() {
     const [user, setUser] = useState(null);
     const [uid, setUid] = useState(null);
@@ -114,6 +124,27 @@ function History() {
 
         fetchReadings();
     }, [user]);
+
+    const navigate = useNavigate();
+    const loginPage = () => {
+        navigate('/Login');
+    }
+
+    //user is not logged in 
+    if (!user) {
+        return (
+            <Wrapper>
+                <HistoryText>
+                    <p>log in to view your past saved readings</p>
+                </HistoryText>
+
+                <LoginButton onClick={loginPage}>
+                    log in here!
+                </LoginButton>
+
+            </Wrapper>
+        );
+    }
 
     return (
         <Wrapper>

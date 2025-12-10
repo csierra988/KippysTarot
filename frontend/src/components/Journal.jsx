@@ -8,6 +8,7 @@ import { getReading } from '../api';
 import { TbArrowBackUp } from "react-icons/tb";
 import TarotCard from './TarotCard';
 import cardData from '../data/tarot-deck.json';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const Wrapper = styled.div`
     display: flex;
@@ -22,14 +23,15 @@ const Content = styled.div`
     display: flex;
     width: 100%;
 
-    @media (max-width: 888px) {
+    @media (max-width: 1100px) {
         flex-direction: column;
         align-items: center;
     }
 `;
 
 const JournalTextArea = styled.textarea`
-    width: 50%;
+    display: flex;
+    width: 400px;
     height: 360px;
     padding: 15px;
     font-size: 16px;
@@ -43,12 +45,23 @@ const JournalTextArea = styled.textarea`
     }
 `;
 
+const EntryBlock = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+`
+
 const Cards = styled.div`
     flex: 1;
     display: flex;
     gap: 20px;
     margin: 40px;
     min-height: 280px;
+
+    @media (max-width: 1100px) {
+        order: -1;
+    }
 `;
 
 const Title = styled.div`
@@ -63,15 +76,75 @@ const Title = styled.div`
 const BackButton = styled.button`
     height: 50px;
     position: relative;
-    top: 30px;
+    top: 60px;
     left: 10px;
     margin-right: auto;
     display: flex;
-    font-size: 16px;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+
+    &:hover {
+        outline: none;
+        border: none;
+        color: rgba(104, 20, 138, 0.66);
+    }
+
+    @media (max-width: 888px) {
+        top: 76px;
+    }
 
 `;
 
+const BackButtonText = styled.text`
+    font-size: 16px;
+    @media (max-width: 888px) {
+        display: none;
+    }
+`;
+
+const SaveButton = styled.div`
+    padding: 10px;
+ `;
+
+const Button = styled.button`
+    font-size: 1em;
+    outline: none;
+    border: none;
+    width: 150px;
+    margin-left: 20px;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+
+    &:hover {
+        outline: none;
+        border: none;
+        color: rgba(104, 20, 138, 0.66);
+    }
+`;
+
+const ButtonUnauth = styled.button`
+    align-self: center;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+
+    &:hover {
+        outline: none;
+        border: none;
+        color: rgba(104, 20, 138, 0.66);
+    }
+`
+
 function Journal() {
+    const [user, setUser] = useState(null);
+    const auth = getAuth();
+
+    useEffect(() => {
+        const unsub = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+
+        return () => unsub();
+    }, []);
+
     const { readingId } = useParams();
     const [title, setTitle] = useState("");
     const [reading, setReading] = useState(null);
@@ -80,61 +153,100 @@ function Journal() {
 
     const navigate = useNavigate();
 
+    
     useEffect(() => {
         const fetchReading = async () => {
-            try{
-                const response = await getReading(readingId);
-                setReading(response);
+            if (user) {
+                 try {
+                    //send in the readingId AND the uid, so a user can only access their readings
+                    const response = await getReading(user.uid, readingId);
+                    setReading(response);
 
-                setTitle(response.title);
+                    setTitle(response.title);
 
-                //getting the data for each tarot card
-                const card1 = cardData.find(card => card.number === response.card1);
-                const card2 = cardData.find(card => card.number === response.card2);
-                const card3 = cardData.find(card => card.number === response.card3);
-                setCards([card1, card2, card3]);
+                    //getting the data for each tarot card
+                    const card1 = cardData.find(card => card.number === response.card1);
+                    const card2 = cardData.find(card => card.number === response.card2);
+                    const card3 = cardData.find(card => card.number === response.card3);
+                    setCards([card1, card2, card3]);
 
-            } catch (err) {
-                console.error('error getting reading: ', err);
+
+                } catch (err) {
+                    console.error('error getting reading: ', err);
+                }
             }
         };
 
         fetchReading();
 
-    }, [readingId]);
+    }, [readingId, user]);
 
     //takes user back to history page
     const backButton = () => {
-        navigate(-1);
+        navigate('/History');
     }
 
-    
-    if (!reading) {
-        return <Wrapper>loading reading...</Wrapper>
+    //takes user to log in page
+    const loginButton = () => {
+        navigate('/Login');
+    }
+
+    const saveEntry = () => {
+
+    }
+
+    //not logged in 
+    if (!user) {
+        return (<Wrapper>
+            <p>you must be logged in to view this page</p>
+            <ButtonUnauth onClick={loginButton}>
+                <BackButtonText> log in here! </BackButtonText>
+            </ButtonUnauth>
+            </Wrapper>);
+    } else if (!reading && !user) {
+        //waiting for authentication
+        return (<Wrapper>
+            <p>loading reading...</p>
+            </Wrapper>);
+    }  else if (!reading) {
+        //trying to access an unauthorized reading entry
+        return (<Wrapper>
+            <p>unable to load reading.</p>
+            <ButtonUnauth onClick={backButton}>
+                <TbArrowBackUp size={20} />
+                <BackButtonText> back to history </BackButtonText>
+            </ButtonUnauth>
+            </Wrapper>);
     }
 
     return (
         <Wrapper>
             <BackButton onClick={backButton}>
-                <TbArrowBackUp size={20}/>
-                    <p> history </p>
+                <TbArrowBackUp size={20} />
+                <BackButtonText> history </BackButtonText>
             </BackButton>
 
-            <Title>this is the entry for {title}</Title>
+            <Title>{title}</Title>
 
-        <Content>
+            <Content>
 
-            <Cards>
-                {cards.map((card, index) => (
-                    <TarotCard key={index} cardData={card} />
-                ))}
-            </Cards>
-            
+                <Cards>
+                    {cards.map((card, index) => (
+                        <TarotCard key={index} cardData={card} />
+                    ))}
+                </Cards>
 
-            <JournalTextArea 
-                placeholder={`This is your tarot journal. Use this to write out your thoughts. For example: How does the ${cards[0].name}, ${cards[1].name}, and ${cards[2].name} cards apply to you and your situation?`}
-            />
-        </Content>
+                <EntryBlock>
+                    <JournalTextArea
+                        placeholder={`This is your tarot journal. Use this to write out your thoughts. For example: How does the ${cards[0].name}, ${cards[1].name}, and ${cards[2].name} cards apply to you and your situation?`}
+                    />
+                    <SaveButton>
+                        <Button onClick={saveEntry}>Save Entry</Button>
+                    </SaveButton>
+
+                </EntryBlock>
+
+            </Content>
 
         </Wrapper>
     );

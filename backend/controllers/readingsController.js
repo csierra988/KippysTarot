@@ -44,10 +44,11 @@ exports.saveReading = async (req, res) => {
 //gets a single reading by its reading id
 exports.getReading = async (req, res) => {
     const reading_id = req.params.id;
+    const firebase_uid = req.query.firebase_uid;
 
     try {
-        const [results] = await db.query('SELECT * FROM readings WHERE id = ?',
-            [reading_id]
+        const [results] = await db.query('SELECT * FROM readings WHERE firebase_uid = ? AND id = ?',
+            [firebase_uid, reading_id]
         );
         //returning the one reading
         res.json(results[0]);
@@ -55,6 +56,11 @@ exports.getReading = async (req, res) => {
         console.error('database error: ', err);
         res.status(500).json({error: err.message});
     }
+
+};
+
+//saving/updating a journal entry
+exports.saveEntry = async () => {
 
 };
 
