@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const admin = require('firebase-admin');
-const serviceAccount = require('./firebase-service-key.json');
 const serverless = require('serverless-http');
 
 const usersRoutes = require('./routes/usersRoutes');
@@ -10,6 +9,7 @@ const readingsRoutes = require('./routes/readingsRoutes');
 
 //enviroment variables
 dotenv.config();
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_KEY);
 
 //initializing the app
 const app = express();
