@@ -181,12 +181,10 @@ function Journal() {
 
     }, [readingId, user]);
 
-    //takes user back to history page
     const backButton = () => {
         navigate('/History');
     }
 
-    //takes user to log in page
     const loginButton = () => {
         navigate('/Login');
     }

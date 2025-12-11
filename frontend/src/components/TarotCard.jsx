@@ -10,7 +10,6 @@ const Wrapper = styled.div`
     height: 410px;
 `;
 
-//the back of the tarot card
 const BackCard = styled.div`
     width: 200px;
     height: 350px;
@@ -43,7 +42,6 @@ const CardBlock = styled.div`
     margin: 0;
 `;
 
-//parent for front of card - using for animation
 const FrontCard = styled.div`
     display: inline-block;
     padding: 16px;

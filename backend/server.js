@@ -3,6 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const admin = require('firebase-admin');
 const serviceAccount = require('./firebase-service-key.json');
+const serverless = require('serverless-http');
 
 const usersRoutes = require('./routes/usersRoutes');
 const readingsRoutes = require('./routes/readingsRoutes');
@@ -30,8 +31,12 @@ app.get('/', (req, res) => {
     res.send("Kippy's Tarot backend server is running");
 });
 
-//starting the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// //starting the server
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
+
+//hosting on vercel
+export const handler = serverless(app);
+export default handler;
