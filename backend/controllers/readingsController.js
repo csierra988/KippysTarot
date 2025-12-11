@@ -9,7 +9,7 @@ exports.getReadings = async (req, res) => {
         //retrieving the title and date for the saved readings
         // const results = await db.query('SELECT readings.title, readings.date FROM readings, users WHERE readings.firebase_uid = users.firebase_uid');
         //querying(is this even a word??) using variable with params 
-        const [results] = await db.query('SELECT readings.id, readings.title, readings.date FROM readings WHERE firebase_uid = ?',
+        const [results] = await db.query('SELECT readings.id, readings.title, readings.date FROM readings WHERE firebase_uid = $1',
             [firebase_uid]
         );
         res.json(results);
@@ -28,7 +28,7 @@ exports.saveReading = async (req, res) => {
     } 
 
     try {
-        const [result] = await db.query('INSERT INTO readings (firebase_uid, title, card1, card2, card3) VALUES (?, ?, ?, ?, ?)',
+        const [result] = await db.query('INSERT INTO readings (firebase_uid, title, card1, card2, card3) VALUES ($1, $2, $3, $4, $5)',
             [firebase_uid, title, card1, card2, card3]
         );
         res.status(201).json({ 
@@ -47,7 +47,7 @@ exports.getReading = async (req, res) => {
     const firebase_uid = req.query.firebase_uid;
 
     try {
-        const [results] = await db.query('SELECT * FROM readings WHERE firebase_uid = ? AND id = ?',
+        const [results] = await db.query('SELECT * FROM readings WHERE firebase_uid = $1 AND id = $2',
             [firebase_uid, reading_id]
         );
         //returning the one reading
