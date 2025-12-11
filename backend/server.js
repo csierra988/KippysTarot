@@ -38,5 +38,5 @@ app.get('/', (req, res) => {
 // });
 
 //hosting on vercel
-export const handler = serverless(app);
-export default handler;
+const handler = serverless(app);
+module.exports = handler;
