@@ -9,7 +9,7 @@ const readingsRoutes = require('./routes/readingsRoutes');
 
 //enviroment variables
 dotenv.config();
-const serviceAccount = JSON.stringify(process.env.FIREBASE_SERVICE_KEY);
+let serviceAccount = JSON.stringify(process.env.FIREBASE_SERVICE_KEY);
 serviceAccount = JSON.parse(serviceAccount);
 
 //initializing the app
