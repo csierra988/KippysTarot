@@ -3,7 +3,7 @@ const db = require('../db.js');
 //getting users from database
 exports.getUsers = async (req, res) => {
     try {
-        const results = await db.query('SELECT * FROM users');
+        const { results } = await db.query('SELECT * FROM users');
         res.json(results);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -19,7 +19,7 @@ exports.addUser = async (req, res) => {
   }
 
   try{
-    const [result] = await db.query('INSERT INTO users (firebase_uid, email, name) VALUES ($1, $2, $3)',
+    const { result } = await db.query('INSERT INTO users (firebase_uid, email, name) VALUES ($1, $2, $3)',
       [firebase_uid, email, name]
     );
     res.status(201).json({
