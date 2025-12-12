@@ -27,3 +27,5 @@ firebase-service-key.json
 *.njsproj
 *.sln
 *.sw?
+.vercel
+.env*.local

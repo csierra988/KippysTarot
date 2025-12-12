@@ -1,9 +1,39 @@
-const serverless = require('serverless-http');
 const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const admin = require('firebase-admin');
+const usersRoutes = require('./routes/usersRoutes');
+const readingsRoutes = require('./routes/readingsRoutes');
+
+//enviroment variables
+dotenv.config();
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_KEY);
+
+//initializing the app
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send("Kippy's Tarot backend server is running - MINIMAL TEST");
+//initialize authentication
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
 });
 
-module.exports = serverless(app);
+app.use(cors()); //frontend requests
+app.use(express.json()); //parsing json requests
+
+//access to the database
+app.use('/users', usersRoutes);
+app.use('/readings', readingsRoutes);
+
+//testing a basic request route on the root url
+app.get('/', (req, res) => {
+    res.send("Kippy's Tarot backend server is running");
+});
+
+// //starting the server
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
+
+//hosting on vercel
+module.exports = app;
