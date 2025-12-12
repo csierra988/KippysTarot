@@ -5,6 +5,8 @@ const admin = require('firebase-admin');
 const usersRoutes = require('./routes/usersRoutes');
 const readingsRoutes = require('./routes/readingsRoutes');
 
+const db = require('./db');
+
 //enviroment variables
 dotenv.config();
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_KEY);
@@ -28,6 +30,15 @@ app.use('/readings', readingsRoutes);
 app.get('/', (req, res) => {
     res.send("Kippy's Tarot backend server is running");
 });
+
+db.query('SELECT version()', (err, res) => {
+    if (err) {
+        console.error('Database connection failed:', err);
+    } else {
+        console.log('Connected to PostgreSQL:', res.rows[0].version);
+    }
+});
+
 
 // //starting the server
 // const PORT = process.env.PORT || 3000;

@@ -3,8 +3,8 @@ const db = require('../db.js');
 //getting users from database
 exports.getUsers = async (req, res) => {
     try {
-        const { results } = await db.query('SELECT * FROM users');
-        res.json(results);
+        const { rows } = await db.query('SELECT * FROM users');
+        res.json(rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -19,15 +19,10 @@ exports.addUser = async (req, res) => {
   }
 
   try{
-    const { result } = await db.query('INSERT INTO users (firebase_uid, email, name) VALUES ($1, $2, $3)',
+    const { rows } = await db.query('INSERT INTO users (firebase_uid, email, name) VALUES ($1, $2, $3)',
       [firebase_uid, email, name]
     );
-    res.status(201).json({
-      id: result.insertId,
-      firebase_uid,
-      email,
-      name
-    });
+    res.status(201).json(rows[0]);
   } catch (err) {
     console.error('database error: ', err);
     res.status(500).json({ error: err.message });
