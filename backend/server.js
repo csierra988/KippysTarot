@@ -22,22 +22,38 @@ admin.initializeApp({
 app.use(cors()); //frontend requests
 app.use(express.json()); //parsing json requests
 
+app.get('/api/ping', (req, res) => {
+  console.log('PING HIT');
+  res.json({ ok: true });
+});
+
 //access to the database
-app.use('/users', usersRoutes);
-app.use('/readings', readingsRoutes);
+app.use('/api/users', usersRoutes);
+app.use('/api/readings', readingsRoutes);
 
 //testing a basic request route on the root url
 app.get('/', (req, res) => {
     res.send("Kippy's Tarot backend server is running");
 });
 
-db.query('SELECT version()', (err, res) => {
-    if (err) {
-        console.error('Database connection failed:', err);
-    } else {
-        console.log('Connected to PostgreSQL:', res.rows[0].version);
-    }
+app.get('/api/db-test', async (req, res) => {
+  try {
+    const result = await db.query('SELECT version()');
+    console.log('db connection successful')
+    res.json({ version: result.rows[0].version });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'DB connection failed' });
+  }
 });
+
+// db.query('SELECT version()', (err, res) => {
+//     if (err) {
+//         console.error('Database connection failed:', err);
+//     } else {
+//         console.log('Connected to PostgreSQL:', res.rows[0].version);
+//     }
+// });
 
 
 // //starting the server

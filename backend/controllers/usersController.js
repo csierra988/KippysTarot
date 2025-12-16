@@ -19,7 +19,7 @@ exports.addUser = async (req, res) => {
   }
 
   try{
-    const { rows } = await db.query('INSERT INTO users (firebase_uid, email, name) VALUES ($1, $2, $3)',
+    const { rows } = await db.query('INSERT INTO users (firebase_uid, email, name) VALUES ($1, $2, $3) RETURNING *',
       [firebase_uid, email, name]
     );
     res.status(201).json(rows[0]);
