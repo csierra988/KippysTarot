@@ -9,7 +9,7 @@ exports.getReadings = async (req, res) => {
         //retrieving the title and date for the saved readings
         // const rows = await db.query('SELECT readings.title, readings.date FROM readings, users WHERE readings.firebase_uid = users.firebase_uid');
         //querying(is this even a word??) using variable with params 
-        const { rows } = await db.query('SELECT readings.id, readings.title, readings.date FROM readings WHERE firebase_uid = $1 RETURNING *',
+        const { rows } = await db.query('SELECT readings.id, readings.title, readings.date FROM readings WHERE firebase_uid = $1',
             [firebase_uid]
         );
         res.json(rows);
@@ -47,7 +47,7 @@ exports.getReading = async (req, res) => {
     const firebase_uid = req.query.firebase_uid;
 
     try {
-        const { rows } = await db.query('SELECT * FROM readings WHERE firebase_uid = $1 AND id = $2 RETURNING *',
+        const { rows } = await db.query('SELECT * FROM readings WHERE firebase_uid = $1 AND id = $2',
             [firebase_uid, reading_id]
         );
         //returning the one reading

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { auth } from './firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
+//production
 const API_BASE_URL = 'https://kippys-tarot-backend.vercel.app/api';
 
 //sign up using firebase and then store in database
