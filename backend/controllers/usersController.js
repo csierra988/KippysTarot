@@ -1,14 +1,14 @@
 const db = require('../db.js');
 
-//getting users from database
-exports.getUsers = async (req, res) => {
-    try {
-        const { rows } = await db.query('SELECT * FROM users');
-        res.json(rows);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-};
+// //getting users from database
+// exports.getUsers = async (req, res) => {
+//     try {
+//         const { rows } = await db.query('SELECT * FROM users');
+//         res.json(rows);
+//     } catch (err) {
+//         res.status(500).json({ error: err.message });
+//     }
+// };
 
 //adding user to the database
 exports.addUser = async (req, res) => {
