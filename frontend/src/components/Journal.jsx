@@ -96,7 +96,7 @@ const BackButton = styled.button`
 
 `;
 
-const BackButtonText = styled.text`
+const BackButtonText = styled.span`
     font-size: 16px;
     @media (max-width: 888px) {
         display: none;
@@ -165,9 +165,9 @@ function Journal() {
                     setTitle(response.title);
 
                     //getting the data for each tarot card
-                    const card1 = cardData.find(card => card.number === response.card1);
-                    const card2 = cardData.find(card => card.number === response.card2);
-                    const card3 = cardData.find(card => card.number === response.card3);
+                    const card1 = cardData.find(card => card.number == response.card1);
+                    const card2 = cardData.find(card => card.number == response.card2);
+                    const card3 = cardData.find(card => card.number == response.card3);
                     setCards([card1, card2, card3]);
 
 
@@ -236,7 +236,11 @@ function Journal() {
 
                 <EntryBlock>
                     <JournalTextArea
-                        placeholder={`This is your tarot journal. Use this to write out your thoughts. For example: How does the ${cards[0].name}, ${cards[1].name}, and ${cards[2].name} cards apply to you and your situation?`}
+                        placeholder={
+                            cards.length === 3
+                            ? `This is your tarot journal. Use this to write out your thoughts. For example: How does the ${cards[0].name}, ${cards[1].name}, and ${cards[2].name} cards apply to you and your situation?`
+                            : "Loading reading entry..."
+                        }
                     />
                     <SaveButton>
                         <Button onClick={saveEntry}>Save Entry</Button>
