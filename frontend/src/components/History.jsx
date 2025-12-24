@@ -1,9 +1,9 @@
 //history page - contains a list of a user saved readings
 import { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getReadings } from '../api';
 import { Link, useNavigate, useNavigation } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAuthWithUid } from '../hooks/useAuth';
 
 const Wrapper = styled.div`
     display: flex;
@@ -94,19 +94,8 @@ const LoginButton = styled.button`
 `;
 
 function History() {
-    const [user, setUser] = useState(null);
-    const [uid, setUid] = useState(null);
-    const auth = getAuth();
-    
-    //if the user is logged in, use their information
-    useEffect(() => {
-        const unsub = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            setUid(currentUser.uid);
-        });
-    
-        return () => unsub();
-    }, []);
+
+    const { user, uid, isLoading } = useAuthWithUid();
 
     const [readings, setReadings] = useState([]);
 
@@ -128,6 +117,12 @@ function History() {
     const navigate = useNavigate();
     const loginPage = () => {
         navigate('/Login');
+    }
+
+    if (isLoading) {
+        return (<Wrapper>
+            <p>Loading...</p>
+            </Wrapper>);
     }
 
     //user is not logged in 

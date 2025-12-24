@@ -124,7 +124,7 @@
         "name": "The Devil",
         "arcana": "Major",
         "suit": null,
-        "meaning": "Confront the unhealthy behaviors that are present as the first step to healing.",
+        "meaning": "Confront unhealthy behaviors that are present as the first step to healing.",
         "image": "/images/card-images/m15.jpg"
     },
     {
@@ -356,7 +356,7 @@
         "name": "Nine of Pentacles",
         "arcana": "Minor",
         "suit": "pentacles",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "You've worked hard to cultivate your wealth. Embrace it and treat yourself.",
         "image": "/images/card-images/p09.jpg"
     },
     {
@@ -364,7 +364,7 @@
         "name": "Ten of Pentacles",
         "arcana": "Minor",
         "suit": "pentacles",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "You have built long lasting wealth and security to pass on to your community.",
         "image": "/images/card-images/p10.jpg"
     },
     {
@@ -372,7 +372,7 @@
         "name": "Page of Pentacles",
         "arcana": "Minor",
         "suit": "pentacles",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Start building the foundation for future prosperity and lasting abundance.",
         "image": "/images/card-images/p11.jpg"
     },
     {
@@ -380,7 +380,7 @@
         "name": "Knight of Pentacles",
         "arcana": "Minor",
         "suit": "pentacles",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Slow down, set realistic goals, and show up to create long term abundance.",
         "image": "/images/card-images/p12.jpg"
     },
     {
@@ -388,7 +388,7 @@
         "name": "Queen of Pentacles",
         "arcana": "Minor",
         "suit": "pentacles",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Appreciate what is around you and how far you've come, while staying grounded.",
         "image": "/images/card-images/p13.jpg"
     },
     {
@@ -396,7 +396,7 @@
         "name": "King of Pentacles",
         "arcana": "Minor",
         "suit": "pentacles",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "There is someone in your life that is financially stable and down to earth.",
         "image": "/images/card-images/p14.jpg"
     },
     {

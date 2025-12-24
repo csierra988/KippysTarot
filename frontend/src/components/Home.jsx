@@ -1,9 +1,8 @@
 //the home page - welcomes user and has the start reading button
 // hi y/n(if signed in), think of a question, set your intentions, and choose your reading type(?)
 import styled from 'styled-components';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 const Wrapper = styled.div`
     display: flex;
@@ -92,19 +91,15 @@ const Navigate = styled(Link)`
 `;
 
 function Home() {
-    const [user, setUser] = useState(null);
-    const auth = getAuth();
+    const { user, isLoading } = useAuth();
 
-    //if the user is logged in, use their information
-    useEffect(() => {
-        const unsub = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-        });
-
-        return () => unsub();
-    }, []);
-    // const currUser = auth.currentUser;
-    // const userName = currUser?.displayName || "";
+    if (isLoading) {
+        return (
+            <Wrapper>
+                <div>is Loading</div>
+            </Wrapper>
+        )
+    }
 
     return (
         <Wrapper>
@@ -120,16 +115,16 @@ function Home() {
                     </Text>
                     <ReadingOptions>
                         <ReadingButtons>
-                            <Navigate to='/Reading'> Three Card </Navigate>
+                            <Navigate to='/Reading'> General </Navigate>
                         </ReadingButtons>
 
-                        <ReadingButtons>
+                        {/* <ReadingButtons>
                             Love - coming soon
                         </ReadingButtons>
 
                         <ReadingButtons>
                             Career - coming soon
-                        </ReadingButtons>
+                        </ReadingButtons> */}
                     </ReadingOptions>
                 </Container>
             </Content>

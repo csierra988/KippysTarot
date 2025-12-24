@@ -1,9 +1,9 @@
 //contains the home menu, access to the history (tarot journal), sign in/sign out
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { logout } from '../api';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import styled from 'styled-components';
+import { useAuth } from '../hooks/useAuth';
 
 const HeaderBlock = styled.div`
     position: absolute;
@@ -132,21 +132,13 @@ const LogOutButton = styled.button`
 
 function Header() {
     const [isOpen, setOpen] = useState(false);
-    const [user, setUser] = useState(null);
-    const auth = getAuth();
 
     const toggleMenu = () => {
         setOpen(!isOpen);
     };
 
     //if the user is logged in, use their information
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-        });
-
-        return () => unsubscribe();
-    }, []);
+    const { user, isLoading } = useAuth();
 
     const loggingOut = () => {
         const conf = window.confirm('are you sure you want to log out?');

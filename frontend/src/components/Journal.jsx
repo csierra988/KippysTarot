@@ -8,7 +8,7 @@ import { getReading } from '../api';
 import { TbArrowBackUp } from "react-icons/tb";
 import TarotCard from './TarotCard';
 import cardData from '../data/tarot-deck.json';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useAuth } from '../hooks/useAuth';
 
 const Wrapper = styled.div`
     display: flex;
@@ -134,16 +134,7 @@ const ButtonUnauth = styled.button`
 `
 
 function Journal() {
-    const [user, setUser] = useState(null);
-    const auth = getAuth();
-
-    useEffect(() => {
-        const unsub = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-        });
-
-        return () => unsub();
-    }, []);
+    const { user, isLoading } = useAuth();
 
     const { readingId } = useParams();
     const [title, setTitle] = useState("");
@@ -153,11 +144,11 @@ function Journal() {
 
     const navigate = useNavigate();
 
-    
+
     useEffect(() => {
         const fetchReading = async () => {
             if (user) {
-                 try {
+                try {
                     //send in the readingId AND the uid, so a user can only access their readings
                     const response = await getReading(user.uid, readingId);
                     setReading(response);
@@ -193,20 +184,22 @@ function Journal() {
 
     }
 
+    if (isLoading) {
+        //waiting for authentication
+        return (<Wrapper>
+            <p>loading reading...</p>
+        </Wrapper>);
+    }
     //not logged in 
-    if (!user) {
+    else if (!user) {
         return (<Wrapper>
             <p>you must be logged in to view this page</p>
             <ButtonUnauth onClick={loginButton}>
                 <BackButtonText> log in here! </BackButtonText>
             </ButtonUnauth>
-            </Wrapper>);
-    } else if (!reading && !user) {
-        //waiting for authentication
-        return (<Wrapper>
-            <p>loading reading...</p>
-            </Wrapper>);
-    }  else if (!reading) {
+        </Wrapper>);
+    }
+    else if (user && !reading) {
         //trying to access an unauthorized reading entry
         return (<Wrapper>
             <p>unable to load reading.</p>
@@ -214,7 +207,7 @@ function Journal() {
                 <TbArrowBackUp size={20} />
                 <BackButtonText> back to history </BackButtonText>
             </ButtonUnauth>
-            </Wrapper>);
+        </Wrapper>);
     }
 
     return (
@@ -238,8 +231,8 @@ function Journal() {
                     <JournalTextArea
                         placeholder={
                             cards.length === 3
-                            ? `This is your tarot journal. Use this to write out your thoughts. For example: How does the ${cards[0].name}, ${cards[1].name}, and ${cards[2].name} cards apply to you and your situation?`
-                            : "Loading reading entry..."
+                                ? `This is your tarot journal. Use this to write out your thoughts. For example: How does the ${cards[0].name}, ${cards[1].name}, and ${cards[2].name} cards apply to you and your situation?`
+                                : "Loading reading entry..."
                         }
                     />
                     <SaveButton>

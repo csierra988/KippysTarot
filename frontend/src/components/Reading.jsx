@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useState } from 'react';
 import { threeRandomCards } from '../utils/Helpers';
 import { saveReading } from '../api';
 import TarotCard from './TarotCard';
 import styled from 'styled-components';
+import { useAuth } from '../hooks/useAuth';
 
 const Content = styled.div`
     display: flex;
@@ -98,17 +98,7 @@ const SaveButton = styled.div`
 `;
 
 function Reading() {
-    const [user, setUser] = useState(null);
-    const auth = getAuth();
-
-    //checking if the user is logged in
-    useEffect(() => {
-            const unsub = onAuthStateChanged(auth, (currentUser) => {
-                setUser(currentUser);
-            });
-    
-            return () => unsub();
-        }, []);
+    const { user, isLoading} = useAuth();
 
     const [cards, setCards] = useState([]);
     const [readingButton, setReadingButton] = useState(true);
