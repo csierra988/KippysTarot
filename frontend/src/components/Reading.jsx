@@ -78,6 +78,8 @@ const Button = styled.button`
     width: 150px;
     margin-left: 20px;
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    background-color: white;
+    color: black;
 
     &:hover {
         outline: none;

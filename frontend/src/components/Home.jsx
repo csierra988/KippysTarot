@@ -71,15 +71,21 @@ const ReadingOptions = styled.div`
     align-items: center;
     justify-content: center;
     gap: 40px;
+    padding-bottom: 20px;
 `;
 
 const ReadingButtons = styled.button`
+    background-color: white;
+    color: black;
     font-size: 1em;
     outline: none;
     border: none;
     height: 55px;
     width: 200px;
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    &:hover {
+        color: rgba(104, 20, 138, 0.66);
+    }
 `;
 
 const Navigate = styled(Link)`
@@ -110,21 +116,24 @@ function Home() {
 
                 <Container>
                     <Text>
-                         <p>hi {user?.displayName || ""}!</p>
-                         <p>think of a question, set your intentions, and choose a reading!</p>
+                        <p>hi {user?.displayName || ""}!</p>
+                        <p>think of a question, set your intentions, and choose a reading!</p>
                     </Text>
                     <ReadingOptions>
-                        <ReadingButtons>
-                            <Navigate to='/Reading'> General </Navigate>
-                        </ReadingButtons>
-
-                        {/* <ReadingButtons>
-                            Love - coming soon
-                        </ReadingButtons>
+                        <Navigate to='/Reading'>
+                            <ReadingButtons>
+                                General
+                            </ReadingButtons>
+                        </Navigate>
 
                         <ReadingButtons>
-                            Career - coming soon
-                        </ReadingButtons> */}
+                            Love - tbd
+                        </ReadingButtons>
+
+                        <ReadingButtons>
+                            Career - tbd
+                        </ReadingButtons>
+
                     </ReadingOptions>
                 </Container>
             </Content>

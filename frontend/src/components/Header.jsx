@@ -152,7 +152,7 @@ function Header() {
             <HeaderBlock>
                 <MenuButton onClick={toggleMenu}> ☰ </MenuButton>
                 <Title to="/">
-                    KIPPYS TAROT
+                    Kippy's Tarot ⋆˙⟡
                 </Title>
             </HeaderBlock>
 

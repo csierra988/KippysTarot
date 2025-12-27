@@ -28,6 +28,7 @@ const HistoryText = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
+    color: black;
     background-color: rgba(255, 255, 255, 0.65);
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
     padding: 10px;
@@ -145,17 +146,17 @@ function History() {
         <Wrapper>
             <Content>
             <HistoryText>
-                <p>click to view on any of your past saved readings.</p>
+                Click to view on any of your past saved readings.
             </HistoryText>
 
             <SavedReadingsList>
                 {readings.map((reading) => (
+                    <Navigate to={`/Journal/${reading.id}`}>
                     <SavedReading key={reading.id}>
-                        <Navigate to={`/Journal/${reading.id}`}>
                             <p>{reading.title}</p>
                             <p>{new Date(reading.date).toLocaleDateString()}</p>
-                        </Navigate>
                     </SavedReading>
+                    </Navigate>
                 ))}
             </SavedReadingsList>
             </Content>

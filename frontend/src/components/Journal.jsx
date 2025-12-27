@@ -9,6 +9,7 @@ import { TbArrowBackUp } from "react-icons/tb";
 import TarotCard from './TarotCard';
 import cardData from '../data/tarot-deck.json';
 import { useAuth } from '../hooks/useAuth';
+import { saveEntry } from '../api';
 
 const Wrapper = styled.div`
     display: flex;
@@ -38,10 +39,11 @@ const JournalTextArea = styled.textarea`
     border: 2px solid black;
     border-radius: 8px;
     margin: 20px;
-    font-family: "Poppins", sans-serif;
+    font-family: "Pixelify Sans", sans-serif;
+    background-color: white;
 
     &&::placeholder {
-        font-family: "Poppins", sans-serif;
+        font-family: "Pixelify Sans", sans-serif;
     }
 `;
 
@@ -81,6 +83,7 @@ const BackButton = styled.button`
     margin-right: auto;
     display: flex;
     justify-content: center;
+    color: black;
     background-color: rgba(255, 255, 255, 0.65);
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
 
@@ -114,6 +117,8 @@ const Button = styled.button`
     width: 150px;
     margin-left: 20px;
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    color: black;
+    background-color: white;
 
     &:hover {
         outline: none;
@@ -181,7 +186,7 @@ function Journal() {
     }
 
     const saveEntry = () => {
-
+        // const response = await.saveEntry(text, readingId);
     }
 
     if (isLoading) {
@@ -231,7 +236,7 @@ function Journal() {
                     <JournalTextArea
                         placeholder={
                             cards.length === 3
-                                ? `This is your tarot journal. Use this to write out your thoughts. For example: How does the ${cards[0].name}, ${cards[1].name}, and ${cards[2].name} cards apply to you and your situation?`
+                                ? `This is your tarot journal. Use this to write out your thoughts. For example: How does ${cards[0].name}, ${cards[1].name}, and ${cards[2].name} cards apply to you and your situation?`
                                 : "Loading reading entry..."
                         }
                     />

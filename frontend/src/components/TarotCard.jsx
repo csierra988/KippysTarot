@@ -84,7 +84,7 @@ const CardData = styled.div`
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
     border-radius: 10px;
     font-size: 14px;
-    font-weight: 420;
+    font-weight: 444;
     text-align: center;
     display: inline-block;
     color: black;
