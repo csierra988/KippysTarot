@@ -12,6 +12,8 @@ router.get('/reading/:id', readingsController.getReading);
 
 router.get('/:firebase_uid', readingsController.getReadings);
 
+router.put('/reading/:id', readingsController.saveEntry);
+
 router.post('/', readingsController.saveReading);
 
 module.exports = router;

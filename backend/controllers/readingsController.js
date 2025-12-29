@@ -60,8 +60,22 @@ exports.getReading = async (req, res) => {
 };
 
 //saving/updating a journal entry
-exports.saveEntry = async () => {
+exports.saveEntry = async (req, res) => {
+    const reading_id = req.params.id;
+    const {journal_entry}  = req.body;
 
+    if (!journal_entry) {
+        return res.status.json({error: 'missing entry'});
+    }
+
+    try {
+        const { rows } = await db.query('UPDATE readings SET journal_entry = $1 WHERE id = $2 RETURNING *', 
+            [journal_entry, reading_id]);
+        return res.status(200).json(rows[0]);
+    } catch (err) {
+        console.error('database error: ', err);
+        res.status(500).json({error: err.message});
+    }
 };
 
 exports.deleteReading = () => {

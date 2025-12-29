@@ -92,9 +92,12 @@ export const getReading = async ( firebase_uid, readingId ) => {
     }
 };
 
-export const saveEntry = async ( textEntry, readingId ) => {
+export const saveEntry = async ( entry, readingId ) => {
     try {
-        const response = await axios.put(`${API_BASE_URL}/readings/${readingId}`)
+        const response = await axios.put(`${API_BASE_URL}/readings/reading/${readingId}`, 
+            {journal_entry: entry});
+        console.log('saved entry');
+        return response.data;
     } catch (err) {
         console.error('error with saving entry', err);
         throw err;

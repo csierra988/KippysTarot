@@ -4,12 +4,11 @@
 import styled from 'styled-components';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getReading } from '../api';
+import { getReading, saveEntry } from '../api';
 import { TbArrowBackUp } from "react-icons/tb";
 import TarotCard from './TarotCard';
 import cardData from '../data/tarot-deck.json';
 import { useAuth } from '../hooks/useAuth';
-import { saveEntry } from '../api';
 
 const Wrapper = styled.div`
     display: flex;
@@ -157,7 +156,7 @@ function Journal() {
                     //send in the readingId AND the uid, so a user can only access their readings
                     const response = await getReading(user.uid, readingId);
                     setReading(response);
-
+                    setEntry(response.journal_entry || '');
                     setTitle(response.title);
 
                     //getting the data for each tarot card
@@ -185,8 +184,17 @@ function Journal() {
         navigate('/Login');
     }
 
-    const saveEntry = () => {
-        // const response = await.saveEntry(text, readingId);
+    const savingEntry = async () => {
+        //retrieving the journal entry text
+        // const entry = document.getElementById("entry").value;
+        // console.log(entry);
+
+        try {
+             await saveEntry(entry, readingId);
+             console.log('successfully saved text entry');
+        } catch (err) {
+            console.error("error with saving entry: ", err);
+        }
     }
 
     if (isLoading) {
@@ -234,6 +242,8 @@ function Journal() {
 
                 <EntryBlock>
                     <JournalTextArea
+                        value ={entry}
+                        onChange ={(e) => setEntry(e.target.value)}
                         placeholder={
                             cards.length === 3
                                 ? `This is your tarot journal. Use this to write out your thoughts. For example: How does ${cards[0].name}, ${cards[1].name}, and ${cards[2].name} cards apply to you and your situation?`
@@ -241,7 +251,7 @@ function Journal() {
                         }
                     />
                     <SaveButton>
-                        <Button onClick={saveEntry}>Save Entry</Button>
+                        <Button onClick={savingEntry}>Save Entry</Button>
                     </SaveButton>
 
                 </EntryBlock>
