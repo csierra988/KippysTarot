@@ -16,7 +16,23 @@ const Wrapper = styled.form`
 const UserInput = styled.input`
     height: 30px;
     width: 400px;
-    margin-bottom: 30px;
+    margin: 10px;
+    padding: 4px;
+    background-color: white;
+    caret-color: black;
+    color: black;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 8px;
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66);
+        outline: none;
+    }
+
+    &&::placeholder {
+        font-family: "Pixelify Sans", sans-serif;
+    }
 `;
 
 const SignUpButton = styled.button`
@@ -24,6 +40,30 @@ const SignUpButton = styled.button`
     background: rgba(255, 255, 255, 0.75);
     color: black;
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    outline: none;
+    border: 2px solid transparent;
+    &:hover {
+        border: 2px solid transparent;
+        color: rgba(104, 20, 138, 0.66);
+    }
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+`;
+
+const PasswordWrapper = styled.div`
+    position: relative;
+`;
+
+const EyeIcon = styled.div`
+    position: absolute;
+    right: 30px;
+    top: 55%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: black;
+
     &:hover {
         color: rgba(104, 20, 138, 0.66);
     }
@@ -68,19 +108,20 @@ function SignUp () {
 
     return (
         <Wrapper onSubmit={signingUp}>
-            sign up page
+            Sign Up Page
             <UserInput
                 placeholder="name" type="text" value={name} onChange={changeName} />
             <UserInput 
                 placeholder="email" type="email" value={email} onChange={changeEmail} />
-            <UserInput 
+            
+            <PasswordWrapper>
+                <UserInput 
                 placeholder="password" type={showPassword ? "text" : "password"} value={password} onChange={changePassword} />
 
-                { showPassword ? (
-                    <FaRegEye onClick={changePasswordVisibility} />
-                ) : (
-                    <FaRegEyeSlash onClick={changePasswordVisibility}/>
-                )}
+                <EyeIcon onClick={changePasswordVisibility}>
+                    { showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                </EyeIcon>
+            </PasswordWrapper>
 
             <SignUpButton type="submit"> Sign Up Now!</SignUpButton>
         </Wrapper>

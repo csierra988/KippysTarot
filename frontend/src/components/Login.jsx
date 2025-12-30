@@ -21,6 +21,22 @@ const UserInput = styled.input`
     height: 30px;
     width: 400px;
     margin: 10px;
+    padding: 4px;
+    background-color: white;
+    caret-color: black;
+    color: black;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 8px;
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+    &&::placeholder {
+        font-family: "Pixelify Sans", sans-serif;
+    }
 `;
 
 const LoginButton = styled.button`
@@ -28,36 +44,71 @@ const LoginButton = styled.button`
     background: rgba(255, 255, 255, 0.75);
     color: black;
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    outline: none;
+    border: 2px solid transparent;;
     &:hover {
+        border: 2px solid transparent;
         color: rgba(104, 20, 138, 0.66);
+    }
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
     }
 `;
 
-const SignUpButton = styled.button `
+const SignUpButton = styled.button`
     justify-content: center;
     margin-top: 10px;
     background: rgba(255, 255, 255, 0.75);
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    outline: none;
+    color: black;
+    border: 2px solid transparent;;
+    &:hover {
+        border: 2px solid transparent;
+        color: rgba(104, 20, 138, 0.66);
+    }
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
 `;
 
-const SignUpNav = styled(Link) `
+const SignUpNav = styled(Link)`
     color: black;
     &:hover {
         background: none;
         color: rgba(104, 20, 138, 0.66);
     }
-`
+`;
 
-function Login () {
+const PasswordWrapper = styled.div`
+     position: relative;
+`;
+
+const EyeIcon = styled.div`
+    position: absolute;
+    right: 30px;
+    top: 35%;
+    transform: trasnlateY(-50%);
+    cursor: pointer;
+    color: black;
+
+    &:hover {
+        color: rgba(104, 20, 138, 0.66);
+    }
+`;
+
+function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
-    const changeEmail = ( event ) => {
+    const changeEmail = (event) => {
         setEmail(event.target.value);
     };
-    const changePassword = ( event ) => {
+    const changePassword = (event) => {
         setPassword(event.target.value);
     };
 
@@ -65,7 +116,7 @@ function Login () {
         setShowPassword((prev) => !prev);
     };
 
-    const loggingIn = async ( event ) => {
+    const loggingIn = async (event) => {
         event.preventDefault();
         try {
             await login(email, password);
@@ -78,25 +129,26 @@ function Login () {
 
     return (
         <LoginStyle onSubmit={loggingIn}>
-            <LoginText>login page</LoginText>
-            <UserInput 
+            <LoginText>Login Page</LoginText>
+            <UserInput
                 placeholder="email" type="email" value={email} onChange={changeEmail} />
-            <UserInput 
-                placeholder="password" type={showPassword ? "text" : "password"} value={password} onChange={changePassword} />
 
-            { showPassword ? (
-                <FaRegEye onClick={changePasswordVisibility} />
-            ) : (
-                <FaRegEyeSlash onClick={changePasswordVisibility}/>
-            )}
+            <PasswordWrapper>
+                <UserInput
+                    placeholder="password" type={showPassword ? "text" : "password"} value={password} onChange={changePassword} />
+
+                <EyeIcon onClick={changePasswordVisibility}>
+                    { showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                </EyeIcon>
+            </PasswordWrapper>
 
             <LoginButton type="submit">Log In!</LoginButton>
 
-            <SignUpButton>
-                <SignUpNav to='/SignUp'>
-                     no account? sign up here!
-                </SignUpNav>
-            </SignUpButton>
+            <SignUpNav to='/SignUp'>
+                <SignUpButton>
+                    No account? Sign up here!
+                </SignUpButton>
+            </SignUpNav>
         </LoginStyle>
     );
 }

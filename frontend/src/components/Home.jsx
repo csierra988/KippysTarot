@@ -79,12 +79,18 @@ const ReadingButtons = styled.button`
     color: black;
     font-size: 1em;
     outline: none;
-    border: none;
+    border: 2px solid transparent;
+    outline: none;
     height: 55px;
     width: 200px;
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
     &:hover {
+        border: 2px solid transparent;
         color: rgba(104, 20, 138, 0.66);
+    }
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none;
     }
 `;
 
@@ -116,8 +122,8 @@ function Home() {
 
                 <Container>
                     <Text>
-                        <p>hi {user?.displayName || ""}!</p>
-                        <p>think of a question, set your intentions, and choose a reading!</p>
+                        <p>Hi {user?.displayName || "Friend"}!</p>
+                        <p>Think of a question, set your intentions, and choose a reading!</p>
                     </Text>
                     <ReadingOptions>
                         <Navigate to='/Reading'>

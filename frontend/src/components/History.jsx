@@ -89,6 +89,8 @@ const LoginButton = styled.button`
     background: rgba(255, 255, 255, 0.75);
     color: black;
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    outline: none;
+    border: none;
     &:hover {
         color: rgba(104, 20, 138, 0.66);
     }
@@ -120,26 +122,26 @@ function History() {
         navigate('/Login');
     }
 
-    if (isLoading) {
-        return (<Wrapper>
-            <p>Loading...</p>
-            </Wrapper>);
-    }
-
     //user is not logged in 
     if (!user) {
         return (
             <Wrapper>
                 <HistoryText>
-                    <p>log in to view your past saved readings</p>
+                    <p>Log in to view your past saved readings.</p>
                 </HistoryText>
 
                 <LoginButton onClick={loginPage}>
-                    log in here!
+                    Log in here!
                 </LoginButton>
 
             </Wrapper>
         );
+    }
+
+    if (isLoading) {
+        return (<Wrapper>
+            <p>Loading...</p>
+            </Wrapper>);
     }
 
     return (
