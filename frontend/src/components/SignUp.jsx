@@ -43,7 +43,7 @@ const SignUpButton = styled.button`
     outline: none;
     border: 2px solid transparent;
     &:hover {
-        border: 2px solid transparent;
+        border: 2px solid rgba(104, 20, 138, 0.66); 
         color: rgba(104, 20, 138, 0.66);
     }
     &:focus {
@@ -69,12 +69,17 @@ const EyeIcon = styled.div`
     }
 `;
 
+const Error = styled.p`
+    color: rgba(208, 36, 36, 0.66);
+`;
+
 
 function SignUp () {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     //setting the values using the user input
@@ -102,6 +107,11 @@ function SignUp () {
             navigate('/');
         } catch (err) {
             console.error('signup error: ', err);
+            switch(err.code) {
+                case 'auth/email-already-in-use':
+                    setErrorMessage('Email already in use!');
+                    break;
+            }
         }
 
     }
@@ -109,6 +119,9 @@ function SignUp () {
     return (
         <Wrapper onSubmit={signingUp}>
             Sign Up Page
+            {errorMessage && (
+                <Error>{errorMessage}</Error>
+            )}
             <UserInput
                 placeholder="name" type="text" value={name} onChange={changeName} />
             <UserInput 

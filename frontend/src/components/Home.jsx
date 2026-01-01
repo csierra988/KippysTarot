@@ -85,7 +85,7 @@ const ReadingButtons = styled.button`
     width: 200px;
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
     &:hover {
-        border: 2px solid transparent;
+        border: 2px solid rgba(104, 20, 138, 0.66); 
         color: rgba(104, 20, 138, 0.66);
     }
     &:focus {

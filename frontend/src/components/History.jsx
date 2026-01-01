@@ -1,9 +1,10 @@
 //history page - contains a list of a user saved readings
 import { useState, useEffect } from 'react';
-import { getReadings } from '../api';
+import { getReadings, deleteReading } from '../api';
 import { Link, useNavigate, useNavigation } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuthWithUid } from '../hooks/useAuth';
+import { FaTrashCan } from "react-icons/fa6";
 
 const Wrapper = styled.div`
     display: flex;
@@ -24,7 +25,7 @@ const HistoryText = styled.div`
     display: flex;
     width: 600px;
     height: 60px;
-    margin: 30px auto 40px auto;
+    margin: 20px auto 40px auto;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -33,15 +34,16 @@ const HistoryText = styled.div`
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
     padding: 10px;
     font-weight: 420;
+    border-radius: 12px;
 `;
 
 const SavedReadingsList = styled.div`
     width: 80%;
     max-width: 800px;
     max-height: 60vh;
-    overflow-y: auto;
+    overflow-y: scroll;
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px 40px;
 
     //adding scrollbar back for the list
     &::-webkit-scrollbar {
@@ -65,23 +67,14 @@ const SavedReading = styled.div`
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     border-radius: 12px;
     padding: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 30px;
     text-align: left;
     font-weight: 420;
-    &:hover {
-        filter: blur(0px);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-        transform: scale(1.03);
-        transition: 0.25s all ease;
-    }
 `;
 
 const Navigate = styled(Link)`
     color: black;
-    &:hover {
-        background: none;
-        color: rgba(104, 20, 138, 0.66);
-    }
+    background: none;
 `;
 
 const LoginButton = styled.button`
@@ -93,6 +86,43 @@ const LoginButton = styled.button`
     border: none;
     &:hover {
         color: rgba(104, 20, 138, 0.66);
+    }
+`;
+
+const BinIcon = styled.div`
+    position: absolute;
+    top: 50%;
+    right: 40px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: black;
+    z-index: 10;
+    padding: 8px;
+
+    &:hover {
+       color: rgba(208, 36, 36, 0.66);
+    }
+`;
+
+const ReadingWrapper = styled.div`
+    position: relative;
+    margin-bottom: 20px;
+    transition: 0.25s all ease;
+
+    &:hover {
+        transform: scale(1.02);
+    }
+
+    &:hover ${Navigate} {
+        background: none;
+        color: rgba(104, 20, 138, 0.66);
+    }
+    &:hover ${SavedReading} {
+        filter: blur(0px);
+        box-shadow: 0 0 40px 10px rgba(147, 51, 234, 0.2); 
+           0 0 80px 20px rgba(236, 72, 153, 0.15), 
+           0 8px 30px rgba(0, 0, 0, 0.1);
+           transform: scale(1.02);
     }
 `;
 
@@ -131,7 +161,7 @@ function History() {
                 </HistoryText>
 
                 <LoginButton onClick={loginPage}>
-                    Log in here!
+                    Log in Here!
                 </LoginButton>
 
             </Wrapper>
@@ -144,6 +174,22 @@ function History() {
             </Wrapper>);
     }
 
+    const deletingReading = async ( readingId ) => {
+        const confirmation = confirm("are you sure you want to delete this reading?");
+
+        if (confirmation) {
+            //delete the reading
+            try {
+               console.log(readingId);
+               await deleteReading(readingId);
+               console.log('successfully deleted reading ', readingId);
+
+            } catch (err) {
+                console.log('error with deleting reading: ', err);
+            }
+        }
+    }
+
     return (
         <Wrapper>
             <Content>
@@ -153,12 +199,18 @@ function History() {
 
             <SavedReadingsList>
                 {readings.map((reading) => (
+                    <ReadingWrapper key={reading.id}>
                     <Navigate to={`/Journal/${reading.id}`}>
                     <SavedReading key={reading.id}>
                             <p>{reading.title}</p>
                             <p>{new Date(reading.date).toLocaleDateString()}</p>
                     </SavedReading>
                     </Navigate>
+
+                    <BinIcon onClick={(e) => deletingReading(reading.id, e)}>
+                        <FaTrashCan />
+                    </BinIcon>
+                    </ReadingWrapper>
                 ))}
             </SavedReadingsList>
             </Content>

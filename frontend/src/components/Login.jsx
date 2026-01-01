@@ -47,7 +47,7 @@ const LoginButton = styled.button`
     outline: none;
     border: 2px solid transparent;;
     &:hover {
-        border: 2px solid transparent;
+        border: 2px solid rgba(104, 20, 138, 0.66); 
         color: rgba(104, 20, 138, 0.66);
     }
     &:focus {
@@ -65,7 +65,7 @@ const SignUpButton = styled.button`
     color: black;
     border: 2px solid transparent;;
     &:hover {
-        border: 2px solid transparent;
+        border: 2px solid rgba(104, 20, 138, 0.66); 
         color: rgba(104, 20, 138, 0.66);
     }
     &:focus {
@@ -99,10 +99,15 @@ const EyeIcon = styled.div`
     }
 `;
 
+const Error = styled.p`
+    color: rgba(208, 36, 36, 0.66);
+`;
+
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     const changeEmail = (event) => {
@@ -124,12 +129,20 @@ function Login() {
             navigate('/');
         } catch (err) {
             console.error('login error: ', err);
+            switch(err.code) {
+                case 'auth/invalid-credential':
+                    setErrorMessage("Incorrect email and/or password!")
+                    break;
+            }
         }
     }
 
     return (
         <LoginStyle onSubmit={loggingIn}>
-            <LoginText>Login Page</LoginText>
+            Login Page
+            {errorMessage && (
+                <Error>{errorMessage}</Error>
+            )}
             <UserInput
                 placeholder="email" type="email" value={email} onChange={changeEmail} />
 

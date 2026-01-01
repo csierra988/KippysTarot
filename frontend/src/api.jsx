@@ -99,11 +99,18 @@ export const saveEntry = async ( entry, readingId ) => {
         console.log('saved entry');
         return response.data;
     } catch (err) {
-        console.error('error with saving entry', err);
+        console.error('error with saving entry: ', err);
         throw err;
     }
 }
 
-export const deleteReading = () => {
-    //do later after setting up history page
+export const deleteReading = async ( readingId ) => {
+        try {
+            const response = await axios.delete(`${API_BASE_URL}/readings/${readingId}`);
+            console.log('reading deleted');
+            return response.data;
+        } catch(err) {
+            console.error('error with deleting reading: ', err);
+            throw err;
+        }
 };

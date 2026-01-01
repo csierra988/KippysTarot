@@ -9,7 +9,7 @@ exports.getReadings = async (req, res) => {
         //retrieving the title and date for the saved readings
         // const rows = await db.query('SELECT readings.title, readings.date FROM readings, users WHERE readings.firebase_uid = users.firebase_uid');
         //querying(is this even a word??) using variable with params 
-        const { rows } = await db.query('SELECT readings.id, readings.title, readings.date FROM readings WHERE firebase_uid = $1',
+        const { rows } = await db.query('SELECT readings.id, readings.title, readings.date FROM readings WHERE firebase_uid = $1 ORDER BY readings.id DESC',
             [firebase_uid]
         );
         res.json(rows);
@@ -78,6 +78,22 @@ exports.saveEntry = async (req, res) => {
     }
 };
 
-exports.deleteReading = () => {
+exports.deleteReading = async (req, res) => {
     //do later after setting up history page
+    const reading_id = req.params.id
+
+    try {
+        const { rowCount } = await db.query('DELETE from readings WHERE id = $1', 
+            [reading_id]);
+        
+        if (rowCount == 0) {
+            return res.status(404).json({error: 'reading not found'});
+        }
+
+        res.status(200).json({message: 'reading successfully deleted'});
+
+    } catch (err) {
+        console.error('database error: ', err);
+        res.status(500).json({error: err.message});
+    }
 };
