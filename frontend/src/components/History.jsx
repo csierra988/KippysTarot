@@ -184,6 +184,9 @@ function History() {
                await deleteReading(readingId);
                console.log('successfully deleted reading ', readingId);
 
+               const response = await getReadings(uid);
+               setReadings(response);
+
             } catch (err) {
                 console.log('error with deleting reading: ', err);
             }
