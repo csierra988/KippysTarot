@@ -43,7 +43,7 @@ const SavedReadingsList = styled.div`
     max-height: 60vh;
     overflow-y: scroll;
     margin: 0 auto;
-    padding: 40px 40px;
+    padding: 50px 60px;
 
     //adding scrollbar back for the list
     &::-webkit-scrollbar {
@@ -75,6 +75,7 @@ const SavedReading = styled.div`
 const Navigate = styled(Link)`
     color: black;
     background: none;
+    transition: color 0.2s ease;
 `;
 
 const LoginButton = styled.button`
@@ -98,6 +99,7 @@ const BinIcon = styled.div`
     color: black;
     z-index: 10;
     padding: 8px;
+    transition: color 0.2s ease;
 
     &:hover {
        color: rgba(208, 36, 36, 0.66);
@@ -111,6 +113,15 @@ const ReadingWrapper = styled.div`
 
     &:hover {
         transform: scale(1.02);
+        color: rgba(104, 20, 138, 0.66);
+
+        ${BinIcon} {
+            color: rgba(104, 20, 138, 0.66);
+
+            &:hover {
+                color: rgba(208, 36, 36, 0.66);
+            }
+        }
     }
 
     &:hover ${Navigate} {
@@ -119,10 +130,11 @@ const ReadingWrapper = styled.div`
     }
     &:hover ${SavedReading} {
         filter: blur(0px);
-        box-shadow: 0 0 40px 10px rgba(147, 51, 234, 0.2); 
-           0 0 80px 20px rgba(236, 72, 153, 0.15), 
-           0 8px 30px rgba(0, 0, 0, 0.1);
-           transform: scale(1.02);
+        box-shadow: 
+            0 15px 60px -10px rgba(147, 51, 234, 0.3),
+            0 20px 100px -15px rgba(236, 72, 153, 0.2), 
+            0 10px 40px -10px rgba(0, 0, 0, 0.15);
+        transform: scale(1.02);
     }
 `;
 
@@ -150,6 +162,14 @@ function History() {
     const navigate = useNavigate();
     const loginPage = () => {
         navigate('/Login');
+    }
+
+    if (!readings) {
+        return (
+            <Wrapper>
+                <p>Loading...</p>
+            </Wrapper>
+        );
     }
 
     //user is not logged in 
@@ -184,8 +204,7 @@ function History() {
                await deleteReading(readingId);
                console.log('successfully deleted reading ', readingId);
 
-               const response = await getReadings(uid);
-               setReadings(response);
+               setReadings(readings.filter(r => r.id !== readingId));
 
             } catch (err) {
                 console.log('error with deleting reading: ', err);

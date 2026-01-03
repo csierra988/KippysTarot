@@ -16,33 +16,20 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    width: 100vw;
+    width: 100%;
+    overflow-x: hidden;
 `;
 
 const Content = styled.div`
     display: flex;
     width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
 
-    @media (max-width: 1100px) {
+    @media (max-width: 1250px) {
         flex-direction: column;
         align-items: center;
-    }
-`;
-
-const JournalTextArea = styled.textarea`
-    display: flex;
-    width: 400px;
-    height: 360px;
-    padding: 15px;
-    font-size: 16px;
-    border: 2px solid black;
-    border-radius: 8px;
-    margin: 20px;
-    font-family: "Pixelify Sans", sans-serif;
-    background-color: white;
-
-    &&::placeholder {
-        font-family: "Pixelify Sans", sans-serif;
     }
 `;
 
@@ -50,8 +37,36 @@ const EntryBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 50%;
-`
+    flex: 1; 
+    padding-right: 40px; 
+    min-width: 0; 
+
+   @media (max-width: 1250px) {
+    width: 100%;
+    flex: none;
+    padding: 0 20px;
+  }
+`;
+
+const JournalTextArea = styled.textarea`
+    display: flex;
+    width: 100%;
+    max-width: 400px; 
+    height: 360px;
+    padding: 15px;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 8px;
+    box-sizing: border-box; 
+    margin: 20px 0;
+    font-family: "Pixelify Sans", sans-serif;
+    background-color: white;
+    color: black;
+
+    &&::placeholder {
+        font-family: "Pixelify Sans", sans-serif;
+    }
+`;
 
 const Cards = styled.div`
     flex: 1;
@@ -60,7 +75,7 @@ const Cards = styled.div`
     margin: 40px;
     min-height: 280px;
 
-    @media (max-width: 1100px) {
+    @media (max-width: 1250px) {
         order: -1;
     }
 `;
@@ -135,7 +150,7 @@ const ButtonUnauth = styled.button`
         border: none;
         color: rgba(104, 20, 138, 0.66);
     }
-`
+`;
 
 function Journal() {
     const { user, isLoading } = useAuth();
@@ -145,6 +160,7 @@ function Journal() {
     const [reading, setReading] = useState(null);
     const [cards, setCards] = useState([]);
     const [entry, setEntry] = useState('');
+    const [error, setError] = useState(false);
 
     const navigate = useNavigate();
 
@@ -155,6 +171,10 @@ function Journal() {
                 try {
                     //send in the readingId AND the uid, so a user can only access their readings
                     const response = await getReading(user.uid, readingId);
+                    if (!response) {
+                        setError(true);
+                        return;
+                    }
                     setReading(response);
                     setEntry(response.journal_entry || '');
                     setTitle(response.title);
@@ -168,6 +188,7 @@ function Journal() {
 
                 } catch (err) {
                     console.error('error getting reading: ', err);
+                    setError(true);
                 }
             }
         };
@@ -204,7 +225,7 @@ function Journal() {
         </Wrapper>);
     }
     //not logged in 
-    else if (!user) {
+    if (!user) {
         return (<Wrapper>
             <p>you must be logged in to view this page</p>
             <ButtonUnauth onClick={loginButton}>
@@ -212,7 +233,7 @@ function Journal() {
             </ButtonUnauth>
         </Wrapper>);
     }
-    else if (user && !reading) {
+    if (error) {
         //trying to access an unauthorized reading entry
         return (<Wrapper>
             <p>unable to load reading.</p>
@@ -220,6 +241,12 @@ function Journal() {
                 <TbArrowBackUp size={20} />
                 <BackButtonText> back to history </BackButtonText>
             </ButtonUnauth>
+        </Wrapper>);
+    }
+
+    if (!reading || cards.length !== 3) {
+        return (<Wrapper>
+            <p>Loading...</p>
         </Wrapper>);
     }
 
@@ -246,7 +273,7 @@ function Journal() {
                         onChange ={(e) => setEntry(e.target.value)}
                         placeholder={
                             cards.length === 3
-                                ? `This is your tarot journal. Use this to write out your thoughts. For example: How does ${cards[0].name}, ${cards[1].name}, and ${cards[2].name} cards apply to you and your situation?`
+                                ? `This is your tarot journal. Use this to write out your thoughts. For example: How does ${cards[0].name}, ${cards[1].name}, and ${cards[2].name} apply to you and your situation?`
                                 : "Loading reading entry..."
                         }
                     />
