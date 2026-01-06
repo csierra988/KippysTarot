@@ -10,4 +10,6 @@ const usersController = require('../controllers/usersController');
 //adding a new user
 router.post('/', usersController.addUser);
 
+router.put('/:firebase_uid', usersController.updateUser);
+
 module.exports = router;

@@ -2,6 +2,8 @@
 import styled from 'styled-components';
 import { useAuth } from '../hooks/useAuth';
 import { useState, useEffect } from 'react';
+import { updateProfile, updateEmail } from 'firebase/auth';
+import { updateUser } from '../api';
 
 const Wrapper = styled.form`
     display: flex;
@@ -40,17 +42,30 @@ const UserInput = styled.input`
 const SaveButton = styled.button`
     color: black;
     background: rgba(255, 255, 255, 0.75);
-
+    outline: none;
+    border: 2px solid transparent;
     margin-top: 10px;
+
+    &:hover {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        color: rgba(104, 20, 138, 0.66);
+    }
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
 `;
 
 const DeleteButton = styled.button`
     color: black;
     background: rgba(255, 255, 255, 0.75);
-
+    outline: none;
+    border: 2px solid transparent;
     margin-top: 10px;
     transition: background 0.2s ease, color 0.2s ease;
     &:hover {
+        border: 2px solid rgba(118, 20, 20, 0.66); 
         color: white;
         background: rgba(208, 36, 36, 0.66);
     }
@@ -89,6 +104,28 @@ function Profile () {
         setEmail(event.target.value);
     }
 
+    const saveChanges = async () => {
+        try {
+            //firebase updates
+            await updateProfile(user, {displayName: name});
+            if (email != user.email) {
+                await updateEmail(user, email);
+            }
+
+            //db updates
+            await updateUser(user.uid, name, email);
+
+            alert('successfully updated profile!');
+        } catch (err) {
+            console.error('error updating profile: ', err);
+            alert('failed to update profile!');
+        }
+    }
+
+    const deleteProfile = async (event) => {
+        const confirmation = confirm("are you sure you want to delete your account?");
+    }
+
     return (
         <Wrapper>
             <p style={{ color: "black" }}>Meow! This is your profile!</p>
@@ -102,8 +139,8 @@ function Profile () {
 
             </Content>
 
-            <SaveButton>Save changes</SaveButton>
-            <DeleteButton>Delete account</DeleteButton>
+            <SaveButton onClick={saveChanges}>Save changes</SaveButton>
+            <DeleteButton onClick={deleteProfile}>Delete account</DeleteButton>
 
         </Wrapper>
     );

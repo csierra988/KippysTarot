@@ -48,6 +48,18 @@ export const logout = async () => {
     }
 };
 
+export const updateUser = async ( firebase_uid, name, email ) => {
+    try {
+         const response = await axios.put(`${API_BASE_URL}/users/${firebase_uid}`, {
+            name: name, email: email
+         });
+         return response.data;
+    } catch (err) {
+        console.error('error with updating profile: ', err);
+        throw err;
+    }
+};
+
 //save a reading(ids of 3 cards) for a user with a title
 export const saveReading = async ( firebase_uid, title, card1, card2, card3 ) => {
     try {

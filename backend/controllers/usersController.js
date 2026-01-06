@@ -28,3 +28,23 @@ exports.addUser = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+//updating email and name for user in db
+exports.updateUser = async (req, res) => {
+    const firebase_uid = req.params.firebase_uid;
+    const {name, email} = req.body;
+
+    if (!name && !email) {
+      return res.status(400).json({error: "missing required fields"});
+    }
+
+    try {
+      const { rows } = await db.query('UPDATE users SET name = $1, email = $2 WHERE firebase_uid = $3 RETURNING *'
+        [name, email, firebase_uid]
+      );
+      return res.status(200).json(rows[0]);
+    } catch (err) {
+      console.error('db error: ', err);
+      res.status(500).json({error: err.message});
+    }
+};

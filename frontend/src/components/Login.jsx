@@ -45,7 +45,7 @@ const LoginButton = styled.button`
     color: black;
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
     outline: none;
-    border: 2px solid transparent;;
+    border: 2px solid transparent;
     &:hover {
         border: 2px solid rgba(104, 20, 138, 0.66); 
         color: rgba(104, 20, 138, 0.66);
