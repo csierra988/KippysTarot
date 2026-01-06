@@ -104,7 +104,8 @@ function Profile () {
         setEmail(event.target.value);
     }
 
-    const saveChanges = async () => {
+    const saveChanges = async (event) => {
+        event.preventDefault();
         try {
             //firebase updates
             await updateProfile(user, {displayName: name});
@@ -114,7 +115,7 @@ function Profile () {
 
             //db updates
             await updateUser(user.uid, name, email);
-
+            console.log('updated profile');
             alert('successfully updated profile!');
         } catch (err) {
             console.error('error updating profile: ', err);
