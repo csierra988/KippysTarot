@@ -15,6 +15,15 @@ const Wrapper = styled.div`
     padding-top: 80px;
 `;
 
+const CenteredWrapper = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+`;
+
 const Content = styled.div`
     display: flex;
     width: 100%;
@@ -84,9 +93,14 @@ const LoginButton = styled.button`
     color: black;
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
     outline: none;
-    border: none;
+    border: 2px solid transparent;
     &:hover {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
         color: rgba(104, 20, 138, 0.66);
+    }
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
     }
 `;
 
@@ -175,7 +189,7 @@ function History() {
     //user is not logged in 
     if (!user) {
         return (
-            <Wrapper>
+            <CenteredWrapper>
                 <HistoryText>
                     <p>Log in to view your past saved readings.</p>
                 </HistoryText>
@@ -183,8 +197,7 @@ function History() {
                 <LoginButton onClick={loginPage}>
                     Log in Here!
                 </LoginButton>
-
-            </Wrapper>
+            </CenteredWrapper>
         );
     }
 

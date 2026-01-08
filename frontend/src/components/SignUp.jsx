@@ -118,7 +118,7 @@ function SignUp () {
 
     return (
         <Wrapper onSubmit={signingUp}>
-            Sign Up Page
+            <p style={{ color: "black" }}>Sign Up Page</p>
             {errorMessage && (
                 <Error>{errorMessage}</Error>
             )}

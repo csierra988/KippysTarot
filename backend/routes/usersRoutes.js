@@ -12,4 +12,6 @@ router.post('/', usersController.addUser);
 
 router.put('/:firebase_uid', usersController.updateUser);
 
+router.delete('/:firebase_uid', usersController.deleteUser);
+
 module.exports = router;

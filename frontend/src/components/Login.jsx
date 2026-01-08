@@ -139,7 +139,7 @@ function Login() {
 
     return (
         <LoginStyle onSubmit={loggingIn}>
-            Login Page
+            <p style={{ color: "black" }}>Login Page</p>
             {errorMessage && (
                 <Error>{errorMessage}</Error>
             )}

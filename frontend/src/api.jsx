@@ -1,7 +1,7 @@
 //communication between the frontend and backend
 import axios from 'axios';
 import { auth } from './firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, deleteUser } from 'firebase/auth';
 
 //production
 const API_BASE_URL = 'https://kippys-tarot-backend.vercel.app/api';
@@ -48,6 +48,7 @@ export const logout = async () => {
     }
 };
 
+//update name and/or email for a user
 export const updateUser = async ( firebase_uid, name, email ) => {
     try {
          const response = await axios.put(`${API_BASE_URL}/users/${firebase_uid}`, {
@@ -56,6 +57,22 @@ export const updateUser = async ( firebase_uid, name, email ) => {
          return response.data;
     } catch (err) {
         console.error('error with updating profile: ', err);
+        throw err;
+    }
+};
+
+//delete a users profile
+export const deleteUserProfile = async( user, firebase_uid ) => {
+    try {
+        //delete from firebase auth
+        await deleteUser(user);
+
+        //delete from db
+        const response = await axios.delete(`${API_BASE_URL}/users/${firebase_uid}`);
+        console.log('user profile deleted!');
+        return response.data;
+    } catch (err) {
+        console.error('error with deleting user: ', err);
         throw err;
     }
 };
@@ -104,6 +121,7 @@ export const getReading = async ( firebase_uid, readingId ) => {
     }
 };
 
+//update/save a journal entry for a reading
 export const saveEntry = async ( entry, readingId ) => {
     try {
         const response = await axios.put(`${API_BASE_URL}/readings/reading/${readingId}`, 
@@ -116,6 +134,7 @@ export const saveEntry = async ( entry, readingId ) => {
     }
 }
 
+//delete a reading and its information
 export const deleteReading = async ( readingId ) => {
         try {
             const response = await axios.delete(`${API_BASE_URL}/readings/${readingId}`);

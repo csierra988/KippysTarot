@@ -48,3 +48,24 @@ exports.updateUser = async (req, res) => {
       res.status(500).json({error: err.message});
     }
 };
+
+//deletes user (and their readings through cascade) from db
+exports.deleteUser = async (req, res) => {
+    const firebase_uid = req.params.firebase_uid;
+    try {
+      const { rowCount } = await db.query('DELETE FROM users WHERE firebase_uid = $1', 
+        [firebase_uid]);
+      
+      //making sure user was deleted
+      if (rowCount === 0) {
+        return res.status(404).json({error: 'user not found'});
+      }
+
+      return res.status(200).json({message: "user successfully deleted"});
+
+    } catch (err) {
+        console.error('db error: ', err);
+        res.status(500).json({error: err.message});
+    }
+
+};
