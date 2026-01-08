@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useAuth } from '../hooks/useAuth';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { updateProfile, updateEmail } from 'firebase/auth';
+import { updateProfile, updateEmail, EmailAuthProvider, reauthenticateWithCredential, verifyBeforeUpdateEmail } from 'firebase/auth';
 import { updateUser, deleteUserProfile, logout } from '../api';
 
 const Wrapper = styled.form`
@@ -149,10 +149,15 @@ function Profile () {
     const saveChanges = async (event) => {
         event.preventDefault();
         try {
+            const password = prompt("please enter in your password to proceed with the changes");
+            const credential = EmailAuthProvider.credential(user.email, password);
+            reauthenticateWithCredential(user, credential);
             //firebase updates
             await updateProfile(user, {displayName: name});
             if (email != user.email) {
-                await updateEmail(user, email);
+                await verifyBeforeUpdateEmail(user, email);
+                alert('verify the link sent to your new email to proceed. (check spam folder!)');
+                //await updateEmail(user, email);
             }
 
             //db updates
@@ -171,6 +176,10 @@ function Profile () {
 
         if (confirmation) {
             try {
+                const password = prompt("please enter in your password to proceed with deletion");
+                const credential = EmailAuthProvider.credential(user.email, password);
+                reauthenticateWithCredential(user, credential);
+
                 await deleteUserProfile(user, user.uid);
                 console.log('deleted profile');
                 alert('successfully deleted profile!');
