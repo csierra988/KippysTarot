@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     padding-top: 80px;
 `;
 
-const CenteredWrapper = styled.form`
+const CenteredWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -174,7 +174,8 @@ function History() {
     }, [user]);
 
     const navigate = useNavigate();
-    const loginPage = () => {
+    const loginPage = async ( event ) => {
+        event.preventDefault();
         navigate('/Login');
     }
 

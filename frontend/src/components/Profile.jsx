@@ -111,7 +111,8 @@ function Profile () {
     const [email, setEmail] = useState("");
 
     const navigate = useNavigate();
-    const loginPage = () => {
+    const loginPage = async ( event ) => {
+        event.preventDefault();
         navigate('/Login');
     }
 
