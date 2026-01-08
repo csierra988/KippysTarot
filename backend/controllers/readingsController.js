@@ -23,7 +23,7 @@ exports.getReadings = async (req, res) => {
 exports.saveReading = async (req, res) => {
     const { firebase_uid, title, card1, card2, card3 } = req.body;
     //if somehow missing ?
-    if (!firebase_uid || !title || !card1 || !card2 || !card3) {
+    if (!firebase_uid || !title || card1 == null || card2 == null || card3 == null) {
         return res.status(400).json({ error: "missing required fields" });
     } 
 

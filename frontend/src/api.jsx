@@ -132,7 +132,7 @@ export const saveEntry = async ( entry, readingId ) => {
         console.error('error with saving entry: ', err);
         throw err;
     }
-}
+};
 
 //delete a reading and its information
 export const deleteReading = async ( readingId ) => {
