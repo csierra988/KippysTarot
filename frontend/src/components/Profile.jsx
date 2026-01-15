@@ -70,6 +70,10 @@ const DeleteButton = styled.button`
         color: white;
         background: rgba(208, 36, 36, 0.66);
     }
+    &:focus {
+        border: 2px solid rgba(208, 36, 36, 0.66);
+        outline: none; 
+    }
 `;
 
 const LoginButton = styled.button`

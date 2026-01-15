@@ -40,6 +40,7 @@ const MenuButton = styled.div`
 const Title = styled(Link)`
     background: none;
     border: none;
+    outline: none;
     padding: 20px;
     font-size: 30px;
     color: rgba(255, 255, 255, 0.66);
@@ -50,6 +51,11 @@ const Title = styled(Link)`
         background: none;
         color: rgba(123, 68, 145, 0.66);
        // color: rgba(104, 20, 138, 0.66);
+    }
+
+    &:focus {
+        background: none;
+        outline: none;
     }
 `;
 

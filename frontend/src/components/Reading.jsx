@@ -86,6 +86,10 @@ const Button = styled.button`
         border: none;
         color: rgba(104, 20, 138, 0.66);
     }
+
+    &:focus {
+    
+    }
 `;
 
 const ButtonBlock = styled.div`
