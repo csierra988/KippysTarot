@@ -74,7 +74,7 @@ const Row = styled.div`
 const Button = styled.button`
     font-size: 1em;
     outline: none;
-    border: none;
+    border: 2px solid transparent;
     width: 150px;
     margin-left: 20px;
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
@@ -82,13 +82,13 @@ const Button = styled.button`
     color: black;
 
     &:hover {
-        outline: none;
-        border: none;
+        border: 2px solid rgba(104, 20, 138, 0.66); 
         color: rgba(104, 20, 138, 0.66);
     }
 
     &:focus {
-    
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
     }
 `;
 

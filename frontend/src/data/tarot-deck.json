@@ -108,7 +108,7 @@
         "name": "Death",
         "arcana": "Major",
         "suit": null,
-        "meaning": "Embrace that a major transformation is afloat. Release what no longer serves you.",
+        "meaning": "Embrace that a transformation is afloat. Release what no longer serves you.",
         "image": "/images/card-images/m13.jpg"
     },
     {
@@ -404,7 +404,7 @@
         "name": "Ace of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "New insignt and ideas are emerging. Invest in them for great outcomes!",
         "image": "/images/card-images/s01.jpg"
     },
     {
@@ -412,7 +412,7 @@
         "name": "Two of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "You are in the cross-swords of two decisions! Rely on your intuition to make a choice.",
         "image": "/images/card-images/s02.jpg"
     },
     {
@@ -420,7 +420,7 @@
         "name": "Three of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Allow yourself to feel the sadness and pain from your situation to lead to healing.",
         "image": "/images/card-images/s03.jpg"
     },
     {
@@ -428,7 +428,7 @@
         "name": "Four of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "It's time to meditate and give yourself some well deserved R&R.",
         "image": "/images/card-images/s04.jpg"
     },
     {
@@ -436,7 +436,7 @@
         "name": "Five of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "You feel you may have won, but there is still a loss resulting from this conflict.",
         "image": "/images/card-images/s05.jpg"
     },
     {
@@ -444,7 +444,7 @@
         "name": "Six of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "You're on a healing journey. Keep moving forward as the worst already is behind you.",
         "image": "/images/card-images/s06.jpg"
     },
     {
@@ -452,7 +452,7 @@
         "name": "Seven of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Something is being hidden from you in your situation. Be careful of liars and manipulators.",
         "image": "/images/card-images/s07.jpg"
     },
     {
@@ -460,7 +460,7 @@
         "name": "Eight of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "You might feel trapped, but believe in yourself instead of circumstance controlling you.",
         "image": "/images/card-images/s08.jpg"
     },
     {
@@ -468,7 +468,7 @@
         "name": "Nine of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Make some changes, so that your wellness is longer being disrupted by stress.",
         "image": "/images/card-images/s09.jpg"
     },
     {
@@ -476,7 +476,7 @@
         "name": "Ten of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "A painful situation is ending. The worst has happened, now there's nowhere to go but up.",
         "image": "/images/card-images/s10.jpg"
     },
     {
@@ -484,7 +484,7 @@
         "name": "Page of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Pay attention to messages you'll be receiving. Stay curious and seek the truth.",
         "image": "/images/card-images/s11.jpg"
     },
     {
@@ -492,7 +492,7 @@
         "name": "Knight of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "The truth is coming in fast and confrontation cannot be avoided.",
         "image": "/images/card-images/s12.jpg"
     },
     {
@@ -500,7 +500,7 @@
         "name": "Queen of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Approach the situation logically using the truth, rather than emotionally.",
         "image": "/images/card-images/s13.jpg"
     },
     {
@@ -508,7 +508,7 @@
         "name": "King of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Take action and make a decision with logic to attain success.",
         "image": "/images/card-images/s14.jpg"
     },
     {

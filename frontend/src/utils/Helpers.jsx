@@ -3,7 +3,11 @@ import cardData from '../data/tarot-deck.json'
 
 //returns an array of three random cards
 export function threeRandomCards() {
-    const threeCards = [...cardData].sort(() => Math.random() - 0.5)
+    //use when testing specific cards
+    const typeCards = cardData.filter(
+        card => card.suit == 'swords'
+    );
+    const threeCards = [...typeCards].sort(() => Math.random() - 0.5)
     return threeCards.splice(0,3);
 }
 
