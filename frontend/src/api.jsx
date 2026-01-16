@@ -17,7 +17,6 @@ export const signUp = async ( name, email, password ) => {
 
         const response = await axios.post(`${API_BASE_URL}/users`, {
             firebase_uid,
-            email,
             name
         });
         return response.data;
@@ -49,10 +48,10 @@ export const logout = async () => {
 };
 
 //update name and/or email for a user
-export const updateUser = async ( firebase_uid, name, email ) => {
+export const updateUser = async ( firebase_uid, name ) => {
     try {
          const response = await axios.put(`${API_BASE_URL}/users/${firebase_uid}`, {
-            name: name, email: email
+            name: name
          });
          return response.data;
     } catch (err) {

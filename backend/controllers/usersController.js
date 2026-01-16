@@ -12,15 +12,15 @@ const db = require('../db.js');
 
 //adding user to the database
 exports.addUser = async (req, res) => {
-    const { firebase_uid, email, name } = req.body;
+    const { firebase_uid, name } = req.body;
 
-    if (!firebase_uid || !email || !name) {
+    if (!firebase_uid || !name) {
     return res.status(400).json({ error: "missing required fields" });
   }
 
   try{
-    const { rows } = await db.query('INSERT INTO users (firebase_uid, email, name) VALUES ($1, $2, $3) RETURNING *',
-      [firebase_uid, email, name]
+    const { rows } = await db.query('INSERT INTO users (firebase_uid, name) VALUES ($1, $2) RETURNING *',
+      [firebase_uid, name]
     );
     res.status(201).json(rows[0]);
   } catch (err) {
@@ -32,15 +32,15 @@ exports.addUser = async (req, res) => {
 //updating email and name for user in db
 exports.updateUser = async (req, res) => {
     const firebase_uid = req.params.firebase_uid;
-    const {name, email} = req.body;
+    const {name} = req.body;
 
-    if (!name && !email) {
+    if (!name) {
       return res.status(400).json({error: "missing required fields"});
     }
 
     try {
-      const { rows } = await db.query('UPDATE users SET name = $1, email = $2 WHERE firebase_uid = $3 RETURNING *',
-        [name, email, firebase_uid]
+      const { rows } = await db.query('UPDATE users SET name = $1 WHERE firebase_uid = $2 RETURNING *',
+        [name, firebase_uid]
       );
       return res.status(200).json(rows[0]);
     } catch (err) {

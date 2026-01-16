@@ -165,7 +165,7 @@ function Profile () {
             }
 
             //db updates
-            await updateUser(user.uid, name, email);
+            await updateUser(user.uid, name);
             console.log('updated profile');
             alert('successfully updated profile!');
         } catch (err) {
