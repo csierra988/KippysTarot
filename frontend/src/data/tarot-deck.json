@@ -516,7 +516,7 @@
         "name": "Ace of Wands",
         "arcana": "Minor",
         "suit": "wands",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "A flash of inspiration will strike offering you motivation to guide you on your journey.",
         "image": "/images/card-images/w01.jpg"
     },
     {
@@ -524,7 +524,7 @@
         "name": "Two of Wands",
         "arcana": "Minor",
         "suit": "wands",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "The world is in your hands. Exciting plans await you, but a choice will have to be made.",
         "image": "/images/card-images/w02.jpg"
     },
     {
@@ -532,7 +532,7 @@
         "name": "Three of Wands",
         "arcana": "Minor",
         "suit": "wands",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Embrace the exciting changes that lie ahead of you as you take these next steps.",
         "image": "/images/card-images/w03.jpg"
     },
     {
@@ -540,7 +540,7 @@
         "name": "Four of Wands",
         "arcana": "Minor",
         "suit": "wands",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Important milestones will be reached. Make sure to celebrate your wins!",
         "image": "/images/card-images/w04.jpg"
     },
     {
@@ -548,7 +548,7 @@
         "name": "Five of Wands",
         "arcana": "Minor",
         "suit": "wands",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "View this conflict as a healthy competition leading to improvement.",
         "image": "/images/card-images/w05.jpg"
     },
     {
@@ -556,7 +556,7 @@
         "name": "Six of Wands",
         "arcana": "Minor",
         "suit": "wands",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "You've emerged victorious, be proud of yourself without downplaying your wins.",
         "image": "/images/card-images/w06.jpg"
     },
     {
@@ -564,7 +564,7 @@
         "name": "Seven of Wands",
         "arcana": "Minor",
         "suit": "wands",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Stand up for your beliefs in the face of adversity and challengers.",
         "image": "/images/card-images/w07.jpg"
     },
     {
@@ -572,7 +572,7 @@
         "name": "Eight of Wands",
         "arcana": "Minor",
         "suit": "wands",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Important news will be coming in quick. Go with the flow.",
         "image": "/images/card-images/w08.jpg"
     },
     {
@@ -580,7 +580,7 @@
         "name": "Nine of Wands",
         "arcana": "Minor",
         "suit": "wands",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Don't give up now, continue persisting to reach your end goal.",
         "image": "/images/card-images/w09.jpg"
     },
     {
@@ -588,7 +588,7 @@
         "name": "Ten of Wands",
         "arcana": "Minor",
         "suit": "wands",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "You may feel overwhelmed right now, it's okay to say no for your own wellbeing.",
         "image": "/images/card-images/w10.jpg"
     },
     {
@@ -596,7 +596,7 @@
         "name": "Page of Wands",
         "arcana": "Minor",
         "suit": "wands",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Engage in exciting conversations to introduce you to fun new adventures.",
         "image": "/images/card-images/w11.jpg"
     },    
     {
@@ -604,7 +604,7 @@
         "name": "Knight of Wands",
         "arcana": "Minor",
         "suit": "wands",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Act on your ideas with this burst of passion. Everything will fall into place swiftly.",
         "image": "/images/card-images/w12.jpg"
     },
     {
@@ -612,7 +612,7 @@
         "name": "Queen of Wands",
         "arcana": "Minor",
         "suit": "wands",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Accept the passionate and ambitious energy around you with confidence.",
         "image": "/images/card-images/w13.jpg"
     },
     {
@@ -620,7 +620,7 @@
         "name": "King of Wands",
         "arcana": "Minor",
         "suit": "wands",
-        "meaning": "Sad times in partnerships and connections are ahead.",
+        "meaning": "Pick up some responsibilities. Make decisions with confidence and stick with it.",
         "image": "/images/card-images/w14.jpg"
     }
 ]

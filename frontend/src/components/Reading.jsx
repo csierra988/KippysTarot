@@ -45,8 +45,8 @@ const ReadingBlock = styled.div`
 const Text = styled.div`
     text-align: center;
     align-items: center;
-    background-color: white;
-    border: 2px solid black;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 12px;
     width: 550px;
     height: 60px;
     padding: 10px;
@@ -75,10 +75,11 @@ const Button = styled.button`
     font-size: 1em;
     outline: none;
     border: 2px solid transparent;
-    width: 150px;
+    height: 55px;
+    width: 200px;
     margin-left: 20px;
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.75);
     color: black;
 
     &:hover {

@@ -46,8 +46,8 @@ const Text = styled.div`
     align-items: center;
     text-align: center;
     background-color: white;
-    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
-    border: 2px solid black;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 12px;
     width: 550px;
     height: 100px;
     padding: 10px;
@@ -75,7 +75,7 @@ const ReadingOptions = styled.div`
 `;
 
 const ReadingButtons = styled.button`
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.75);
     color: black;
     font-size: 1em;
     outline: none;
@@ -132,13 +132,13 @@ function Home() {
                             </ReadingButtons>
                         </Navigate>
 
-                        <ReadingButtons>
+                        {/* <ReadingButtons>
                             Love - tbd
                         </ReadingButtons>
 
                         <ReadingButtons>
                             Career - tbd
-                        </ReadingButtons>
+                        </ReadingButtons> */}
 
                     </ReadingOptions>
                 </Container>
