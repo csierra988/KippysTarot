@@ -1,5 +1,5 @@
 //contains the home menu, access to the history (tarot journal), sign in/sign out
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { logout } from '../api';
 import styled from 'styled-components';
@@ -67,7 +67,7 @@ const Overlay = styled.div`
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.4);
-    display: ${props => props.$isOpen ? 'block' : 'none' };
+    display: ${props => props.$isOpen ? 'block' : 'none'};
     z-index: 150;
 `;
 
@@ -136,8 +136,46 @@ const LogOutButton = styled.button`
     }
 `;
 
+const LogOutPrompt = styled.dialog`
+    color: black;
+    background-color: white;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    text-align: center;
+    padding: 30px;
+    width: 440px;
+`;
+
+const Button = styled.button`
+    font-size: 1em;
+    outline: none;
+    border: 2px solid transparent;
+    // height: 55px;
+    // width: 200px;
+    margin-left: 20px;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    background-color: rgba(255, 255, 255, 0.75);
+    color: black;
+
+    &:hover {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        color: rgba(104, 20, 138, 0.66);
+    }
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+`;
+
+const ButtonBlock = styled.div`
+    margin-top: 8px;
+`;
+
 function Header() {
     const [isOpen, setOpen] = useState(false);
+    const dialogRef = useRef(null);
 
     const toggleMenu = () => {
         setOpen(!isOpen);
@@ -147,14 +185,23 @@ function Header() {
     const { user, isLoading } = useAuth();
 
     const loggingOut = () => {
-        const conf = window.confirm('are you sure you want to log out?');
-        if (conf) {
-            logout();
-        }
+            logout();  
+            dialogRef.current?.close();
     };
 
     return (
         <div>
+            <LogOutPrompt ref={dialogRef}>
+                <p>Are you sure you want to log out?</p>
+                <ButtonBlock>
+                    <Button onClick={loggingOut}>
+                        Log out
+                    </Button>
+                    <Button onClick={() => dialogRef.current?.close()}>
+                        Cancel
+                    </Button>
+                </ButtonBlock>
+            </LogOutPrompt>
             <HeaderBlock>
                 <MenuButton onClick={toggleMenu}> ☰ </MenuButton>
                 <Title to="/">
@@ -162,7 +209,7 @@ function Header() {
                 </Title>
             </HeaderBlock>
 
-            <Overlay $isOpen={isOpen} onClick={toggleMenu}/>
+            <Overlay $isOpen={isOpen} onClick={toggleMenu} />
 
             <Menu $isOpen={isOpen} onClick={toggleMenu}>
                 <NavLink to="/" onClick={toggleMenu}> Home</NavLink>
@@ -173,8 +220,8 @@ function Header() {
                 {/* when a user is logged in, show log out
                 and vice versa */}
                 <LoginPlacement>
-                    { user ? (
-                        <LogOutButton onClick={loggingOut}>Logout</LogOutButton>
+                    {user ? (
+                        <LogOutButton onClick={() => dialogRef.current?.showModal()}>Logout</LogOutButton>
                     ) : (
                         <NavLink to="/Login" onClick={toggleMenu}>Login</NavLink>
                     )}

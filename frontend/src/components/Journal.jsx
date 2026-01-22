@@ -55,16 +55,23 @@ const JournalTextArea = styled.textarea`
     height: 360px;
     padding: 15px;
     font-size: 16px;
-    border: 2px solid black;
+    outline: none;
+    border: 2px solid transparent;
     border-radius: 8px;
     box-sizing: border-box; 
     margin: 20px 0;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
     font-family: "Pixelify Sans", sans-serif;
     background-color: white;
     color: black;
 
     &&::placeholder {
         font-family: "Pixelify Sans", sans-serif;
+    }
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
     }
 `;
 
@@ -84,34 +91,45 @@ const Title = styled.div`
     justify-content: center;
     text-align: center;
     margin: 24px;
+    margin-top: 60px;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 30px;
     color: black;
+
+    text-shadow: 
+    -1px -1px 0 #ffffffff,  
+     1px -1px 0 #ffffffff,
+    -1px  1px 0 #ffffffff,
+     1px  1px 0 #ffffffff;
+
+     @media (max-width: 1250px) {
+        margin-top: 100px;
+  }
 `;
 
-const BackButton = styled.button`
-    height: 50px;
-    position: relative;
-    top: 60px;
-    left: 10px;
-    margin-right: auto;
-    display: flex;
-    justify-content: center;
-    color: black;
-    background-color: rgba(255, 255, 255, 0.65);
-    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+// const BackButton = styled.button`
+//     height: 50px;
+//     position: relative;
+//     top: 60px;
+//     left: 10px;
+//     margin-right: auto;
+//     display: flex;
+//     justify-content: center;
+//     color: black;
+//     background-color: rgba(255, 255, 255, 0.65);
+//     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
 
-    &:hover {
-        outline: none;
-        border: none;
-        color: rgba(104, 20, 138, 0.66);
-    }
+//     &:hover {
+//         outline: none;
+//         border: none;
+//         color: rgba(104, 20, 138, 0.66);
+//     }
 
-    @media (max-width: 888px) {
-        top: 76px;
-    }
+//     @media (max-width: 888px) {
+//         top: 76px;
+//     }
 
-`;
+// `;
 
 const BackButtonText = styled.span`
     font-size: 16px;
@@ -127,17 +145,21 @@ const SaveButton = styled.div`
 const Button = styled.button`
     font-size: 1em;
     outline: none;
-    border: none;
+    border: 2px solid transparent;
     width: 150px;
     margin-left: 20px;
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
     color: black;
     background-color: white;
-
+    
     &:hover {
-        outline: none;
-        border: none;
+        border: 2px solid rgba(104, 20, 138, 0.66); 
         color: rgba(104, 20, 138, 0.66);
+    }
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
     }
 `;
 
@@ -252,10 +274,10 @@ function Journal() {
 
     return (
         <Wrapper>
-            <BackButton onClick={backButton}>
+            {/* <BackButton onClick={backButton}>
                 <TbArrowBackUp size={20} />
                 <BackButtonText> history </BackButtonText>
-            </BackButton>
+            </BackButton> */}
 
             <Title>{title}</Title>
 

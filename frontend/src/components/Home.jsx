@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     gap: 45px;
     min-height: 100vh;
     width: 100vw;
-    margin-top: 40px;
+   //margin-top: 40px;
 `;
 
 const Content = styled.div`

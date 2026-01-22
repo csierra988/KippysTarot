@@ -1,5 +1,5 @@
 //history page - contains a list of a user saved readings
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getReadings, deleteReading } from '../api';
 import { Link, useNavigate, useNavigation } from 'react-router-dom';
 import styled from 'styled-components';
@@ -87,23 +87,6 @@ const Navigate = styled(Link)`
     transition: color 0.2s ease;
 `;
 
-const LoginButton = styled.button`
-    margin-top: 10px;
-    background: rgba(255, 255, 255, 0.75);
-    color: black;
-    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
-    outline: none;
-    border: 2px solid transparent;
-    &:hover {
-        border: 2px solid rgba(104, 20, 138, 0.66); 
-        color: rgba(104, 20, 138, 0.66);
-    }
-    &:focus {
-        border: 2px solid rgba(104, 20, 138, 0.66); 
-        outline: none; 
-    }
-`;
-
 const BinIcon = styled.div`
     position: absolute;
     top: 50%;
@@ -152,11 +135,56 @@ const ReadingWrapper = styled.div`
     }
 `;
 
+const DeletePrompt = styled.dialog`
+    color: black;
+    background-color: white;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    text-align: center;
+    padding: 30px;
+   // position: fixed;
+    width: 440px;
+
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+`;
+
+const Button = styled.button`
+    font-size: 1em;
+    outline: none;
+    border: 2px solid transparent;
+    // height: 55px;
+    // width: 200px;
+    margin-left: 20px;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    background-color: rgba(255, 255, 255, 0.75);
+    color: black;
+
+    &:hover {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        color: rgba(104, 20, 138, 0.66);
+    }
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+`;
+
+const ButtonBlock = styled.div`
+    margin-top: 8px;
+`;
+
 function History() {
 
     const { user, uid, isLoading } = useAuthWithUid();
 
     const [readings, setReadings] = useState([]);
+    const [readingId, setReadingId] = useState(null);
+
+    const dialogRef = useRef(null);
 
     useEffect(() => {
         const fetchReadings = async () => {
@@ -174,7 +202,7 @@ function History() {
     }, [user]);
 
     const navigate = useNavigate();
-    const loginPage = async ( event ) => {
+    const loginPage = async (event) => {
         event.preventDefault();
         navigate('/Login');
     }
@@ -195,9 +223,9 @@ function History() {
                     <p>Log in to view your past saved readings.</p>
                 </HistoryText>
 
-                <LoginButton onClick={loginPage}>
+                <Button onClick={loginPage}>
                     Log in Here!
-                </LoginButton>
+                </Button>
             </CenteredWrapper>
         );
     }
@@ -205,52 +233,76 @@ function History() {
     if (isLoading) {
         return (<Wrapper>
             <p>Loading...</p>
-            </Wrapper>);
+        </Wrapper>);
     }
 
-    const deletingReading = async ( readingId ) => {
-        const confirmation = confirm("are you sure you want to delete this reading?");
+    const deletingReading = async (readingId) => {
+        //delete the reading
+        try {
+            console.log(readingId);
+            await deleteReading(readingId);
+            console.log('successfully deleted reading ', readingId);
 
-        if (confirmation) {
-            //delete the reading
-            try {
-               console.log(readingId);
-               await deleteReading(readingId);
-               console.log('successfully deleted reading ', readingId);
+            setReadings(readings.filter(r => r.id !== readingId));
 
-               setReadings(readings.filter(r => r.id !== readingId));
-
-            } catch (err) {
-                console.log('error with deleting reading: ', err);
-            }
+        } catch (err) {
+            console.log('error with deleting reading: ', err);
         }
+        setReadingId(null);
+        dialogRef.current?.close();
     }
 
     return (
-        <Wrapper>
-            <Content>
-            <HistoryText>
-                Click to view on any of your past saved readings.
-            </HistoryText>
+        <>
+            <Wrapper>
+                <Content>
 
-            <SavedReadingsList>
-                {readings.map((reading) => (
-                    <ReadingWrapper key={reading.id}>
-                    <Navigate to={`/Journal/${reading.id}`}>
-                    <SavedReading key={reading.id}>
-                            <p>{reading.title}</p>
-                            <p>{new Date(reading.date).toLocaleDateString()}</p>
-                    </SavedReading>
-                    </Navigate>
+                    <DeletePrompt ref={dialogRef}>
+                        Are you sure you want to delete this reading?
+                        <ButtonBlock>
+                            <Button onClick={(event) => deletingReading(readingId, event)}>
+                                Confirm
+                            </Button>
+                            <Button onClick={() => {
+                                setReadingId(null);
+                                dialogRef.current?.close();
+                            }}>
+                                Cancel
+                            </Button>
+                        </ButtonBlock>
+                    </DeletePrompt>
 
-                    <BinIcon onClick={(e) => deletingReading(reading.id, e)}>
+                    <HistoryText>
+                        Click to view on any of your past saved readings.
+                    </HistoryText>
+
+                    <SavedReadingsList>
+                        {readings.map((reading) => (
+                            <ReadingWrapper key={reading.id}>
+                                <Navigate to={`/Journal/${reading.id}`}>
+                                    <SavedReading key={reading.id}>
+                                        <p>{reading.title}</p>
+                                        <p>{new Date(reading.date).toLocaleDateString()}</p>
+                                    </SavedReading>
+                                </Navigate>
+
+                                {/* <BinIcon onClick={(e) => deletingReading(reading.id, e)}>
                         <FaTrashCan />
-                    </BinIcon>
-                    </ReadingWrapper>
-                ))}
-            </SavedReadingsList>
-            </Content>
-        </Wrapper>
+                    </BinIcon> */}
+                                <BinIcon onClick={() => {
+                                    setReadingId(reading.id);
+                                    dialogRef.current?.showModal();
+                                }}>
+                                    <FaTrashCan />
+                                </BinIcon>
+
+                            </ReadingWrapper>
+                        ))}
+
+                    </SavedReadingsList>
+                </Content>
+            </Wrapper>
+        </>
     );
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { threeRandomCards } from '../utils/Helpers';
 import { saveReading } from '../api';
 import TarotCard from './TarotCard';
@@ -100,8 +100,51 @@ const ButtonBlock = styled.div`
     margin: 20px auto; 
 `;
 
-const SaveButton = styled.div`
+const ButtonPlacement = styled.div`
     padding: 10px;
+`;
+
+const SavePrompt = styled.dialog`
+    color: black;
+    background-color: white;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    text-align: center;
+    padding: 30px;
+    position: fixed;
+    width: 440px;
+
+    @media (min-width: 888px) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+`;
+
+const CenteredPrompts = styled.div`
+`;
+
+const UserInput = styled.input`
+    height: 30px;
+    width: 400px;
+    margin: 10px;
+   // padding: 4px;
+    background-color: white;
+    caret-color: black;
+    color: black;
+    outline: none;
+    border: 2px solid rgba(104, 20, 138, 0.66);
+    border-radius: 8px;
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+    &&::placeholder {
+        font-family: "Pixelify Sans", sans-serif;
+    }
 `;
 
 function Reading() {
@@ -110,6 +153,8 @@ function Reading() {
     const [cards, setCards] = useState([]);
     const [readingButton, setReadingButton] = useState(true);
     const [cardValue, setCardValue] = useState(0);
+    const [title, setTitle] = useState('');
+    const dialogRef = useRef(null);
 
     const drawThreeCards = () => {
         const threeCards = threeRandomCards();
@@ -126,10 +171,10 @@ function Reading() {
     }
 
     //saves a reading with title if a user is logged in
-    const savingReading = async ( ) => {
-        if (user) {
-            const title = prompt("enter a title for your reading");
-    
+    const savingReading = async ( event ) => {
+            //console.log(event);
+            event.preventDefault();
+            
             if (title) {
                 try {
                      //save the reading to the database with uid, title, and card ids
@@ -139,13 +184,37 @@ function Reading() {
                     console.error('error with saving reading: ', err);
                 }
             }
-        }
-        else {
-            alert("to save a reading you must be logged in");
-        }
+
+            setTitle(""); //resetting the title
+            dialogRef.current?.close();
+    }
+
+    const changeTitle =  (event) => {
+        setTitle(event.target.value);
     }
 
     return (
+        <>
+        <SavePrompt ref={dialogRef}>
+            { user ? (
+                <CenteredPrompts> 
+                    Enter the title for your reading.
+                    <form onSubmit={savingReading}>
+                        <UserInput type="text" placeholder="title" value={title} onChange={changeTitle}/>
+                        <Button type="submit">
+                            Save
+                        </Button>
+                    </form>
+                </CenteredPrompts>
+            ) : (
+                    <CenteredPrompts> 
+                        <p> Log in to save a reading.</p>
+                        <Button onClick={() => dialogRef.current?.close()}>ok</Button>
+                    </CenteredPrompts>
+                )
+            }
+        </SavePrompt>
+
         <ReadingBlock>
 
             <Content>
@@ -163,16 +232,17 @@ function Reading() {
                 </Row>
 
                  <ButtonBlock>
-                <SaveButton>
+
+                <ButtonPlacement>
                     { readingButton ? (
                         <Button onClick={firstReading}>Reveal Cards</Button>
                     ): (
                         <div>
                             <Button onClick={drawThreeCards}>Draw Again</Button>
-                            <Button onClick={savingReading}>Save Reading</Button>
+                            <Button onClick={() => dialogRef.current?.showModal()}>Save Reading</Button>
                         </div>
                     )}
-                </SaveButton>
+                </ButtonPlacement>
             </ButtonBlock>
 
                 </CardContainer>
@@ -190,6 +260,7 @@ function Reading() {
                 </SaveButton>
             </ButtonBlock> */}
         </ReadingBlock>
+        </>
     );
 }
 
