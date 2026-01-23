@@ -72,7 +72,7 @@
    
    ```
    cd backend
-   npm run
+   npm run dev
    ```
    ```
    cd frontend
