@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { threeRandomCards } from '../utils/Helpers';
 import { saveReading } from '../api';
 import TarotCard from './TarotCard';
@@ -114,11 +114,14 @@ const SavePrompt = styled.dialog`
     padding: 30px;
     position: fixed;
     width: 440px;
+    max-width: calc(100vw - 2rem);
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-    @media (min-width: 888px) {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    &::backdrop {
+        background: rgba(0, 0, 0, 0.2);
     }
 `;
 
@@ -151,24 +154,21 @@ function Reading() {
     const { user, isLoading} = useAuth();
 
     const [cards, setCards] = useState([]);
-    const [readingButton, setReadingButton] = useState(true);
+   // const [readingButton, setReadingButton] = useState(true);
     const [cardValue, setCardValue] = useState(0);
     const [title, setTitle] = useState('');
     const dialogRef = useRef(null);
 
-    const drawThreeCards = () => {
+    const drawThreeCards = useCallback(() => {
         const threeCards = threeRandomCards();
         setCards(threeCards);
         //changing card value so that the cards get updated and rerender starting on back image
         setCardValue(prev => prev + 1);
-    }
+    }, []); 
 
-    //the first reading displays three cards, but subsequent readings display draw again and save reading buttons
-    const firstReading = () => {
-        const threeCards = threeRandomCards();
-        setCards(threeCards);
-        setReadingButton(false);
-    }
+    useEffect(() => {
+        drawThreeCards();
+    }, [drawThreeCards]); 
 
     //saves a reading with title if a user is logged in
     const savingReading = async ( event ) => {
@@ -234,31 +234,16 @@ function Reading() {
                  <ButtonBlock>
 
                 <ButtonPlacement>
-                    { readingButton ? (
-                        <Button onClick={firstReading}>Reveal Cards</Button>
-                    ): (
                         <div>
                             <Button onClick={drawThreeCards}>Draw Again</Button>
                             <Button onClick={() => dialogRef.current?.showModal()}>Save Reading</Button>
                         </div>
-                    )}
                 </ButtonPlacement>
             </ButtonBlock>
 
                 </CardContainer>
 
             </Content>
-
-            {/* <ButtonBlock>
-                <SaveButton>
-                    <Button onClick={saveReading}>Save Reading</Button>
-                    { readingButton ? (
-                        <Button onClick={firstReading}>Three Cards</Button>
-                    ): (
-                        <Button onClick={drawThreeCards}>Draw Again</Button>
-                    )}
-                </SaveButton>
-            </ButtonBlock> */}
         </ReadingBlock>
         </>
     );

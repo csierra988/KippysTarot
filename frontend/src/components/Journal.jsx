@@ -96,6 +96,13 @@ const Title = styled.div`
     font-size: 30px;
     color: black;
 
+    align-items: center;
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 12px;
+    padding: 20px;
+    width:600px;
+
     text-shadow: 
     -1px -1px 0 #ffffffff,  
      1px -1px 0 #ffffffff,
@@ -106,30 +113,6 @@ const Title = styled.div`
         margin-top: 100px;
   }
 `;
-
-// const BackButton = styled.button`
-//     height: 50px;
-//     position: relative;
-//     top: 60px;
-//     left: 10px;
-//     margin-right: auto;
-//     display: flex;
-//     justify-content: center;
-//     color: black;
-//     background-color: rgba(255, 255, 255, 0.65);
-//     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
-
-//     &:hover {
-//         outline: none;
-//         border: none;
-//         color: rgba(104, 20, 138, 0.66);
-//     }
-
-//     @media (max-width: 888px) {
-//         top: 76px;
-//     }
-
-// `;
 
 const BackButtonText = styled.span`
     font-size: 16px;
@@ -229,9 +212,6 @@ function Journal() {
 
     const savingEntry = async () => {
         //retrieving the journal entry text
-        // const entry = document.getElementById("entry").value;
-        // console.log(entry);
-
         try {
              await saveEntry(entry, readingId);
              console.log('successfully saved text entry');
@@ -274,10 +254,6 @@ function Journal() {
 
     return (
         <Wrapper>
-            {/* <BackButton onClick={backButton}>
-                <TbArrowBackUp size={20} />
-                <BackButtonText> history </BackButtonText>
-            </BackButton> */}
 
             <Title>{title}</Title>
 
