@@ -85,4 +85,6 @@
   ✧ Card reversal meanings
 
   ✧ Add artwork of Kippy
+
+  ✧ Better compatibility with different screen sizes
  
