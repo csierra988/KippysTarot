@@ -131,7 +131,7 @@ function TarotCard({ cardData }) {
                 </CardBlock>
 
                 <FrontCard>
-                    <FrontInner $reversed={cardData?.reversed}>
+                    
                     <CardBlock>
 
                         <CardData>
@@ -139,11 +139,11 @@ function TarotCard({ cardData }) {
                         </CardData>
 
                         <Card>
-                            <FrontImage src={cardData?.image} />
+                            <FrontImage src={cardData?.image} style={{transform: cardData?.reversed ? 'rotate(180deg)' : 'none'}} />
                         </Card>
 
                     </CardBlock>
-                    </FrontInner>
+                    
                 </FrontCard>
 
             </ReactCardFlip>
