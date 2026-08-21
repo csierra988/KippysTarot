@@ -188,7 +188,11 @@ function Journal() {
                     const card1 = cardData.find(card => card.number == response.card1);
                     const card2 = cardData.find(card => card.number == response.card2);
                     const card3 = cardData.find(card => card.number == response.card3);
-                    setCards([card1, card2, card3]);
+                    setCards([
+                        {...card1, reversed: response.rev1}, 
+                        {...card2, reversed: response.rev2}, 
+                        {...card3, reversed: response.rev3},
+                    ]);
 
 
                 } catch (err) {
