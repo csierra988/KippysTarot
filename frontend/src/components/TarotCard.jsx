@@ -104,6 +104,12 @@ const CardData = styled.div`
     text-align: center;
 `;
 
+//applies the rotation to the front image
+const FrontInner = styled.div`
+    transform: ${({ $reversed }) => $reversed ? 'rotate(180deg)' : 'none'};
+    transition: none;
+`
+
 
 function TarotCard({ cardData }) {
     const [isFlipped, setIsFlipped] = useState(false);
@@ -111,6 +117,8 @@ function TarotCard({ cardData }) {
     function flipCard() {
         setIsFlipped(!isFlipped);
     }
+
+    const meaning = cardData?.reversed ? cardData?.reversedMeaning : cardData?.meaning;
 
     return (
         <Wrapper>
@@ -123,17 +131,19 @@ function TarotCard({ cardData }) {
                 </CardBlock>
 
                 <FrontCard>
+                    
                     <CardBlock>
 
                         <CardData>
-                            {cardData?.meaning} 
+                            {meaning} 
                         </CardData>
 
                         <Card>
-                            <FrontImage src={cardData?.image} />
+                            <FrontImage src={cardData?.image} style={{transform: cardData?.reversed ? 'rotate(180deg)' : 'none'}} />
                         </Card>
 
                     </CardBlock>
+                    
                 </FrontCard>
 
             </ReactCardFlip>

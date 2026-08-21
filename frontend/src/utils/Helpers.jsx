@@ -7,8 +7,11 @@ export function threeRandomCards() {
     // const typeCards = cardData.filter(
     //     card => card.suit == 'wands'
     // );
-    const threeCards = [...cardData].sort(() => Math.random() - 0.5)
-    return threeCards.splice(0,3);
+    const threeCards = [...cardData].sort(() => Math.random() - 0.5).splice(0,3)
+    return threeCards.map(card => ({
+        ...card,
+        reversed: Math.random() < 0.5
+    }));
 }
 
 //returns one random card

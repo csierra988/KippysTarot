@@ -4,7 +4,8 @@
         "name": "The Fool",
         "arcana": "Major",
         "suit": null,
-        "meaning": "Prepare to embark on new beginnings",
+        "meaning": "Prepare to embark on new beginnings.",
+        "reversedMeaning": "Before taking a risk, reassess and create a solid plan.",
         "image": "/images/card-images/m00.jpg"
     },
     {
@@ -13,6 +14,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "The timing is perfect to start manifesting your own dreams and desires.",
+        "reversedMeaning": "Look for other opportunities instead of forcing this one.",
         "image": "/images/card-images/m01.jpg"
     },
     {
@@ -21,6 +23,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Look within and trust your own intuition",
+        "reversedMeaning": "Stop relying on others opinions, and trust yourself",
         "image": "/images/card-images/m02.jpg"
     },
     {
@@ -29,6 +32,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Relax and allow yourself to be open to all forms of love",
+        "reversedMeaning": "Prioritize your needs first before extending to others.",
         "image": "/images/card-images/m03.jpg"
     },
     {
@@ -37,6 +41,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "You're in control, so don't be afraid to take action",
+        "reversedMeaning": "Watch out for poor leadership and abuse of power.",
         "image": "/images/card-images/m04.jpg"
     },
     {
@@ -45,6 +50,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Continue learning while also upholding your own values",
+        "reversedMeaning": "There is a roadblock due to a refusal to learning.",
         "image": "/images/card-images/m05.jpg"
     },
     {
@@ -53,6 +59,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "You're in alignment with yourself, healthy relationships can blossom.",
+        "reversedMeaning": "A relationship is out of balance, look inward to find the source.",
         "image": "/images/card-images/m06.jpg"
     },
     {
@@ -61,6 +68,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "You're on the right path, be intentional and prepare to take action",
+        "reversedMeaning": "You're stuck and need to take advantage of your impulses for momentum.",
         "image": "/images/card-images/m07.jpg"
     },
     {
@@ -69,6 +77,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Be confident and trust yourself when it comes to overcoming obstacles",
+        "reversedMeaning": "There is a lack of confidence, reconnect with yourself before being overwhelmed.",
         "image": "/images/card-images/m08.jpg"
     },
     {
@@ -77,6 +86,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Take some time to connect with your inner self",
+        "reversedMeaning": "You've been isolated for too long, preventing you from moving forward.",
         "image": "/images/card-images/m09.jpg"
     },
     {
@@ -85,6 +95,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Embrace life's cycles of ups and downs to invite what's meant for you",
+        "reversedMeaning": "Focus only on what you can control to create space for something new.",
         "image": "/images/card-images/m10.jpg"
     },
     {
@@ -93,6 +104,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Truth will be revealed in due time. Remain true to yourself.",
+        "reversedMeaning": "Take accountability for your actions rather than ignoring the consequences.",
         "image": "/images/card-images/m11.jpg"
     },
     {
@@ -101,6 +113,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Take a breath, reflect, and change your perspective on your situation.",
+        "reversedMeaning": "Don't force anything, delays happen for a reason. Practice patience.",
         "image": "/images/card-images/m12.jpg"
     },
     {
@@ -109,6 +122,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Embrace that a transformation is afloat. Release what no longer serves you.",
+        "reversedMeaning": "Clinging onto the past is inflicting pain. Let go, and trust in yourself.",
         "image": "/images/card-images/m13.jpg"
     },
     {
@@ -117,6 +131,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Trust in divine timing.",
+        "reversedMeaning": "Address imbalances that may be causing stress and anxiety.",
         "image": "/images/card-images/m14.jpg"
     },
     {
@@ -125,6 +140,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Confront unhealthy behaviors that are present as the first step to healing.",
+        "reversedMeaning": "Make the changes to free yourself from old and destructive patterns.",
         "image": "/images/card-images/m15.jpg"
     },
     {
@@ -133,6 +149,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Sudden breakdowns and upheavals are occurring to bring in new opportunities.",
+        "reversedMeaning": "Don't try to avoid sudden changes. It is necessary to rebuild stronger.",
         "image": "/images/card-images/m16.jpg"
     },
     {
@@ -141,6 +158,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Hope and healing from your situation are coming soon. Don't lose faith.",
+        "reversedMeaning": "There is a strong disconnect. Don't lose faith, inspiration is on the way. ",
         "image": "/images/card-images/m17.jpg"
     },
     {
@@ -149,6 +167,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Things once hidden are going to be revealed. Trust your intuition.",
+        "reversedMeaning": "There's a refusal to acknowledge the truth.",
         "image": "/images/card-images/m18.jpg"
     },
     {
@@ -157,6 +176,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "You'll receive clarity on your situation, continue to be optimistic.",
+        "reversedMeaning": "Beware of being pessimistic, and re-evaluate your situation to celebrate small wins.",
         "image": "/images/card-images/m19.jpg"
     },
     {
@@ -165,6 +185,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "Accepting what has happened in the past is necessary in order to move forward.",
+        "reversedMeaning": "Judging yourself harshly for past mistakes is keeping you from moving on.",
         "image": "/images/card-images/m20.jpg"
     },
     {
@@ -173,6 +194,7 @@
         "arcana": "Major",
         "suit": null,
         "meaning": "A cycle is ending allowing for you to reap the rewards and begin a new journey.",
+        "reversedMeaning": "A lack of closure is delaying you from seeing the end of a situation.",
         "image": "/images/card-images/m21.jpg"
     },
     {
@@ -181,6 +203,7 @@
         "arcana": "Minor",
         "suit": "cups",
         "meaning": "Self love, existing relationships, and/or new connections will flourish.",
+        "reversedMeaning": "There's a feeling of depletion that needs to be addressed with self care.",
         "image": "/images/card-images/c01.jpg"
     },
     {
@@ -189,6 +212,7 @@
         "arcana": "Minor",
         "suit": "cups",
         "meaning": "There are shared feelings in this harmonious relationship.",
+        "reversedMeaning": "A relationship is disharmonious and one sided heading towards a breakup.",
         "image": "/images/card-images/c02.jpg"
     },
     {
@@ -197,6 +221,7 @@
         "arcana": "Minor",
         "suit": "cups",
         "meaning": "Enjoy spending some time with your friends and family. Relax and have fun.",
+        "reversedMeaning": "You've been socializing too often, draining your own energy.",
         "image": "/images/card-images/c03.jpg"
     },
     {
@@ -205,6 +230,7 @@
         "arcana": "Minor",
         "suit": "cups",
         "meaning": "Focusing on the past leads to stagnation. New opportunities are around.",
+        "reversedMeaning": "Focusing on the past cannot change feelings of apathy. Change starts within.",
         "image": "/images/card-images/c04.jpg"
     },
     {
@@ -213,6 +239,7 @@
         "arcana": "Minor",
         "suit": "cups",
         "meaning": "It's okay to cry it out. This sadness won't last forever as two cups still remain.",
+        "reversedMeaning": "View your situation in a new light. Look for the silver linings.",
         "image": "/images/card-images/c05.jpg"
     },
     {
@@ -221,6 +248,7 @@
         "arcana": "Minor",
         "suit": "cups",
         "meaning": "Reconnect with your inner child to experience feelings of comfort and safety.",
+        "reversedMeaning": "Theres an unhealthy attachment to nostalgia and the past.",
         "image": "/images/card-images/c06.jpg"
     },
     {
@@ -229,6 +257,7 @@
         "arcana": "Minor",
         "suit": "cups",
         "meaning": "Your possibilities are endless, figure out how to turn your dreams into reality.",
+        "reversedMeaning": "Looks can be deceiving. Beware of things that seem too good to be true.",
         "image": "/images/card-images/c07.jpg"
     },
     {
@@ -237,6 +266,7 @@
         "arcana": "Minor",
         "suit": "cups",
         "meaning": "Don't settle for less. Follow your heart and walk away for deeper fulfillment.",
+        "reversedMeaning": "You've stayed in a situation for longer than necessary. It's time to walk away.",
         "image": "/images/card-images/c08.jpg"
     },
     {
@@ -245,6 +275,7 @@
         "arcana": "Minor",
         "suit": "cups",
         "meaning": "Don't downplay the wealth you have accumulated in aspects of your life.",
+        "reversedMeaning": "There is a need to implement moderation after a period of overindulgence.",
         "image": "/images/card-images/c09.jpg"
     },
     {
@@ -253,6 +284,7 @@
         "arcana": "Minor",
         "suit": "cups",
         "meaning": "You have reached emotional fulfillment and happiness. Express your gratitude.",
+        "reversedMeaning": "Achieving security and harmony is being blocked. Listen to your heart to guide you.",
         "image": "/images/card-images/c10.jpg"
     },
     {
@@ -261,6 +293,7 @@
         "arcana": "Minor",
         "suit": "cups",
         "meaning": "Flirtatious energy is in the air. Have some fun while being open to receiving messages. ",
+        "reversedMeaning": "You may feel unable to express yourself from taking life too seriously.",
         "image": "/images/card-images/c11.jpg"
     },
     {
@@ -269,6 +302,7 @@
         "arcana": "Minor",
         "suit": "cups",
         "meaning": "Offerings are coming in fast, don't be fooled by the quick charm of others.",
+        "reversedMeaning": "Expectations are too high and desiring perfection is causing distress.",
         "image": "/images/card-images/c12.jpg"
     },
     {
@@ -277,6 +311,7 @@
         "arcana": "Minor",
         "suit": "cups",
         "meaning": "Embrace your sensitive side approaching life with compassion and emotional maturity.",
+        "reversedMeaning": "Bottling up your emotions is damaging, open up to someone you trust.",
         "image": "/images/card-images/c13.jpg"
     },
     {
@@ -285,6 +320,7 @@
         "arcana": "Minor",
         "suit": "cups",
         "meaning": "Uphold your boundaries while staying kind and composed.",
+        "reversedMeaning": "There are shaky boundaries or emotional instabiility around you.",
         "image": "/images/card-images/c14.jpg"
     },
     {
@@ -293,6 +329,7 @@
         "arcana": "Minor",
         "suit": "pentacles",
         "meaning": "A new opportunity in regards to abundance is on the way.",
+        "reversedMeaning": "A need for control is causing you to miss opportunities.",
         "image": "/images/card-images/p01.jpg"
     },
     {
@@ -301,6 +338,7 @@
         "arcana": "Minor",
         "suit": "pentacles",
         "meaning": "Try to find a healthy balance when juggling multiple obligations.",
+        "reversedMeaning": "Challenges are leaving you feeling unbalanced. Look for missteps to get back into alignment.",
         "image": "/images/card-images/p02.jpg"
     },
     {
@@ -309,6 +347,7 @@
         "arcana": "Minor",
         "suit": "pentacles",
         "meaning": "Collaborate and share ideas with your peers to invite in future opportunities.",
+        "reversedMeaning": "Theres a lack of confidence surrounding your work. Step out of your comfort zone.",
         "image": "/images/card-images/p03.jpg"
     },
     {
@@ -317,6 +356,7 @@
         "arcana": "Minor",
         "suit": "pentacles",
         "meaning": "Seeking stability is stunting possible growth and causing insecurity.",
+        "reversedMeaning": "You've been too materialistic and controlling over your finances.",
         "image": "/images/card-images/p04.jpg"
     },
     {
@@ -325,6 +365,7 @@
         "arcana": "Minor",
         "suit": "pentacles",
         "meaning": "You may be struggling and dealing with loss. Don't be afraid to ask for help.",
+        "reversedMeaning": "You're moving on from a period of financial challenges.",
         "image": "/images/card-images/p05.jpg"
     },
     {
@@ -333,6 +374,7 @@
         "arcana": "Minor",
         "suit": "pentacles",
         "meaning": "Be willing and open to receiving without feeling undeserving.",
+        "reversedMeaning": "Don't give with the expectations of getting something in return.",
         "image": "/images/card-images/p06.jpg"
     },
     {
@@ -341,6 +383,7 @@
         "arcana": "Minor",
         "suit": "pentacles",
         "meaning": "Stay patient and don't be discouraged. Focus on how far you've come.",
+        "reversedMeaning": "Procastination is why you haven't reached your goals yet. Reassess your plans.",
         "image": "/images/card-images/p07.jpg"
     },
     {
@@ -349,6 +392,7 @@
         "arcana": "Minor",
         "suit": "pentacles",
         "meaning": "Continue building your skills. Your hard work won't go unnoticed.",
+        "reversedMeaning": "Overworking yourself is causing burnout. It may be time to reconsider your priorities.",
         "image": "/images/card-images/p08.jpg"
     },
     {
@@ -357,6 +401,7 @@
         "arcana": "Minor",
         "suit": "pentacles",
         "meaning": "You've worked hard to cultivate your wealth. Embrace it and treat yourself.",
+        "reversedMeaning": "Your spending unsustainable and hollow. Material objects cannot buy happiness.",
         "image": "/images/card-images/p09.jpg"
     },
     {
@@ -365,6 +410,7 @@
         "arcana": "Minor",
         "suit": "pentacles",
         "meaning": "You have built long lasting wealth and security to pass on to your community.",
+        "reversedMeaning": "Beware of focusing on short term financial gain over long term.",
         "image": "/images/card-images/p10.jpg"
     },
     {
@@ -373,6 +419,7 @@
         "arcana": "Minor",
         "suit": "pentacles",
         "meaning": "Start building the foundation for future prosperity and lasting abundance.",
+        "reversedMeaning": "Refocus on your goals to avoid procrastination.",
         "image": "/images/card-images/p11.jpg"
     },
     {
@@ -381,6 +428,7 @@
         "arcana": "Minor",
         "suit": "pentacles",
         "meaning": "Slow down, set realistic goals, and show up to create long term abundance.",
+        "reversedMeaning": "An unhealthy complacency with relationships is causing stagnation.",
         "image": "/images/card-images/p12.jpg"
     },
     {
@@ -389,6 +437,7 @@
         "arcana": "Minor",
         "suit": "pentacles",
         "meaning": "Appreciate what is around you and how far you've come, while staying grounded.",
+        "reversedMeaning": "Your work is causing you to be out of touch, there's a need for balance.",
         "image": "/images/card-images/p13.jpg"
     },
     {
@@ -397,6 +446,7 @@
         "arcana": "Minor",
         "suit": "pentacles",
         "meaning": "There is someone in your life that is financially stable and down to earth.",
+        "reversedMeaning": "Someone in your life is greedy and indulging in self centered behavior.",
         "image": "/images/card-images/p14.jpg"
     },
     {
@@ -404,7 +454,8 @@
         "name": "Ace of Swords",
         "arcana": "Minor",
         "suit": "swords",
-        "meaning": "New insignt and ideas are emerging. Invest in them for great outcomes!",
+        "meaning": "New insight and ideas are emerging. Invest in them for great outcomes!",
+        "reversedMeaning": "Don't be afraid to seek clarity rather than overanalyzing your situation.",
         "image": "/images/card-images/s01.jpg"
     },
     {
@@ -413,6 +464,7 @@
         "arcana": "Minor",
         "suit": "swords",
         "meaning": "You are in the cross-swords of two decisions! Rely on your intuition to make a choice.",
+        "reversedMeaning": "Let intuition guide you to make a choice instead of the opinions of others.",
         "image": "/images/card-images/s02.jpg"
     },
     {
@@ -421,6 +473,7 @@
         "arcana": "Minor",
         "suit": "swords",
         "meaning": "Allow yourself to feel the sadness and pain from your situation to lead to healing.",
+        "reversedMeaning": "You're recovering from heartbreak. Don't let fear of being hurt block new relationships.",
         "image": "/images/card-images/s03.jpg"
     },
     {
@@ -429,6 +482,7 @@
         "arcana": "Minor",
         "suit": "swords",
         "meaning": "It's time to meditate and give yourself some well deserved R&R.",
+        "reversedMeaning": "You will burn out soon if you don't balance your work with rest.",
         "image": "/images/card-images/s04.jpg"
     },
     {
@@ -437,6 +491,7 @@
         "arcana": "Minor",
         "suit": "swords",
         "meaning": "You feel you may have won, but there is still a loss resulting from this conflict.",
+        "reversedMeaning": "Grudges are holding you back. Focus on compromise rather than conflict.",
         "image": "/images/card-images/s05.jpg"
     },
     {
@@ -445,6 +500,7 @@
         "arcana": "Minor",
         "suit": "swords",
         "meaning": "You're on a healing journey. Keep moving forward as the worst already is behind you.",
+        "reversedMeaning": "Issues need to be resolved that are keeping you from moving on.",
         "image": "/images/card-images/s06.jpg"
     },
     {
@@ -453,6 +509,7 @@
         "arcana": "Minor",
         "suit": "swords",
         "meaning": "Something is being hidden from you in your situation. Be careful of liars and manipulators.",
+        "reversedMeaning": "A hidden truth is going to be revealed in regards to a sneaky situation.",
         "image": "/images/card-images/s07.jpg"
     },
     {
@@ -461,6 +518,7 @@
         "arcana": "Minor",
         "suit": "swords",
         "meaning": "You might feel trapped, but believe in yourself instead of circumstance controlling you.",
+        "reversedMeaning": "You are freeing yourself from self imposed restrictions.",
         "image": "/images/card-images/s08.jpg"
     },
     {
@@ -469,6 +527,7 @@
         "arcana": "Minor",
         "suit": "swords",
         "meaning": "Make some changes, so that your wellness is longer being disrupted by stress.",
+        "reversedMeaning": "Immense stress from your situation will be passing soon. Be gentle to yourself in the meantime.",
         "image": "/images/card-images/s09.jpg"
     },
     {
@@ -477,6 +536,7 @@
         "arcana": "Minor",
         "suit": "swords",
         "meaning": "A painful situation is ending. The worst has happened, now there's nowhere to go but up.",
+        "reversedMeaning": "Refusing to let something go is blocking new beginnings and abundance.",
         "image": "/images/card-images/s10.jpg"
     },
     {
@@ -485,6 +545,7 @@
         "arcana": "Minor",
         "suit": "swords",
         "meaning": "Pay attention to messages you'll be receiving. Stay curious and seek the truth.",
+        "reversedMeaning": "Don't participate in gossip, and be mindful of the people surrounding you.",
         "image": "/images/card-images/s11.jpg"
     },
     {
@@ -493,6 +554,7 @@
         "arcana": "Minor",
         "suit": "swords",
         "meaning": "The truth is coming in fast and confrontation cannot be avoided.",
+        "reversedMeaning": "Rushing into something without thinking can lead to messy miscommunications.",
         "image": "/images/card-images/s12.jpg"
     },
     {
@@ -501,6 +563,7 @@
         "arcana": "Minor",
         "suit": "swords",
         "meaning": "Approach the situation logically using the truth, rather than emotionally.",
+        "reversedMeaning": "You or someone around you is being overly critical.",
         "image": "/images/card-images/s13.jpg"
     },
     {
@@ -509,6 +572,7 @@
         "arcana": "Minor",
         "suit": "swords",
         "meaning": "Take action and make a decision with logic to attain success.",
+        "reversedMeaning": "There is a sense of intellectual superiority and controlling behaviors. Rebalance your energy.",
         "image": "/images/card-images/s14.jpg"
     },
     {
@@ -517,6 +581,7 @@
         "arcana": "Minor",
         "suit": "wands",
         "meaning": "A flash of inspiration will strike offering you motivation to guide you on your journey.",
+        "reversedMeaning": "Fear of failure is preventing you from moving forward.",
         "image": "/images/card-images/w01.jpg"
     },
     {
@@ -525,6 +590,7 @@
         "arcana": "Minor",
         "suit": "wands",
         "meaning": "The world is in your hands. Exciting plans await you, but a choice will have to be made.",
+        "reversedMeaning": "A lack of planning is causing this to not work out. Create a clear plan and try again.",
         "image": "/images/card-images/w02.jpg"
     },
     {
@@ -533,6 +599,7 @@
         "arcana": "Minor",
         "suit": "wands",
         "meaning": "Embrace the exciting changes that lie ahead of you as you take these next steps.",
+        "reversedMeaning": "Delays can be frustrating, but they are apart of your learning journey.",
         "image": "/images/card-images/w03.jpg"
     },
     {
@@ -541,6 +608,7 @@
         "arcana": "Minor",
         "suit": "wands",
         "meaning": "Important milestones will be reached. Make sure to celebrate your wins!",
+        "reversedMeaning": "Don't hesitate to celebrate yourself and how far you've come.",
         "image": "/images/card-images/w04.jpg"
     },
     {
@@ -549,6 +617,7 @@
         "arcana": "Minor",
         "suit": "wands",
         "meaning": "View this conflict as a healthy competition leading to improvement.",
+        "reversedMeaning": "A conflict is being blown out of proportion. Stick to the facts to avoid more drama.",
         "image": "/images/card-images/w05.jpg"
     },
     {
@@ -557,6 +626,7 @@
         "arcana": "Minor",
         "suit": "wands",
         "meaning": "You've emerged victorious, be proud of yourself without downplaying your wins.",
+        "reversedMeaning": "This is only a temporary setback to your success. Don't give up now.",
         "image": "/images/card-images/w06.jpg"
     },
     {
@@ -565,6 +635,7 @@
         "arcana": "Minor",
         "suit": "wands",
         "meaning": "Stand up for your beliefs in the face of adversity and challengers.",
+        "reversedMeaning": "You're being overly defensive when your beliefs are challenged.",
         "image": "/images/card-images/w07.jpg"
     },
     {
@@ -573,6 +644,7 @@
         "arcana": "Minor",
         "suit": "wands",
         "meaning": "Important news will be coming in quick. Go with the flow.",
+        "reversedMeaning": "Slow down and enjoy the process of your actions without focusing on the outcome.",
         "image": "/images/card-images/w08.jpg"
     },
     {
@@ -581,6 +653,7 @@
         "arcana": "Minor",
         "suit": "wands",
         "meaning": "Don't give up now, continue persisting to reach your end goal.",
+        "reversedMeaning": "Stubbornness is preventing a goal from completing. Observe your behavior and take responsibility.",
         "image": "/images/card-images/w09.jpg"
     },
     {
@@ -589,6 +662,7 @@
         "arcana": "Minor",
         "suit": "wands",
         "meaning": "You may feel overwhelmed right now, it's okay to say no for your own wellbeing.",
+        "reversedMeaning": "People pleasing is leading to a severe burnout. Create boundaries and don't be afraid of saying no.",
         "image": "/images/card-images/w10.jpg"
     },
     {
@@ -597,6 +671,7 @@
         "arcana": "Minor",
         "suit": "wands",
         "meaning": "Engage in exciting conversations to introduce you to fun new adventures.",
+        "reversedMeaning": "Impulsiveness is giving you a reputation of being unreliable. Only take on what you can finish.",
         "image": "/images/card-images/w11.jpg"
     },    
     {
@@ -605,6 +680,7 @@
         "arcana": "Minor",
         "suit": "wands",
         "meaning": "Act on your ideas with this burst of passion. Everything will fall into place swiftly.",
+        "reversedMeaning": "Delays are causing self doubt, but they are a part of life. Have patience and listen to your intuition.",
         "image": "/images/card-images/w12.jpg"
     },
     {
@@ -613,6 +689,7 @@
         "arcana": "Minor",
         "suit": "wands",
         "meaning": "Accept the passionate and ambitious energy around you with confidence.",
+        "reversedMeaning": "Build up your self confidence and believe in yourself.",
         "image": "/images/card-images/w13.jpg"
     },
     {
@@ -621,6 +698,7 @@
         "arcana": "Minor",
         "suit": "wands",
         "meaning": "Pick up some responsibilities. Make decisions with confidence and stick with it.",
+        "reversedMeaning": "There are unhealthy displays of abuse of power. Find out where this selfish energy comes from.",
         "image": "/images/card-images/w14.jpg"
     }
 ]
