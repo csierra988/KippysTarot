@@ -178,7 +178,7 @@ function Reading() {
             if (title) {
                 try {
                      //save the reading to the database with uid, title, and card ids
-                    await saveReading(user.uid, title, cards[0].number, cards[1].number, cards[2].number);
+                    await saveReading(user.uid, title, cards[0].number, cards[1].number, cards[2].number, cards[0].reversed, cards[1].reversed, cards[2].reversed);
                     console.log('successfully saved reading with title');
                 } catch (err) {
                     console.error('error with saving reading: ', err);

@@ -77,14 +77,17 @@ export const deleteUserProfile = async( user, firebase_uid ) => {
 };
 
 //save a reading(ids of 3 cards) for a user with a title
-export const saveReading = async ( firebase_uid, title, card1, card2, card3 ) => {
+export const saveReading = async ( firebase_uid, title, card1, card2, card3, rev1, rev2, rev3 ) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/readings`, {
             firebase_uid,
             title,
             card1,
             card2,
-            card3
+            card3,
+            rev1,
+            rev2,
+            rev3
         });
         return response.data;
     } catch (err) {

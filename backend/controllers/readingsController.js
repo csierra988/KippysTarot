@@ -21,15 +21,15 @@ exports.getReadings = async (req, res) => {
 
 //save reading to the database
 exports.saveReading = async (req, res) => {
-    const { firebase_uid, title, card1, card2, card3 } = req.body;
+    const { firebase_uid, title, card1, card2, card3, rev1, rev2, rev3 } = req.body;
     //if somehow missing ?
-    if (!firebase_uid || !title || card1 == null || card2 == null || card3 == null) {
+    if (!firebase_uid || !title || card1 == null || card2 == null || card3 == null || rev1 == null || rev2 == null || rev3 == null) {
         return res.status(400).json({ error: "missing required fields" });
     } 
 
     try {
-        const { rows } = await db.query('INSERT INTO readings (firebase_uid, title, card1, card2, card3) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [firebase_uid, title, card1, card2, card3]
+        const { rows } = await db.query('INSERT INTO readings (firebase_uid, title, card1, card2, card3, rev1, rev2, rev3) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+            [firebase_uid, title, card1, card2, card3, rev1, rev2, rev3]
         );
         res.status(201).json({ 
             message: 'reading saved successfully',
