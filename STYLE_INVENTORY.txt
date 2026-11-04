@@ -1,0 +1,1789 @@
+KIPPY'S TAROT — STYLE INVENTORY
+Prepared: November 4, 2026
+Purpose: Week 1 / Day 2 preparation for the styled-components migration.
+
+SCOPE AND HOW TO USE THIS FILE
+=============================
+Source audit of all nine frontend/src/components/*.jsx files, index.css,
+App.css, App.jsx, main.jsx, and frontend/index.html. No application styles
+were changed. This is a source inventory, not a browser/computed-style audit.
+Source locations below are relative to the project root and reflect this snapshot.
+
+Sections 1–9 summarize shared patterns, important exceptions, and decisions.
+Appendix A lists repeated declarations with their component locations.
+Appendix B preserves every styled-component definition, including nested states,
+media queries, interpolations, comments, duplicates, and empty definitions.
+Appendix C records global CSS, font loading, inline styles, and icon sizing.
+Comments in the appendix are historical source, not active design requirements.
+Suggested names below are proposals; no theme tokens currently exist in source.
+
+1. SHARED COLORS AND SURFACES
+============================
+Primary interaction purple: rgba(104, 20, 138, 0.66)
+  Buttons, focused inputs, links, History hover, password icons.
+  Suggested name: accent. Preserve alpha; a solid purple is not equivalent.
+Navigation purple: rgba(123, 68, 145, 0.66)
+  Header menu icon, title, navigation links, logout hover.
+  Suggested name: navigation-accent. Distinct from primary interaction purple.
+Scrollbar purple: rgba(123, 68, 145, 0.6)
+  History list scrollbar thumb; separate opacity from navigation purple.
+Error/danger red: rgba(208, 36, 36, 0.66)
+  Login/SignUp errors, Profile delete background/focus, History trash hover.
+Danger border: rgba(118, 20, 20, 0.66)
+  Profile DeleteButton hover border.
+
+Black: black
+  Most component text, input text/carets, icons, card borders, Kippy placeholders.
+White: white / #ffffff / #ffffffff
+  Inputs, dialogs, Journal button, text-outline effect, destructive hover text.
+Panel white: rgba(255, 255, 255, 0.65)
+  Home.Text, Reading.Text, History.HistoryText, Profile.ProfileText, Journal.Title.
+Button white: rgba(255, 255, 255, 0.75)
+  Shared action buttons across Home, Reading, Login, SignUp, Profile, Header, History.
+Card white: rgba(255, 255, 255, 0.70) / rgba(255, 255, 255, 0.7)
+  TarotCard.CardData and History.SavedReading (same color value).
+Navigation text: rgba(255, 255, 255, 0.66)
+  Header menu icon, title, links, logout.
+Drawer pink: rgba(231, 184, 206, 1)
+  Header.Menu.
+Header pink: rgba(252, 70, 107, 0.25)
+  Header.HeaderBlock background; also the pink endpoint of tarot hover gradient.
+Menu overlay: rgba(0, 0, 0, 0.4)
+  Header.Overlay.
+Reading modal backdrop: rgba(0, 0, 0, 0.2)
+  Reading.SavePrompt::backdrop; other dialogs have no authored backdrop rule.
+Scrollbar track: rgba(255,255,255,0.2)
+  History.SavedReadingsList.
+
+Global page background (duplicated on :root and body):
+  fallback: #EEAECA
+  radial-gradient(circle, rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%)
+  Suggested names for endpoints: page-pink, page-blue.
+
+Existing global/default palette in index.css:
+  Root text: rgba(255, 255, 255, 0.87)
+  Link: #646cff; hover: #535bf2
+  Default button background: #1a1a1a; hover border: #646cff
+  Light preference: root text #213547, root background-color #ffffff,
+    link hover #747bff, button background #f9f9f9.
+  These rules remain relevant wherever a component does not override them.
+  The root light background-color does not remove its gradient background-image.
+
+2. TYPOGRAPHY
+=============
+Primary font: "Pixelify Sans", sans-serif.
+  Root: weight 400, style normal; button font-family inherits.
+  Explicitly repeated for Login/SignUp/Profile/Reading input placeholders and
+  Journal textarea text/placeholder. Input text itself has no explicit font-family.
+Font loading: frontend/index.html loads Pixelify Sans weights 400–700 and Poppins
+  weights 100–900 (normal/italic). No Poppins font-family usage found in src.
+Weights:
+  400: root.
+  420: Home/Reading text panels, History text/list cards, Profile text panel.
+  500: global links/buttons, Journal title, TarotCard meaning label.
+Sizes:
+  1em: global and several component buttons.
+  1.1em: Header navigation and logout.
+  14px: TarotCard meaning label.
+  16px: Journal textarea and back-button text.
+  30px: Header title and Journal title.
+  40px: Header menu icon container.
+  3.2em with line-height 1.1: global h1 rule.
+Rendering: font-synthesis none; text-rendering optimizeLegibility;
+  -webkit-font-smoothing antialiased; -moz-osx-font-smoothing grayscale.
+White text outline, shared by Journal.Title and TarotCard.CardData:
+  -1px -1px 0 #ffffffff, 1px -1px 0 #ffffffff,
+  -1px 1px 0 #ffffffff, 1px 1px 0 #ffffffff.
+
+3. BORDERS, RADII, SHADOWS, AND EFFECTS
+=====================================
+Common control border: 2px solid transparent; purple on hover/focus.
+  Reading.UserInput is purple even when unfocused.
+Global button border: 1px solid transparent (component buttons often override).
+Card border: 1px solid black on TarotCard.BackCard and Card.
+Radii:
+  8px: global buttons, inputs, Journal textarea, Header links/logout.
+  10px: TarotCard meaning label; History scrollbar thumb.
+  12px: panels, dialogs, saved reading entries.
+  20px: tarot front/back card frames.
+  25px: tarot hover-effect wrapper.
+Shared shadow (candidate name: surface):
+  0 8px 24px hsla(0, 0%, 0%, .15)
+  Used across all nine component files: controls, panels, header/menu, cards.
+History entry resting shadow:
+  0 4px 20px rgba(0,0,0,0.15)
+History entry hover shadow:
+  0 15px 60px -10px rgba(147, 51, 234, 0.3),
+  0 20px 100px -15px rgba(236, 72, 153, 0.2),
+  0 10px 40px -10px rgba(0, 0, 0, 0.15)
+Tarot hover shadow:
+  0 0 30px rgba(63, 94, 251, 0.4),
+  0 0 60px rgba(252, 70, 107, 0.3),
+  0 0 90px rgba(63, 94, 251, 0.2)
+Tarot hover background:
+  fallback #3F5EFB;
+  radial-gradient(circle, rgba(63, 94, 251, 0.25) 0%,
+    rgba(252, 70, 107, 0.25) 100%).
+  Header also declares #3F5EFB before its pink background override.
+Both tarot/history hover effects declare filter: blur(0px).
+
+4. REPEATED CONTROL AND PANEL PATTERNS
+======================================
+Standard action button:
+  Translucent white 75%, black text, shared shadow, transparent 2px border.
+  Hover: primary purple border and text. Focus: primary purple border,
+  outline none. Global button rule supplies radius, padding, font, cursor,
+  and transition unless overridden locally.
+  Variations to preserve:
+  - Home.ReadingButtons: 200px wide, 55px high.
+  - Reading.Button: same dimensions plus margin-left 20px.
+  - Login/SignUp/Profile actions: margin-top 10px, natural size.
+  - Header/History dialog buttons: margin-left 20px, natural size.
+  - Journal.Button: width 150px, margin-left 20px, opaque white background.
+  - Journal.ButtonUnauth: only align-self/shadow and limited hover overrides;
+    it still relies substantially on global button defaults.
+  - Profile.DeleteButton: red danger hover and background/color transitions.
+
+Shared text input (Login, SignUp, Profile):
+  width 400px; height 30px; margin 10px; padding 4px;
+  white background; black text/caret; 2px transparent border; radius 8px;
+  purple focus border; outline none; Pixelify Sans placeholder.
+Reading title input:
+  Same width/height/margin/colors/radius, but purple border at rest;
+  its padding: 4px declaration is commented out.
+Journal textarea:
+  width 100%; max-width 400px; height 360px; padding 15px;
+  margin 20px 0; font-size 16px; border-box; shared shadow;
+  white/black colors; 8px radius; transparent 2px border, purple on focus.
+
+Shared informational panel:
+  White 65%, black centered text, radius 12px, usually padding 10px/weight 420.
+  Home: 550 x 100px. Reading: 550 x 60px.
+  History/Profile: 600 x 60px, flex centered, shared shadow,
+    margin 20px auto 40px auto.
+  Journal title: width 600px, padding 20px, font 30px/500,
+    white text outline; margins documented in Appendix B.
+
+Shared dialog surface (Header, History, Profile, Reading):
+  width 440px; padding 30px; white background; black centered text;
+  radius 12px; transparent 2px border; outline none.
+  Reading additionally uses fixed positioning, top/left 50%,
+  translate(-50%, -50%), margin 0, max-width calc(100vw - 2rem),
+  and custom 20% black backdrop. Other dialogs rely on native positioning.
+  Header/History ButtonBlock: margin-top 8px.
+  Profile ButtonBlock: also flex centered with gap 15px.
+
+5. LAYOUT, SPACING, AND DIMENSIONS
+=================================
+Common page wrapper: flex column, centered items, min-height 100vh.
+  Home/Login/SignUp/Profile/History use width 100vw.
+  History normal wrapper adds padding-top 80px and is not vertically centered;
+    its CenteredWrapper is centered.
+  Journal uses width 100% and overflow-x hidden.
+Global body: margin/padding 0, min-width 320px, min-height 100vh.
+
+Home and Reading:
+  Main content: display flex, width 100%.
+  Reading content additionally gap 20px and margin-top 60px.
+  Kippy placeholder: black background, flex 1, height 550px, centered content.
+    Home adds margin 40px; Reading adds max-height 550px.
+  Home.Container / Reading.CardContainer: flex 2, centered flex column,
+    gap 50px, padding 10px.
+  Home wrapper / Reading block: gap 45px; Reading block padding 40px.
+  Home reading options: gap 40px, padding-bottom 20px.
+  Reading card row: gap 32px, centered, flex-wrap wrap.
+
+History:
+  List width 80%, max-width 800px, max-height 60vh,
+    padding 50px 60px, margin 0 auto, overflow-y scroll.
+  Entry padding 16px, margin-bottom 30px; wrapper margin-bottom 20px.
+  Trash control: right 40px, top 50%, translateY(-50%), padding 8px.
+
+Journal:
+  Main content gap 20px; align-items flex-start, justify-content center.
+  Entry column flex 1, min-width 0, padding-right 40px.
+  Cards flex 1, gap 20px, margin 40px, min-height 280px.
+  Title margin 24px, overridden margin-top 60px.
+
+Tarot dimensions (preserve relationship between nested boxes):
+  Wrapper 260 x 410px, flex-shrink 0.
+  Grid CardBlock 220 x 380px, margin 0.
+  Front/back frame 200 x 350px, margin 20px auto, overflow hidden.
+  FrontCard wrapper padding 16px.
+  Meaning label 160 x 90px, padding 8px, border-box,
+    horizontal auto margins, margin-top -10px.
+  Front frame and meaning label overlap at grid-area 1 / 1 / 2 / 2.
+  Both images width/height 100%, object-fit fill, object-position center.
+
+Common spacing values include 4, 8, 10, 15, 16, 20, 24, 30, 32, 40, 45,
+50, 60, and 80px. Do not normalize near-matches during initial conversion.
+Global button padding uses em units (0.6em 1.2em), not fixed pixel values.
+
+6. RESPONSIVE RULES AND COLOR PREFERENCE
+=======================================
+All authored width breakpoints are max-width rules, inclusive at the boundary.
+max-width: 888px
+  Home.Content / Reading.Content: column layout, centered items.
+  Home.KippyBlock / Reading.KippyBlock: order -1, width 550px,
+    height 200px, padding-top/bottom 40px.
+  Journal.BackButtonText: display none.
+max-width: 1250px
+  Journal.Content: column layout, centered items.
+  Journal.EntryBlock: width 100%, flex none, padding 0 20px.
+  Journal.Cards: order -1.
+  Journal.Title: margin-top 100px.
+max-width: 300px
+  Header.Menu: width 220px instead of 200px.
+  Note interaction with body's min-width 320px when assessing small screens.
+prefers-color-scheme: light
+  Global root/link/button colors change as listed in section 1.
+  There is no separate authored dark-mode component theme.
+
+7. POSITIONING, STATES, AND ANIMATION
+=====================================
+Header.HeaderBlock: absolute top/left/right 0, height 50px,
+  padding 0 20px, z-index 100.
+Header.Overlay: fixed on all four edges, z-index 150,
+  display block/none from $isOpen.
+Header.Menu: fixed top 0, left 0 when open / -500px when closed,
+  width 200px, height 100%, padding 80px 20px 20px,
+  z-index 200, transition left 0.3s ease.
+Header.LoginPlacement: relative, margin-top 300px.
+Other stacking: TarotCard.CardData z-index 2; History.BinIcon z-index 10.
+Native modal dialogs use browser modal behavior; do not replace it with an
+ordinary positioned div solely to reproduce the visual surface.
+
+Transitions:
+  Global buttons: border-color 0.25s.
+  Header navigation/logout: background 0.2s (hover changes text color).
+  History link/trash: color 0.2s ease.
+  History wrapper: all 0.25s ease, hover scale(1.02).
+  History saved entry also scales to 1.02 on parent hover; both scales compound.
+  Profile delete: background 0.2s ease, color 0.2s ease.
+  Tarot FrontCard: transform 1s ease; hovered rule changes to all 1s ease,
+    scale(1.15), decorative gradient/glow.
+  Tarot flip: ReactCardFlip with horizontal direction and isFlipped state;
+    animation internals come from the library, not the local CSS definitions.
+  Reversed card image: inline rotate(180deg) or none.
+
+History parent/child states:
+  Hovering ReadingWrapper colors link/trash purple and adds entry glow/scale.
+  Hovering the trash icon itself overrides purple with danger red.
+Password controls:
+  Relative wrapper and absolute eye icon, right 30px, pointer cursor,
+  black at rest and primary purple on hover.
+  SignUp: top 55%, translateY(-50%). Login differs; see quirks below.
+
+8. GLOBAL DEPENDENCIES AND EXISTING QUIRKS
+=========================================
+- main.jsx imports index.css. App.css is empty. App's className="App" has no
+  authored matching CSS rule in the inspected source.
+- No universal box-sizing reset is authored. Only Journal textarea and tarot
+  meaning label explicitly use border-box. Check computed sizing before adding
+  a reset: fixed widths/heights can include different padding/border totals.
+- Root color-scheme is light dark. Native inputs/dialogs and inherited colors
+  may differ by OS/browser preference.
+- Global WebKit scrollbar rule hides scrollbars. History explicitly restores
+  its list scrollbar (8px width, 50px height, rounded thumb). Other engines can
+  behave differently; no equivalent scrollbar-width rule is authored.
+- Many controls suppress outlines and use border changes for focus. Global
+  button:focus-visible also exists; verify actual keyboard focus rendering.
+- Global paragraph margins, native form-control defaults, dialog defaults,
+  and image display behavior are not fully reset in source.
+- frontend/index.html has no viewport meta tag. Mobile rendering needs a
+  browser baseline; adding one is a separate behavior change.
+- Login.EyeIcon has misspelled transform: trasnlateY(-50%) and top: 35%.
+  That transform is invalid. SignUp uses translateY(-50%) and top: 55%.
+  Flag this for a deliberate fix rather than silently treating them as identical.
+- TarotCard.FrontInner defines conditional rotation but is not rendered;
+  actual reversal is the inline FrontImage transform.
+- Login.LoginText is defined but not rendered. Profile.Content and
+  Reading.CenteredPrompts are empty styled wrappers (the latter is rendered).
+- TarotCard.CardData declares inline-block then flex (flex wins), and repeats
+  text-align. Several blocks declare white/fallback colors before overriding.
+- Some align-items/justify-content declarations are on elements without a
+  flex/grid display; do not assume those declarations currently center content.
+- Fixed 400/550/600px widths, wide card rows, and dialog padding need checks on
+  small screens. Preserve the baseline before scheduling responsive fixes.
+- Journal.BackButtonText hides at <=888px, including the text inside its
+  unauthenticated login button; check that state when reviewing mobile behavior.
+- No authored disabled-state rules, reduced-motion media rules, or keyframes
+  were found in the reviewed app source. Library behavior is outside this audit.
+
+9. PROPOSED MIGRATION CONVENTIONS (NOT IMPLEMENTED)
+==================================================
+- Give repeated semantic colors names: accent, navigation-accent, danger,
+  danger-border, panel, control-surface, card-surface, drawer, page-pink/page-blue.
+- Give shared shadow and font named tokens; keep complex glow/text-outline
+  effects in readable CSS if that makes them easier to maintain.
+- Build shared button/input/panel/dialog components only after accounting for
+  the variations above. Keep existing HTML semantics and event behavior.
+- Preserve exact dimensions, alpha values, em units, and breakpoint boundaries
+  in the first pass. Layout redesign and defect fixes should be explicit changes.
+- Use complete conditional class strings for open/closed and reversed states.
+- Retain parent-driven hover behavior and the nested trash-hover override.
+- Check all global style dependencies before changing reset/cascade behavior.
+
+APPENDIX A — REPEATED DECLARATIONS
+==================================
+Exact textual declarations appearing in at least two styled definitions.
+Includes different states within those definitions; see Appendix B for context.
+Comment-only lines are excluded. Equivalent spellings are not merged.
+
+align-items: center;
+  Header.jsx:HeaderBlock, History.jsx:CenteredWrapper, History.jsx:HistoryText, History.jsx:Wrapper, Home.jsx:Container, Home.jsx:Content, Home.jsx:ReadingOptions, Home.jsx:Text, Home.jsx:Wrapper, Journal.jsx:Content, Journal.jsx:EntryBlock, Journal.jsx:Title, Journal.jsx:Wrapper, Login.jsx:LoginStyle, Profile.jsx:ProfileText, Profile.jsx:Wrapper, Reading.jsx:CardContainer, Reading.jsx:Content, Reading.jsx:ReadingBlock, Reading.jsx:Text, SignUp.jsx:Wrapper, TarotCard.jsx:CardData
+
+background-color: rgba(255, 255, 255, 0.65);
+  History.jsx:HistoryText, Home.jsx:Text, Journal.jsx:Title, Profile.jsx:ProfileText, Reading.jsx:Text
+
+background-color: rgba(255, 255, 255, 0.75);
+  Header.jsx:Button, History.jsx:Button, Home.jsx:ReadingButtons, Reading.jsx:Button
+
+background-color: white;
+  Header.jsx:LogOutPrompt, History.jsx:DeletePrompt, Home.jsx:Text, Journal.jsx:Button, Journal.jsx:JournalTextArea, Journal.jsx:Title, Login.jsx:UserInput, Profile.jsx:DialogPrompts, Profile.jsx:UserInput, Reading.jsx:SavePrompt, Reading.jsx:UserInput, SignUp.jsx:UserInput
+
+background: #3F5EFB;
+  Header.jsx:HeaderBlock, TarotCard.jsx:FrontCard
+
+background: black;
+  Home.jsx:KippyBlock, Reading.jsx:KippyBlock
+
+background: none;
+  Header.jsx:LogOutButton, Header.jsx:MenuButton, Header.jsx:NavLink, Header.jsx:Title, History.jsx:Navigate, History.jsx:ReadingWrapper, Home.jsx:Navigate, Login.jsx:SignUpNav
+
+background: rgba(255, 255, 255, 0.75);
+  Login.jsx:LoginButton, Login.jsx:SignUpButton, Profile.jsx:Button, Profile.jsx:DeleteButton, Profile.jsx:LoginButton, SignUp.jsx:SignUpButton
+
+border-radius: 10px;
+  History.jsx:SavedReadingsList, TarotCard.jsx:CardData
+
+border-radius: 12px;
+  Header.jsx:LogOutPrompt, History.jsx:DeletePrompt, History.jsx:HistoryText, History.jsx:SavedReading, Home.jsx:Text, Journal.jsx:Title, Profile.jsx:DialogPrompts, Profile.jsx:ProfileText, Reading.jsx:SavePrompt, Reading.jsx:Text
+
+border-radius: 20px;
+  TarotCard.jsx:BackCard, TarotCard.jsx:Card
+
+border-radius: 8px;
+  Header.jsx:LogOutButton, Header.jsx:NavLink, Journal.jsx:JournalTextArea, Login.jsx:UserInput, Profile.jsx:UserInput, Reading.jsx:UserInput, SignUp.jsx:UserInput
+
+border: 1px solid black;
+  TarotCard.jsx:BackCard, TarotCard.jsx:Card
+
+border: 2px solid rgba(104, 20, 138, 0.66);
+  Header.jsx:Button, History.jsx:Button, Home.jsx:ReadingButtons, Journal.jsx:Button, Journal.jsx:JournalTextArea, Login.jsx:LoginButton, Login.jsx:SignUpButton, Login.jsx:UserInput, Profile.jsx:Button, Profile.jsx:LoginButton, Profile.jsx:UserInput, Reading.jsx:Button, Reading.jsx:UserInput, SignUp.jsx:SignUpButton, SignUp.jsx:UserInput
+
+border: 2px solid transparent;
+  Header.jsx:Button, Header.jsx:LogOutPrompt, History.jsx:Button, History.jsx:DeletePrompt, Home.jsx:ReadingButtons, Journal.jsx:Button, Journal.jsx:JournalTextArea, Login.jsx:LoginButton, Login.jsx:UserInput, Profile.jsx:Button, Profile.jsx:DeleteButton, Profile.jsx:DialogPrompts, Profile.jsx:LoginButton, Profile.jsx:UserInput, Reading.jsx:Button, Reading.jsx:SavePrompt, SignUp.jsx:SignUpButton, SignUp.jsx:UserInput
+
+border: none;
+  Header.jsx:LogOutButton, Header.jsx:MenuButton, Header.jsx:Title, Journal.jsx:ButtonUnauth
+
+box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+  Header.jsx:Button, Header.jsx:HeaderBlock, Header.jsx:Menu, History.jsx:Button, History.jsx:HistoryText, Home.jsx:ReadingButtons, Journal.jsx:Button, Journal.jsx:ButtonUnauth, Journal.jsx:JournalTextArea, Login.jsx:LoginButton, Login.jsx:SignUpButton, Profile.jsx:Button, Profile.jsx:DeleteButton, Profile.jsx:LoginButton, Profile.jsx:ProfileText, Reading.jsx:Button, SignUp.jsx:SignUpButton, TarotCard.jsx:Card, TarotCard.jsx:CardData
+
+box-sizing: border-box;
+  Journal.jsx:JournalTextArea, TarotCard.jsx:CardData
+
+caret-color: black;
+  Login.jsx:UserInput, Profile.jsx:UserInput, Reading.jsx:UserInput, SignUp.jsx:UserInput
+
+color: black;
+  Header.jsx:Button, Header.jsx:HeaderBlock, Header.jsx:LogOutPrompt, History.jsx:BinIcon, History.jsx:Button, History.jsx:DeletePrompt, History.jsx:HistoryText, History.jsx:Navigate, Home.jsx:Navigate, Home.jsx:ReadingButtons, Home.jsx:Text, Journal.jsx:Button, Journal.jsx:JournalTextArea, Journal.jsx:Title, Login.jsx:EyeIcon, Login.jsx:LoginButton, Login.jsx:SignUpButton, Login.jsx:SignUpNav, Login.jsx:UserInput, Profile.jsx:Button, Profile.jsx:DeleteButton, Profile.jsx:DialogPrompts, Profile.jsx:LoginButton, Profile.jsx:ProfileText, Profile.jsx:UserInput, Reading.jsx:Button, Reading.jsx:SavePrompt, Reading.jsx:Text, Reading.jsx:UserInput, SignUp.jsx:EyeIcon, SignUp.jsx:SignUpButton, SignUp.jsx:UserInput, TarotCard.jsx:CardData
+
+color: rgba(104, 20, 138, 0.66);
+  Header.jsx:Button, History.jsx:Button, History.jsx:ReadingWrapper, Home.jsx:Navigate, Home.jsx:ReadingButtons, Journal.jsx:Button, Journal.jsx:ButtonUnauth, Login.jsx:EyeIcon, Login.jsx:LoginButton, Login.jsx:SignUpButton, Login.jsx:SignUpNav, Profile.jsx:Button, Profile.jsx:LoginButton, Reading.jsx:Button, SignUp.jsx:EyeIcon, SignUp.jsx:SignUpButton
+
+color: rgba(123, 68, 145, 0.66);
+  Header.jsx:LogOutButton, Header.jsx:MenuButton, Header.jsx:NavLink, Header.jsx:Title
+
+color: rgba(208, 36, 36, 0.66);
+  History.jsx:BinIcon, History.jsx:ReadingWrapper, Login.jsx:Error, SignUp.jsx:Error
+
+color: rgba(255, 255, 255, 0.66);
+  Header.jsx:LogOutButton, Header.jsx:MenuButton, Header.jsx:NavLink, Header.jsx:Title
+
+cursor: pointer;
+  Header.jsx:LogOutButton, Header.jsx:MenuButton, Header.jsx:NavLink, Header.jsx:Title, History.jsx:BinIcon, Login.jsx:EyeIcon, SignUp.jsx:EyeIcon
+
+display: block;
+  Header.jsx:LogOutButton, Header.jsx:NavLink, History.jsx:SavedReadingsList
+
+display: flex;
+  Header.jsx:HeaderBlock, History.jsx:CenteredWrapper, History.jsx:Content, History.jsx:HistoryText, History.jsx:Wrapper, Home.jsx:Container, Home.jsx:Content, Home.jsx:KippyBlock, Home.jsx:ReadingOptions, Home.jsx:Wrapper, Journal.jsx:Cards, Journal.jsx:Content, Journal.jsx:EntryBlock, Journal.jsx:JournalTextArea, Journal.jsx:Wrapper, Login.jsx:LoginStyle, Profile.jsx:ButtonBlock, Profile.jsx:ProfileText, Profile.jsx:Wrapper, Reading.jsx:ButtonBlock, Reading.jsx:CardContainer, Reading.jsx:Content, Reading.jsx:KippyBlock, Reading.jsx:ReadingBlock, Reading.jsx:Row, SignUp.jsx:Wrapper, TarotCard.jsx:CardData
+
+display: inline-block;
+  TarotCard.jsx:CardData, TarotCard.jsx:FrontCard
+
+filter: blur(0px);
+  History.jsx:ReadingWrapper, TarotCard.jsx:FrontCard
+
+flex-direction: column;
+  History.jsx:CenteredWrapper, History.jsx:Content, History.jsx:Wrapper, Home.jsx:Container, Home.jsx:Content, Home.jsx:ReadingOptions, Home.jsx:Wrapper, Journal.jsx:Content, Journal.jsx:EntryBlock, Journal.jsx:Wrapper, Login.jsx:LoginStyle, Profile.jsx:Wrapper, Reading.jsx:CardContainer, Reading.jsx:Content, Reading.jsx:ReadingBlock, SignUp.jsx:Wrapper
+
+flex: 1;
+  Home.jsx:KippyBlock, Journal.jsx:Cards, Journal.jsx:EntryBlock, Reading.jsx:KippyBlock
+
+flex: 2;
+  Home.jsx:Container, Reading.jsx:CardContainer
+
+font-family: "Pixelify Sans", sans-serif;
+  Journal.jsx:JournalTextArea, Login.jsx:UserInput, Profile.jsx:UserInput, Reading.jsx:UserInput, SignUp.jsx:UserInput
+
+font-size: 1.1em;
+  Header.jsx:LogOutButton, Header.jsx:NavLink
+
+font-size: 16px;
+  Journal.jsx:BackButtonText, Journal.jsx:JournalTextArea
+
+font-size: 1em;
+  Header.jsx:Button, History.jsx:Button, Home.jsx:ReadingButtons, Journal.jsx:Button, Reading.jsx:Button
+
+font-size: 30px;
+  Header.jsx:Title, Journal.jsx:Title
+
+font-weight: 420;
+  History.jsx:HistoryText, History.jsx:SavedReading, Home.jsx:Text, Profile.jsx:ProfileText, Reading.jsx:Text
+
+font-weight: 500;
+  Journal.jsx:Title, TarotCard.jsx:CardData
+
+gap: 20px;
+  Journal.jsx:Cards, Journal.jsx:Content, Reading.jsx:Content
+
+gap: 45px;
+  Home.jsx:Wrapper, Reading.jsx:ReadingBlock
+
+gap: 50px;
+  Home.jsx:Container, Reading.jsx:CardContainer
+
+grid-area: 1 / 1 / 2 / 2;
+  TarotCard.jsx:Card, TarotCard.jsx:CardData
+
+height: 100%;
+  Header.jsx:Menu, TarotCard.jsx:BackImage, TarotCard.jsx:FrontImage
+
+height: 200px;
+  Home.jsx:KippyBlock, Reading.jsx:KippyBlock
+
+height: 30px;
+  Login.jsx:UserInput, Profile.jsx:UserInput, Reading.jsx:UserInput, SignUp.jsx:UserInput
+
+height: 350px;
+  TarotCard.jsx:BackCard, TarotCard.jsx:Card
+
+height: 50px;
+  Header.jsx:HeaderBlock, History.jsx:SavedReadingsList
+
+height: 550px;
+  Home.jsx:KippyBlock, Reading.jsx:KippyBlock
+
+height: 55px;
+  Home.jsx:ReadingButtons, Reading.jsx:Button
+
+height: 60px;
+  History.jsx:HistoryText, Profile.jsx:ProfileText, Reading.jsx:Text
+
+justify-content: center;
+  History.jsx:CenteredWrapper, History.jsx:HistoryText, Home.jsx:Container, Home.jsx:KippyBlock, Home.jsx:ReadingOptions, Home.jsx:Wrapper, Journal.jsx:Content, Journal.jsx:Title, Journal.jsx:Wrapper, Login.jsx:LoginStyle, Login.jsx:SignUpButton, Profile.jsx:ButtonBlock, Profile.jsx:ProfileText, Profile.jsx:Wrapper, Reading.jsx:ButtonBlock, Reading.jsx:CardContainer, Reading.jsx:KippyBlock, Reading.jsx:Row, SignUp.jsx:Wrapper, TarotCard.jsx:CardData
+
+left: 0;
+  Header.jsx:HeaderBlock, Header.jsx:Overlay
+
+margin-bottom: 10px;
+  Header.jsx:LogOutButton, Header.jsx:NavLink
+
+margin-left: 20px;
+  Header.jsx:Button, History.jsx:Button, Journal.jsx:Button, Reading.jsx:Button
+
+margin-top: 10px;
+  Login.jsx:LoginButton, Login.jsx:SignUpButton, Profile.jsx:Button, Profile.jsx:DeleteButton, Profile.jsx:LoginButton, SignUp.jsx:SignUpButton
+
+margin-top: 60px;
+  Journal.jsx:Title, Reading.jsx:Content
+
+margin-top: 8px;
+  Header.jsx:ButtonBlock, History.jsx:ButtonBlock, Profile.jsx:ButtonBlock
+
+margin: 0;
+  Reading.jsx:SavePrompt, TarotCard.jsx:CardBlock
+
+margin: 10px;
+  Login.jsx:UserInput, Profile.jsx:UserInput, Reading.jsx:UserInput, SignUp.jsx:UserInput
+
+margin: 20px auto 40px auto;
+  History.jsx:HistoryText, Profile.jsx:ProfileText
+
+margin: 20px auto;
+  Reading.jsx:ButtonBlock, TarotCard.jsx:BackCard, TarotCard.jsx:Card
+
+margin: 40px;
+  Home.jsx:KippyBlock, Journal.jsx:Cards
+
+min-height: 100vh;
+  History.jsx:CenteredWrapper, History.jsx:Wrapper, Home.jsx:Wrapper, Journal.jsx:Wrapper, Login.jsx:LoginStyle, Profile.jsx:Wrapper, SignUp.jsx:Wrapper
+
+object-fit: fill;
+  TarotCard.jsx:BackImage, TarotCard.jsx:FrontImage
+
+object-position: center;
+  TarotCard.jsx:BackImage, TarotCard.jsx:FrontImage
+
+order: -1;
+  Home.jsx:KippyBlock, Journal.jsx:Cards, Reading.jsx:KippyBlock
+
+outline: none;
+  Header.jsx:Button, Header.jsx:LogOutButton, Header.jsx:LogOutPrompt, Header.jsx:Title, History.jsx:Button, History.jsx:DeletePrompt, Home.jsx:ReadingButtons, Journal.jsx:Button, Journal.jsx:ButtonUnauth, Journal.jsx:JournalTextArea, Login.jsx:LoginButton, Login.jsx:SignUpButton, Login.jsx:UserInput, Profile.jsx:Button, Profile.jsx:DeleteButton, Profile.jsx:DialogPrompts, Profile.jsx:LoginButton, Profile.jsx:UserInput, Reading.jsx:Button, Reading.jsx:SavePrompt, Reading.jsx:UserInput, SignUp.jsx:SignUpButton, SignUp.jsx:UserInput
+
+overflow: hidden;
+  TarotCard.jsx:BackCard, TarotCard.jsx:Card
+
+padding-bottom: 40px;
+  Home.jsx:KippyBlock, Reading.jsx:KippyBlock
+
+padding-top: 40px;
+  Home.jsx:KippyBlock, Reading.jsx:KippyBlock
+
+padding: 0 20px;
+  Header.jsx:HeaderBlock, Journal.jsx:EntryBlock
+
+padding: 10px;
+  History.jsx:HistoryText, Home.jsx:Container, Home.jsx:Text, Journal.jsx:SaveButton, Profile.jsx:ProfileText, Reading.jsx:ButtonPlacement, Reading.jsx:CardContainer, Reading.jsx:Text
+
+padding: 15px 20px;
+  Header.jsx:LogOutButton, Header.jsx:NavLink
+
+padding: 16px;
+  History.jsx:SavedReading, TarotCard.jsx:FrontCard
+
+padding: 20px;
+  Header.jsx:Title, Journal.jsx:Title
+
+padding: 30px;
+  Header.jsx:LogOutPrompt, History.jsx:DeletePrompt, Profile.jsx:DialogPrompts, Reading.jsx:SavePrompt
+
+padding: 4px;
+  Login.jsx:UserInput, Profile.jsx:UserInput, SignUp.jsx:UserInput
+
+padding: 8px;
+  History.jsx:BinIcon, TarotCard.jsx:CardData
+
+position: absolute;
+  Header.jsx:HeaderBlock, History.jsx:BinIcon, Login.jsx:EyeIcon, SignUp.jsx:EyeIcon
+
+position: fixed;
+  Header.jsx:Menu, Header.jsx:Overlay, Reading.jsx:SavePrompt
+
+position: relative;
+  Header.jsx:LoginPlacement, History.jsx:ReadingWrapper, Login.jsx:PasswordWrapper, Reading.jsx:ButtonBlock, SignUp.jsx:PasswordWrapper
+
+right: 0;
+  Header.jsx:HeaderBlock, Header.jsx:Overlay
+
+right: 30px;
+  Login.jsx:EyeIcon, SignUp.jsx:EyeIcon
+
+text-align: center;
+  Header.jsx:LogOutPrompt, History.jsx:DeletePrompt, History.jsx:HistoryText, Home.jsx:Text, Journal.jsx:Title, Login.jsx:LoginText, Profile.jsx:DialogPrompts, Profile.jsx:ProfileText, Reading.jsx:SavePrompt, Reading.jsx:Text, TarotCard.jsx:CardData
+
+text-decoration: none;
+  Header.jsx:LogOutButton, Header.jsx:NavLink
+
+top: 0;
+  Header.jsx:HeaderBlock, Header.jsx:Menu, Header.jsx:Overlay
+
+top: 50%;
+  History.jsx:BinIcon, Reading.jsx:SavePrompt
+
+transform: translateY(-50%);
+  History.jsx:BinIcon, SignUp.jsx:EyeIcon
+
+transition: background 0.2s;
+  Header.jsx:LogOutButton, Header.jsx:NavLink
+
+transition: color 0.2s ease;
+  History.jsx:BinIcon, History.jsx:Navigate
+
+width: 100%;
+  History.jsx:Content, Home.jsx:Content, Journal.jsx:Content, Journal.jsx:EntryBlock, Journal.jsx:JournalTextArea, Journal.jsx:Wrapper, Reading.jsx:Content, TarotCard.jsx:BackImage, TarotCard.jsx:FrontImage
+
+width: 100vw;
+  History.jsx:CenteredWrapper, History.jsx:Wrapper, Home.jsx:Wrapper, Login.jsx:LoginStyle, Profile.jsx:Wrapper, SignUp.jsx:Wrapper
+
+width: 200px;
+  Header.jsx:Menu, Home.jsx:ReadingButtons, Reading.jsx:Button, TarotCard.jsx:BackCard, TarotCard.jsx:Card
+
+width: 220px;
+  Header.jsx:Menu, TarotCard.jsx:CardBlock
+
+width: 400px;
+  Login.jsx:UserInput, Profile.jsx:UserInput, Reading.jsx:UserInput, SignUp.jsx:UserInput
+
+width: 440px;
+  Header.jsx:LogOutPrompt, History.jsx:DeletePrompt, Profile.jsx:DialogPrompts, Reading.jsx:SavePrompt
+
+width: 550px;
+  Home.jsx:KippyBlock, Home.jsx:Text, Reading.jsx:KippyBlock, Reading.jsx:Text
+
+width: 600px;
+  History.jsx:HistoryText, Profile.jsx:ProfileText
+
+APPENDIX B — COMPLETE STYLED DEFINITIONS (86 blocks)
+==========================================================
+Source order within each file; declarations preserved verbatim.
+
+frontend/src/components/Header.jsx:8 — HeaderBlock (styled.div)
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: #3F5EFB;
+    background: rgba(252, 70, 107, 0.25);
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    color: black;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 100;
+
+frontend/src/components/Header.jsx:24 — MenuButton (styled.div)
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.66);
+   // color: rgba(123, 68, 145, 0.66);;
+    font-size: 40px;
+    cursor: pointer;
+    margin-bottom: 8px;
+
+    &:hover {
+        background: none;
+        color: rgba(123, 68, 145, 0.66);
+       // color: rgba(104, 20, 138, 0.66);
+    }
+
+frontend/src/components/Header.jsx:40 — Title (styled(Link))
+    background: none;
+    border: none;
+    outline: none;
+    padding: 20px;
+    font-size: 30px;
+    color: rgba(255, 255, 255, 0.66);
+   // color: rgba(123, 68, 145, 0.66);
+    cursor: pointer;
+
+    &:hover {
+        background: none;
+        color: rgba(123, 68, 145, 0.66);
+       // color: rgba(104, 20, 138, 0.66);
+    }
+
+    &:focus {
+        background: none;
+        outline: none;
+    }
+
+frontend/src/components/Header.jsx:63 — Overlay (styled.div)
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: ${props => props.$isOpen ? 'block' : 'none'};
+    z-index: 150;
+
+frontend/src/components/Header.jsx:74 — Menu (styled.div)
+    position: fixed;
+    background: rgba(231, 184, 206, 1);
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    top: 0;
+    //-500 to not show it
+    left: ${props => props.$isOpen ? '0' : '-500px'};
+    width: 200px;
+    height: 100%;
+    transition: left 0.3s ease;
+    z-index: 200;
+    padding: 80px 20px 20px;
+
+    @media (max-width: 300px) {
+        width: 220px;
+    }
+
+frontend/src/components/Header.jsx:93 — LoginPlacement (styled.div)
+    position: relative;
+    margin-top: 300px;
+
+frontend/src/components/Header.jsx:98 — NavLink (styled(Link))
+    display: block;
+    color: rgba(255, 255, 255, 0.66);
+    // color: rgba(123, 68, 145, 0.66);
+    text-decoration: none;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    transition: background 0.2s;
+    cursor: pointer;
+    
+    &:hover {
+        background: none;
+        color: rgba(123, 68, 145, 0.66);
+        // color: rgba(104, 20, 138, 0.66);
+    }
+
+frontend/src/components/Header.jsx:117 — LogOutButton (styled.button)
+    display: block;
+    color: rgba(255, 255, 255, 0.66);
+    // color: rgba(123, 68, 145, 0.66);
+    text-decoration: none;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    transition: background 0.2s;
+    cursor: pointer;
+    background: none;
+    border: none;
+    
+    &:hover {
+        outline: none;
+        border: none;
+        color: rgba(123, 68, 145, 0.66);
+        // color: rgba(104, 20, 138, 0.66);
+    }
+
+frontend/src/components/Header.jsx:139 — LogOutPrompt (styled.dialog)
+    color: black;
+    background-color: white;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    text-align: center;
+    padding: 30px;
+    width: 440px;
+
+frontend/src/components/Header.jsx:150 — Button (styled.button)
+    font-size: 1em;
+    outline: none;
+    border: 2px solid transparent;
+    // height: 55px;
+    // width: 200px;
+    margin-left: 20px;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    background-color: rgba(255, 255, 255, 0.75);
+    color: black;
+
+    &:hover {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        color: rgba(104, 20, 138, 0.66);
+    }
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+frontend/src/components/Header.jsx:172 — ButtonBlock (styled.div)
+    margin-top: 8px;
+
+frontend/src/components/History.jsx:9 — Wrapper (styled.div)
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+    padding-top: 80px;
+
+frontend/src/components/History.jsx:18 — CenteredWrapper (styled.div)
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+
+frontend/src/components/History.jsx:27 — Content (styled.div)
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+frontend/src/components/History.jsx:33 — HistoryText (styled.div)
+    display: flex;
+    width: 600px;
+    height: 60px;
+    margin: 20px auto 40px auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    padding: 10px;
+    font-weight: 420;
+    border-radius: 12px;
+
+frontend/src/components/History.jsx:49 — SavedReadingsList (styled.div)
+    width: 80%;
+    max-width: 800px;
+    max-height: 60vh;
+    overflow-y: scroll;
+    margin: 0 auto;
+    padding: 50px 60px;
+
+    //adding scrollbar back for the list
+    &::-webkit-scrollbar {
+        display: block;
+        width: 8px;
+        height: 50px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(123, 68, 145, 0.6);
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.2);
+    }
+
+frontend/src/components/History.jsx:74 — SavedReading (styled.div)
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 30px;
+    text-align: left;
+    font-weight: 420;
+
+frontend/src/components/History.jsx:84 — Navigate (styled(Link))
+    color: black;
+    background: none;
+    transition: color 0.2s ease;
+
+frontend/src/components/History.jsx:90 — BinIcon (styled.div)
+    position: absolute;
+    top: 50%;
+    right: 40px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: black;
+    z-index: 10;
+    padding: 8px;
+    transition: color 0.2s ease;
+
+    &:hover {
+       color: rgba(208, 36, 36, 0.66);
+    }
+
+frontend/src/components/History.jsx:106 — ReadingWrapper (styled.div)
+    position: relative;
+    margin-bottom: 20px;
+    transition: 0.25s all ease;
+
+    &:hover {
+        transform: scale(1.02);
+        color: rgba(104, 20, 138, 0.66);
+
+        ${BinIcon} {
+            color: rgba(104, 20, 138, 0.66);
+
+            &:hover {
+                color: rgba(208, 36, 36, 0.66);
+            }
+        }
+    }
+
+    &:hover ${Navigate} {
+        background: none;
+        color: rgba(104, 20, 138, 0.66);
+    }
+    &:hover ${SavedReading} {
+        filter: blur(0px);
+        box-shadow: 
+            0 15px 60px -10px rgba(147, 51, 234, 0.3),
+            0 20px 100px -15px rgba(236, 72, 153, 0.2), 
+            0 10px 40px -10px rgba(0, 0, 0, 0.15);
+        transform: scale(1.02);
+    }
+
+frontend/src/components/History.jsx:138 — DeletePrompt (styled.dialog)
+    color: black;
+    background-color: white;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    text-align: center;
+    padding: 30px;
+   // position: fixed;
+    width: 440px;
+
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+
+frontend/src/components/History.jsx:154 — Button (styled.button)
+    font-size: 1em;
+    outline: none;
+    border: 2px solid transparent;
+    // height: 55px;
+    // width: 200px;
+    margin-left: 20px;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    background-color: rgba(255, 255, 255, 0.75);
+    color: black;
+
+    &:hover {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        color: rgba(104, 20, 138, 0.66);
+    }
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+frontend/src/components/History.jsx:176 — ButtonBlock (styled.div)
+    margin-top: 8px;
+
+frontend/src/components/Home.jsx:7 — Wrapper (styled.div)
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 45px;
+    min-height: 100vh;
+    width: 100vw;
+   //margin-top: 40px;
+
+frontend/src/components/Home.jsx:18 — Content (styled.div)
+    display: flex;
+    width: 100%;
+
+    @media (max-width: 888px) {
+        flex-direction: column;
+        align-items: center;
+    }
+
+frontend/src/components/Home.jsx:28 — KippyBlock (styled.div)
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    background: black;
+    height: 550px;
+    margin: 40px;
+
+    @media (max-width: 888px) {
+        order: -1;
+        width: 550px;
+        height: 200px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+frontend/src/components/Home.jsx:45 — Text (styled.div)
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 12px;
+    width: 550px;
+    height: 100px;
+    padding: 10px;
+    color: black;
+    font-weight: 420;
+
+frontend/src/components/Home.jsx:58 — Container (styled.div)
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding: 10px;
+
+frontend/src/components/Home.jsx:68 — ReadingOptions (styled.div)
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding-bottom: 20px;
+
+frontend/src/components/Home.jsx:77 — ReadingButtons (styled.button)
+    background-color: rgba(255, 255, 255, 0.75);
+    color: black;
+    font-size: 1em;
+    outline: none;
+    border: 2px solid transparent;
+    outline: none;
+    height: 55px;
+    width: 200px;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    &:hover {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        color: rgba(104, 20, 138, 0.66);
+    }
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none;
+    }
+
+frontend/src/components/Home.jsx:97 — Navigate (styled(Link))
+    color: black;
+    &:hover {
+        background: none;
+        color: rgba(104, 20, 138, 0.66);
+    }
+
+frontend/src/components/Journal.jsx:13 — Wrapper (styled.div)
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+
+frontend/src/components/Journal.jsx:23 — Content (styled.div)
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+
+    @media (max-width: 1250px) {
+        flex-direction: column;
+        align-items: center;
+    }
+
+frontend/src/components/Journal.jsx:36 — EntryBlock (styled.div)
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1; 
+    padding-right: 40px; 
+    min-width: 0; 
+
+   @media (max-width: 1250px) {
+    width: 100%;
+    flex: none;
+    padding: 0 20px;
+  }
+
+frontend/src/components/Journal.jsx:51 — JournalTextArea (styled.textarea)
+    display: flex;
+    width: 100%;
+    max-width: 400px; 
+    height: 360px;
+    padding: 15px;
+    font-size: 16px;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    box-sizing: border-box; 
+    margin: 20px 0;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    font-family: "Pixelify Sans", sans-serif;
+    background-color: white;
+    color: black;
+
+    &&::placeholder {
+        font-family: "Pixelify Sans", sans-serif;
+    }
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+frontend/src/components/Journal.jsx:78 — Cards (styled.div)
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    margin: 40px;
+    min-height: 280px;
+
+    @media (max-width: 1250px) {
+        order: -1;
+    }
+
+frontend/src/components/Journal.jsx:90 — Title (styled.div)
+    justify-content: center;
+    text-align: center;
+    margin: 24px;
+    margin-top: 60px;
+    font-weight: 500;
+    font-size: 30px;
+    color: black;
+
+    align-items: center;
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 12px;
+    padding: 20px;
+    width:600px;
+
+    text-shadow: 
+    -1px -1px 0 #ffffffff,  
+     1px -1px 0 #ffffffff,
+    -1px  1px 0 #ffffffff,
+     1px  1px 0 #ffffffff;
+
+     @media (max-width: 1250px) {
+        margin-top: 100px;
+  }
+
+frontend/src/components/Journal.jsx:117 — BackButtonText (styled.span)
+    font-size: 16px;
+    @media (max-width: 888px) {
+        display: none;
+    }
+
+frontend/src/components/Journal.jsx:124 — SaveButton (styled.div)
+    padding: 10px;
+ 
+
+frontend/src/components/Journal.jsx:128 — Button (styled.button)
+    font-size: 1em;
+    outline: none;
+    border: 2px solid transparent;
+    width: 150px;
+    margin-left: 20px;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    color: black;
+    background-color: white;
+    
+    &:hover {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        color: rgba(104, 20, 138, 0.66);
+    }
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+frontend/src/components/Journal.jsx:149 — ButtonUnauth (styled.button)
+    align-self: center;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+
+    &:hover {
+        outline: none;
+        border: none;
+        color: rgba(104, 20, 138, 0.66);
+    }
+
+frontend/src/components/Login.jsx:7 — LoginStyle (styled.form)
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+
+frontend/src/components/Login.jsx:16 — LoginText (styled.div)
+    text-align: center;
+
+frontend/src/components/Login.jsx:20 — UserInput (styled.input)
+    height: 30px;
+    width: 400px;
+    margin: 10px;
+    padding: 4px;
+    background-color: white;
+    caret-color: black;
+    color: black;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 8px;
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+    &&::placeholder {
+        font-family: "Pixelify Sans", sans-serif;
+    }
+
+frontend/src/components/Login.jsx:42 — LoginButton (styled.button)
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.75);
+    color: black;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    outline: none;
+    border: 2px solid transparent;
+    &:hover {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        color: rgba(104, 20, 138, 0.66);
+    }
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+frontend/src/components/Login.jsx:59 — SignUpButton (styled.button)
+    justify-content: center;
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    outline: none;
+    color: black;
+    border: 2px solid transparent;;
+    &:hover {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        color: rgba(104, 20, 138, 0.66);
+    }
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+frontend/src/components/Login.jsx:77 — SignUpNav (styled(Link))
+    color: black;
+    &:hover {
+        background: none;
+        color: rgba(104, 20, 138, 0.66);
+    }
+
+frontend/src/components/Login.jsx:85 — PasswordWrapper (styled.div)
+     position: relative;
+
+frontend/src/components/Login.jsx:89 — EyeIcon (styled.div)
+    position: absolute;
+    right: 30px;
+    top: 35%;
+    transform: trasnlateY(-50%);
+    cursor: pointer;
+    color: black;
+
+    &:hover {
+        color: rgba(104, 20, 138, 0.66);
+    }
+
+frontend/src/components/Login.jsx:102 — Error (styled.p)
+    color: rgba(208, 36, 36, 0.66);
+
+frontend/src/components/Profile.jsx:9 — Wrapper (styled.form)
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+
+frontend/src/components/Profile.jsx:18 — Content (styled.div)
+
+
+frontend/src/components/Profile.jsx:21 — UserInput (styled.input)
+    height: 30px;
+    width: 400px;
+    margin: 10px;
+    padding: 4px;
+    background-color: white;
+    caret-color: black;
+    color: black;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 8px;
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+    &&::placeholder {
+        font-family: "Pixelify Sans", sans-serif;
+    }
+
+frontend/src/components/Profile.jsx:43 — Button (styled.button)
+    color: black;
+    background: rgba(255, 255, 255, 0.75);
+    outline: none;
+    border: 2px solid transparent;
+    margin-top: 10px;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+
+    &:hover {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        color: rgba(104, 20, 138, 0.66);
+    }
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+frontend/src/components/Profile.jsx:62 — DeleteButton (styled.button)
+    color: black;
+    background: rgba(255, 255, 255, 0.75);
+    outline: none;
+    border: 2px solid transparent;
+    margin-top: 10px;
+    transition: background 0.2s ease, color 0.2s ease;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    &:hover {
+        border: 2px solid rgba(118, 20, 20, 0.66); 
+        color: white;
+        background: rgba(208, 36, 36, 0.66);
+    }
+    &:focus {
+        border: 2px solid rgba(208, 36, 36, 0.66);
+        outline: none; 
+    }
+
+frontend/src/components/Profile.jsx:81 — LoginButton (styled.button)
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.75);
+    color: black;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    outline: none;
+    border: 2px solid transparent;
+    &:hover {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        color: rgba(104, 20, 138, 0.66);
+    }
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+frontend/src/components/Profile.jsx:98 — ProfileText (styled.div)
+    display: flex;
+    width: 600px;
+    height: 60px;
+    margin: 20px auto 40px auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    padding: 10px;
+    font-weight: 420;
+    border-radius: 12px;
+
+frontend/src/components/Profile.jsx:114 — DialogPrompts (styled.dialog)
+    color: black;
+    background-color: white;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    text-align: center;
+    padding: 30px;
+   // position: fixed;
+    width: 440px;
+
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+
+frontend/src/components/Profile.jsx:130 — ButtonBlock (styled.div)
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+frontend/src/components/Reading.jsx:8 — Content (styled.div)
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    margin-top: 60px;
+
+    @media (max-width: 888px) {
+        flex-direction: column;
+        align-items: center;
+    }
+
+frontend/src/components/Reading.jsx:20 — KippyBlock (styled.div)
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    background: black;
+    height: 550px;
+    max-height: 550px;
+
+    @media (max-width: 888px) {
+        order: -1;
+        width: 550px;
+        height: 200px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+frontend/src/components/Reading.jsx:37 — ReadingBlock (styled.div)
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 45px;
+    padding: 40px;
+
+frontend/src/components/Reading.jsx:45 — Text (styled.div)
+    text-align: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 12px;
+    width: 550px;
+    height: 60px;
+    padding: 10px;
+    color: black;
+    font-weight: 420;
+
+frontend/src/components/Reading.jsx:57 — CardContainer (styled.div)
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding: 10px;
+
+frontend/src/components/Reading.jsx:67 — Row (styled.div)
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+frontend/src/components/Reading.jsx:74 — Button (styled.button)
+    font-size: 1em;
+    outline: none;
+    border: 2px solid transparent;
+    height: 55px;
+    width: 200px;
+    margin-left: 20px;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    background-color: rgba(255, 255, 255, 0.75);
+    color: black;
+
+    &:hover {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        color: rgba(104, 20, 138, 0.66);
+    }
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+frontend/src/components/Reading.jsx:96 — ButtonBlock (styled.div)
+    display: flex;
+    position: relative;
+    justify-content: center;
+    margin: 20px auto; 
+
+frontend/src/components/Reading.jsx:103 — ButtonPlacement (styled.div)
+    padding: 10px;
+
+frontend/src/components/Reading.jsx:107 — SavePrompt (styled.dialog)
+    color: black;
+    background-color: white;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    text-align: center;
+    padding: 30px;
+    position: fixed;
+    width: 440px;
+    max-width: calc(100vw - 2rem);
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &::backdrop {
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+frontend/src/components/Reading.jsx:128 — CenteredPrompts (styled.div)
+
+
+frontend/src/components/Reading.jsx:131 — UserInput (styled.input)
+    height: 30px;
+    width: 400px;
+    margin: 10px;
+   // padding: 4px;
+    background-color: white;
+    caret-color: black;
+    color: black;
+    outline: none;
+    border: 2px solid rgba(104, 20, 138, 0.66);
+    border-radius: 8px;
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+    &&::placeholder {
+        font-family: "Pixelify Sans", sans-serif;
+    }
+
+frontend/src/components/SignUp.jsx:7 — Wrapper (styled.form)
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+
+frontend/src/components/SignUp.jsx:16 — UserInput (styled.input)
+    height: 30px;
+    width: 400px;
+    margin: 10px;
+    padding: 4px;
+    background-color: white;
+    caret-color: black;
+    color: black;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 8px;
+
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66);
+        outline: none;
+    }
+
+    &&::placeholder {
+        font-family: "Pixelify Sans", sans-serif;
+    }
+
+frontend/src/components/SignUp.jsx:38 — SignUpButton (styled.button)
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.75);
+    color: black;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    outline: none;
+    border: 2px solid transparent;
+    &:hover {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        color: rgba(104, 20, 138, 0.66);
+    }
+    &:focus {
+        border: 2px solid rgba(104, 20, 138, 0.66); 
+        outline: none; 
+    }
+
+frontend/src/components/SignUp.jsx:55 — PasswordWrapper (styled.div)
+    position: relative;
+
+frontend/src/components/SignUp.jsx:59 — EyeIcon (styled.div)
+    position: absolute;
+    right: 30px;
+    top: 55%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: black;
+
+    &:hover {
+        color: rgba(104, 20, 138, 0.66);
+    }
+
+frontend/src/components/SignUp.jsx:72 — Error (styled.p)
+    color: rgba(208, 36, 36, 0.66);
+
+frontend/src/components/TarotCard.jsx:7 — Wrapper (styled.div)
+    flex-shrink: 0;
+    width: 260px;
+    height: 410px;
+
+frontend/src/components/TarotCard.jsx:13 — BackCard (styled.div)
+    width: 200px;
+    height: 350px;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin: 20px auto;
+    overflow: hidden;
+
+frontend/src/components/TarotCard.jsx:23 — BackImage (styled.img)
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    object-position: center;
+
+frontend/src/components/TarotCard.jsx:30 — FrontImage (styled.img)
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    object-position: center;
+
+frontend/src/components/TarotCard.jsx:38 — CardBlock (styled.div)
+    display: grid;
+    width: 220px;
+    height: 380px;
+    margin: 0;
+
+frontend/src/components/TarotCard.jsx:45 — FrontCard (styled.div)
+    display: inline-block;
+    padding: 16px;
+    border-radius: 25px;
+    transition: transform 1s ease;
+    &:hover {
+        //padding: 16px;
+        background: #3F5EFB;
+        background: radial-gradient(circle, rgba(63, 94, 251, 0.25) 0%, rgba(252, 70, 107, 0.25) 100%);
+        filter: blur(0px);
+        box-shadow: 
+            0 0 30px rgba(63, 94, 251, 0.4),
+            0 0 60px rgba(252, 70, 107, 0.3),
+            0 0 90px rgba(63, 94, 251, 0.2);
+        transform: scale(1.15);
+        transition: 1s all ease;
+    }
+
+frontend/src/components/TarotCard.jsx:64 — Card (styled.div)
+    width: 200px;
+    height: 350px;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin: 20px auto;
+    overflow: hidden;
+    grid-area: 1 / 1 / 2 / 2;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+
+frontend/src/components/TarotCard.jsx:75 — CardData (styled.div)
+    width: 160px;
+    height: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -10px;
+    grid-area: 1 / 1 / 2 / 2;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.70);
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    display: inline-block;
+    
+    color: black;
+
+    text-shadow: 
+    -1px -1px 0 #ffffffff,  
+     1px -1px 0 #ffffffff,
+    -1px  1px 0 #ffffffff,
+     1px  1px 0 #ffffffff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    box-sizing: border-box;
+    text-align: center;
+
+frontend/src/components/TarotCard.jsx:108 — FrontInner (styled.div)
+    transform: ${({ $reversed }) => $reversed ? 'rotate(180deg)' : 'none'};
+    transition: none;
+
+APPENDIX C — GLOBAL CSS AND OTHER STYLE SOURCES
+===============================================
+
+frontend/src/index.css
+:root {
+  font-family: "Pixelify Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  /* background-color: #242424; */
+
+  background: #EEAECA;
+  background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  /* background: #FAEBD7; */
+  background: #EEAECA;
+  background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+frontend/src/App.css
+[Empty file]
+
+frontend/index.html:6
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+frontend/index.html:7
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
+frontend/src/components/Journal.jsx:247
+  <TbArrowBackUp size={20} />
+
+frontend/src/components/Login.jsx:142
+  <p style={{ color: "black" }}>Login Page</p>
+
+frontend/src/components/Profile.jsx:281
+  <p style={{ color: "black" }}>Meow! This is your profile! Change your name and email here if you wish.</p>
+
+frontend/src/components/Profile.jsx:285
+  <p style={{ color: "black" }}>Your name: </p>
+
+frontend/src/components/Profile.jsx:288
+  <p style={{ color: "black" }}>Your email: </p>
+
+frontend/src/components/SignUp.jsx:121
+  <p style={{ color: "black" }}>Sign Up Page</p>
+
+frontend/src/components/TarotCard.jsx:142
+  <FrontImage src={cardData?.image} style={{transform: cardData?.reversed ? 'rotate(180deg)' : 'none'}} />
+
