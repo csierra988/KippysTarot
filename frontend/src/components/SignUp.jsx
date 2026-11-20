@@ -1,77 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import { signUp } from "../api";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
-
-const Wrapper = styled.form`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    width: 100vw;
-`;
-
-const UserInput = styled.input`
-    height: 30px;
-    width: 400px;
-    margin: 10px;
-    padding: 4px;
-    background-color: white;
-    caret-color: black;
-    color: black;
-    outline: none;
-    border: 2px solid transparent;
-    border-radius: 8px;
-
-    &:focus {
-        border: 2px solid rgba(104, 20, 138, 0.66);
-        outline: none;
-    }
-
-    &&::placeholder {
-        font-family: "Pixelify Sans", sans-serif;
-    }
-`;
-
-const SignUpButton = styled.button`
-    margin-top: 10px;
-    background: rgba(255, 255, 255, 0.75);
-    color: black;
-    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
-    outline: none;
-    border: 2px solid transparent;
-    &:hover {
-        border: 2px solid rgba(104, 20, 138, 0.66); 
-        color: rgba(104, 20, 138, 0.66);
-    }
-    &:focus {
-        border: 2px solid rgba(104, 20, 138, 0.66); 
-        outline: none; 
-    }
-`;
-
-const PasswordWrapper = styled.div`
-    position: relative;
-`;
-
-const EyeIcon = styled.div`
-    position: absolute;
-    right: 30px;
-    top: 55%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: black;
-
-    &:hover {
-        color: rgba(104, 20, 138, 0.66);
-    }
-`;
-
-const Error = styled.p`
-    color: rgba(208, 36, 36, 0.66);
-`;
+import TextInput from "./ui/TextInput";
+import Button from "./ui/Button";
 
 
 function SignUp () {
@@ -117,27 +49,27 @@ function SignUp () {
     }
 
     return (
-        <Wrapper onSubmit={signingUp}>
+        <form onSubmit={signingUp} className="flex flex-col justify-center items-center min-h-screen w-screen">
             <p style={{ color: "black" }}>Sign Up Page</p>
             {errorMessage && (
-                <Error>{errorMessage}</Error>
+                <p className="text-error">{errorMessage}</p>
             )}
-            <UserInput
+            <TextInput
                 placeholder="name" type="text" value={name} onChange={changeName} />
-            <UserInput 
+            <TextInput 
                 placeholder="email" type="email" value={email} onChange={changeEmail} />
             
-            <PasswordWrapper>
-                <UserInput 
+            <div className="relative">
+                <TextInput 
                 placeholder="password" type={showPassword ? "text" : "password"} value={password} onChange={changePassword} />
 
-                <EyeIcon onClick={changePasswordVisibility}>
+                <div onClick={changePasswordVisibility} className="absolute right-[30px] top-[55%] translate-y-[-50%] cursor-pointer text-black hover:text-accent">
                     { showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
-                </EyeIcon>
-            </PasswordWrapper>
+                </div>
+            </div>
 
-            <SignUpButton type="submit"> Sign Up Now!</SignUpButton>
-        </Wrapper>
+            <Button type="submit" className="mt-[10px]"> Sign Up Now!</Button>
+        </form>
     );
 }
 
