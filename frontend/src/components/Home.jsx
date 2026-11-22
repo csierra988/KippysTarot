@@ -2,6 +2,7 @@
 // hi y/n(if signed in), think of a question, set your intentions, and choose your reading type(?)
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import Button from './ui/Button';
 
 // const Wrapper = styled.div`
 //     display: flex;
@@ -134,9 +135,9 @@ function Home() {
                         {/* navigate */}
                         <Link to='/Reading' className="text-black hover:bg-none hover:text-accent">
                             {/* reading buttons */}
-                            <button className="bg-control text-black text-[1em] outline-none border-2 border-solid border-transparent h-[55px] w-[200px] shadow-surface hover:border-2 hover:border-solid hover:border-accent hover:text-accent focus:border-2 focus:border-solid focus:border-accent focus:outline-none">
+                            <Button className="text-[1em] h-[55px] w-[200px]">
                                 General
-                            </button>
+                            </Button>
                         </Link>
 
                         {/* <ReadingButtons>
