@@ -2,176 +2,8 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { logout } from '../api';
-import styled from 'styled-components';
 import { useAuth } from '../hooks/useAuth';
-
-const HeaderBlock = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50px;
-    background: #3F5EFB;
-    background: rgba(252, 70, 107, 0.25);
-    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
-    color: black;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    z-index: 100;
-`;
-
-const MenuButton = styled.div`
-    background: none;
-    border: none;
-    color: rgba(255, 255, 255, 0.66);
-   // color: rgba(123, 68, 145, 0.66);;
-    font-size: 40px;
-    cursor: pointer;
-    margin-bottom: 8px;
-
-    &:hover {
-        background: none;
-        color: rgba(123, 68, 145, 0.66);
-       // color: rgba(104, 20, 138, 0.66);
-    }
-`;
-
-const Title = styled(Link)`
-    background: none;
-    border: none;
-    outline: none;
-    padding: 20px;
-    font-size: 30px;
-    color: rgba(255, 255, 255, 0.66);
-   // color: rgba(123, 68, 145, 0.66);
-    cursor: pointer;
-
-    &:hover {
-        background: none;
-        color: rgba(123, 68, 145, 0.66);
-       // color: rgba(104, 20, 138, 0.66);
-    }
-
-    &:focus {
-        background: none;
-        outline: none;
-    }
-`;
-
-//"dims" website when menu is toggled
-const Overlay = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    display: ${props => props.$isOpen ? 'block' : 'none'};
-    z-index: 150;
-`;
-
-const Menu = styled.div`
-    position: fixed;
-    background: rgba(231, 184, 206, 1);
-    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
-    top: 0;
-    //-500 to not show it
-    left: ${props => props.$isOpen ? '0' : '-500px'};
-    width: 200px;
-    height: 100%;
-    transition: left 0.3s ease;
-    z-index: 200;
-    padding: 80px 20px 20px;
-
-    @media (max-width: 300px) {
-        width: 220px;
-    }
-
-`;
-
-const LoginPlacement = styled.div`
-    position: relative;
-    margin-top: 300px;
-`;
-
-const NavLink = styled(Link)`
-    display: block;
-    color: rgba(255, 255, 255, 0.66);
-    // color: rgba(123, 68, 145, 0.66);
-    text-decoration: none;
-    padding: 15px 20px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    font-size: 1.1em;
-    transition: background 0.2s;
-    cursor: pointer;
-    
-    &:hover {
-        background: none;
-        color: rgba(123, 68, 145, 0.66);
-        // color: rgba(104, 20, 138, 0.66);
-    }
-`;
-
-const LogOutButton = styled.button`
-    display: block;
-    color: rgba(255, 255, 255, 0.66);
-    // color: rgba(123, 68, 145, 0.66);
-    text-decoration: none;
-    padding: 15px 20px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    font-size: 1.1em;
-    transition: background 0.2s;
-    cursor: pointer;
-    background: none;
-    border: none;
-    
-    &:hover {
-        outline: none;
-        border: none;
-        color: rgba(123, 68, 145, 0.66);
-        // color: rgba(104, 20, 138, 0.66);
-    }
-`;
-
-const LogOutPrompt = styled.dialog`
-    color: black;
-    background-color: white;
-    outline: none;
-    border: 2px solid transparent;
-    border-radius: 12px;
-    text-align: center;
-    padding: 30px;
-    width: 440px;
-`;
-
-const Button = styled.button`
-    font-size: 1em;
-    outline: none;
-    border: 2px solid transparent;
-    // height: 55px;
-    // width: 200px;
-    margin-left: 20px;
-    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
-    background-color: rgba(255, 255, 255, 0.75);
-    color: black;
-
-    &:hover {
-        border: 2px solid rgba(104, 20, 138, 0.66); 
-        color: rgba(104, 20, 138, 0.66);
-    }
-
-    &:focus {
-        border: 2px solid rgba(104, 20, 138, 0.66); 
-        outline: none; 
-    }
-`;
-
-const ButtonBlock = styled.div`
-    margin-top: 8px;
-`;
+import Button from './ui/Button';
 
 function Header() {
     const [isOpen, setOpen] = useState(false);
@@ -191,42 +23,45 @@ function Header() {
 
     return (
         <div>
-            <LogOutPrompt ref={dialogRef}>
+            <dialog ref={dialogRef} className="text-black bg-white outline-none border-2 border-solid border-transparent rounded-panel text-center p-[30px] w-[440px]">
                 <p>Are you sure you want to log out?</p>
-                <ButtonBlock>
-                    <Button onClick={loggingOut}>
+                <div className="mt-[8px]">
+                    <Button onClick={loggingOut} className="text-[1em] ml-[20px]">
                         Log out
                     </Button>
-                    <Button onClick={() => dialogRef.current?.close()}>
+                    <Button onClick={() => dialogRef.current?.close()} className="text-[1em] ml-[20px]">
                         Cancel
                     </Button>
-                </ButtonBlock>
-            </LogOutPrompt>
-            <HeaderBlock>
-                <MenuButton onClick={toggleMenu}> ☰ </MenuButton>
-                <Title to="/">
+                </div>
+            </dialog>
+            {/* HeaderBlock */}
+            <div className="absolute top-0 left-0 right-0 h-[50px] bg-header shadow-surface text-black flex items-center py-0 px-[20px] z-100">
+                <div onClick={toggleMenu} className="bg-none border-none text-panel text-[40px] cursor-pointer mb-[8px] hover:bg-none hover:text-navigation-accent"> ☰ </div>
+                <Link to="/" className="bg-none border-none outline-none p-[20px] text-[30px] text-panel cursor-pointer hover:bg-none hover:text-navigation-accent">
                     Kippy's Tarot ⋆˙⟡
-                </Title>
-            </HeaderBlock>
+                </Link>
+            </div>
 
-            <Overlay $isOpen={isOpen} onClick={toggleMenu} />
-
-            <Menu $isOpen={isOpen} onClick={toggleMenu}>
-                <NavLink to="/" onClick={toggleMenu}> Home</NavLink>
+            {/* Overlay */}
+            <div onClick={toggleMenu} className={`fixed inset-0 bg-[rgba(0,0,0,0.4)] z-150 ${isOpen ? 'block' : 'hidden'}`}/>
+            
+            {/* Menu */}
+            <div className={`fixed bg-drawer shadow-surface top-0 ${isOpen ? 'left-0' : 'left-[-500px]'} w-[200px] h-full transition-[left] duration-[0.3s] ease-[ease] z-200 pt-[80px] px-[20px] pb-[20px] [@media(max-width:300px)]:w-[220px]`}>
+                <Link to="/" onClick={() => setOpen(false)} className="block text-panel px-[20px] py-[15px] mb-[10px] rounded-control text-[1.1em] transition-[background] duration-[0.2s] cursor-pointer hover:bg-none hover:text-accent ease-[ease]"> Home</Link>
                 {/* <NavLink to="/Reading" onClick={toggleMenu}> Three Card Reading</NavLink> */}
-                <NavLink to="/History" onClick={toggleMenu}> History</NavLink>
-                <NavLink to="/Profile" onClick={toggleMenu}>Profile</NavLink>
+                <Link to="/History" onClick={() => setOpen(false)} className="block text-panel px-[20px] py-[15px] mb-[10px] rounded-control text-[1.1em] transition-[background] duration-[0.2s] cursor-pointer hover:bg-none hover:text-accent ease-[ease]"> History</Link>
+                <Link to="/Profile" onClick={() => setOpen(false)} className="block text-panel px-[20px] py-[15px] mb-[10px] rounded-control text-[1.1em] transition-[background] duration-[0.2s] cursor-pointer hover:bg-none hover:text-accent ease-[ease]">Profile</Link>
 
                 {/* when a user is logged in, show log out
                 and vice versa */}
-                <LoginPlacement>
+                <div className="relative mt-[300px]">
                     {user ? (
-                        <LogOutButton onClick={() => dialogRef.current?.showModal()}>Logout</LogOutButton>
+                        <button type="button" onClick={() => {setOpen(false); dialogRef.current?.showModal();}} className="block bg-transparent border-0 shadow-none px-[20px] py-[15px] mb-[10px] rounded-control text-[1.1em] text-panel transition-[background] duration-200 ease-[ease] hover:text-accent focus:border-none focus:outline-none">Logout</button>
                     ) : (
-                        <NavLink to="/Login" onClick={toggleMenu}>Login</NavLink>
+                        <Link to="/Login" onClick={() => setOpen(false)} className="block text-panel px-[20px] py-[15px] mb-[10px] rounded-control text-[1.1em] transition-[background] duration-[0.2s] cursor-pointer hover:bg-none hover:text-accent ease-[ease]">Login</Link>
                     )}
-                </LoginPlacement>
-            </Menu>
+                </div>
+            </div>
 
         </div>
     );
