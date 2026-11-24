@@ -18,6 +18,8 @@
   --color-error: rgba(208, 36, 36, 0.66);
   /*Profile DeleteButton hover border.*/
   --color-danger-border: rgba(118, 20, 20, 0.66);
+  /* Header bar */
+  --color-header: rgba(252, 70, 107, 0.25);
 
   /*shared backgrounds*/
   --color-panel: rgba(255, 255, 255, 0.65);
